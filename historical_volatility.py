@@ -1,15 +1,17 @@
 import pandas as pd
 from pandas_datareader import data as pdr
-#import yfinance as yf
+import yfinance as yf
 import numpy as np
 #import matplotlib.pyplot as plt
 
-timeperiod=1
+timeperiod=252
 ticker="BTC-USD"
-df = pdr.get_data_yahoo(ticker)
-df['ln_returns'] = np.log(df['Close']/df['Close'].shift())
-volatility = data['ln_returns'].std()**.5
-print(df)
+df = yf.Ticker(ticker).history(period="max")
+df['ln_rets'] = np.log((df['Close']/df['Close'].shift()))
+volatility = df['ln_rets'].std()*timeperiod**.5
+
+print(volatility)
+
 #df = yf.Ticker("BTC-USD").history(period="max").reset_index()[["Date","Open"]]
 
 
