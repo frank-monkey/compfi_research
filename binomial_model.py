@@ -18,23 +18,19 @@ d = 0.5 #downside factor
 # to make it easy to implement unique options
 # X is strike, price is price of stock 
 
-@staticmethod
 def call(S_0, K):
     return max(0, S_0 - K)
 
-@staticmethod
 def put(S_0, K):
     return max(0, K - S_0)
 
 def chooser(S_0, K):
     return max(S_0 - K, K - S_0)
 
-@staticmethod
 def squared_price(S_0, K):
     return S_0**2
 
 #calculates using non-recursive derived formula
-@staticmethod
 def non_recursive(pricing_method, S_0, K, n, r, u, d):
     p_hat = ((1+r-d)/(u-d))
     q_hat = 1 - p_hat
@@ -45,7 +41,6 @@ def non_recursive(pricing_method, S_0, K, n, r, u, d):
     return 1/((1+r)**n)*sum
 
 #pure recursion
-@staticmethod
 def recursive_binomial_model(pricing_method, S_0, K, n, r, u, d):
     p_hat = ((1+r-d)/(u-d))
     q_hat = 1 - p_hat
@@ -56,7 +51,6 @@ def recursive_binomial_model(pricing_method, S_0, K, n, r, u, d):
         return (1/(1+r))*(p_hat*recursive_binomial_model(pricing_method, u*S_0, K, n-1, r, u, d) 
             + q_hat*recursive_binomial_model(pricing_method, d*S_0, K, n-1, r, u, d))
 
-@staticmethod
 def np_binomial_model(pricing_method, S_0, K, n, r, u, d):
     prices = np.zeros((n+1, n+1))
     prices[0][0] = S_0
