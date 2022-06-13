@@ -75,9 +75,9 @@ def np_binomial_model(pricing_method, S_0, K, n, r, u, d):
     for j in range(0, n):
         V[j][n] = x(prices[j][n])
 
-    for j in range(0, n-1):
+    for j in range(n-1, -1, -1):
         for i in range(n-1, j-1, -1):
-            V[j][i] = (1/(r+1))*(p_hat*V[j][i+1]+p_hat*V[j+1][i+1])
+            V[j][i] = (1/(r+1))*(p_hat*V[j][i+1]+q_hat*V[j+1][i+1])
     print(V)
 
 print(non_recursive(put, S_0, K, n, r, u, d))
