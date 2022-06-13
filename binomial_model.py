@@ -64,19 +64,21 @@ def np_binomial_model(pricing_method, S_0, K, n, r, u, d):
             prices[i][j] = d*prices[i][j-1]
     print(prices)
 
-
-"""
     p_hat = ((1+r-d)/(u-d))
     q_hat = 1 - p_hat
     print("p_hat = " + str(p_hat) + " q_hat = " + str(q_hat))
-    if (n==0):
-        return pricing_method(S_0, K)
-    else:
-        return (1/(1+r))*(p_hat*recursive_binomial_model(pricing_method, u*S_0, K, n-1, r, u, d) 
-            + q_hat*recursive_binomial_model(pricing_method, d*S_0, K, n-1, r, u, d))
-"""
 
+    x = lambda p : pricing_method(p, K)
 
+    V = np.zeros((n+1, n+1))
+
+    for j in range(0, n):
+        V[j][n] = x(prices[j][n])
+
+    for j in range(0, n-1):
+        for i in range(n-1, j-1, -1):
+            V[j][i] = (1/(r+1))*(p_hat*V[j][i+1]+p_hat*V[j+1][i+1])
+    print(V)
 
 print(non_recursive(put, S_0, K, n, r, u, d))
 print(recursive_binomial_model(put, S_0, K, n, r, u, d))
