@@ -26,6 +26,9 @@ def call(S_0, K):
 def put(S_0, K):
     return max(0, K - S_0)
 
+def chooser(S_0, K):
+    return max(S_0 - K, K - S_0)
+
 @staticmethod
 def squared_price(S_0, K):
     return S_0**2
@@ -80,6 +83,8 @@ def np_binomial_model(pricing_method, S_0, K, n, r, u, d):
             V[j][i] = (1/(r+1))*(p_hat*V[j][i+1]+q_hat*V[j+1][i+1])
     print(V)
 
-print(non_recursive(put, S_0, K, n, r, u, d))
-print(recursive_binomial_model(put, S_0, K, n, r, u, d))
+#print(non_recursive(put, S_0, K, n, r, u, d))
+#print(recursive_binomial_model(put, S_0, K, n, r, u, d))
 print(np_binomial_model(put, S_0, K, n, r, u, d))
+print(np_binomial_model(call, S_0, K, n, r, u, d))
+print(np_binomial_model(chooser, S_0, K, n, r, u, d))
