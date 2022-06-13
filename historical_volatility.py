@@ -5,8 +5,9 @@ import numpy as np
 #import matplotlib.pyplot as plt
 
 timeperiod=252
-ticker="BTC-USD"
-df = yf.Ticker(ticker).history(period="max")
+ticker=""
+
+df = yf.Ticker(ticker).history(period="1y")
 df['ln_rets'] = np.log((df['Close']/df['Close'].shift()))
 volatility = df['ln_rets'].std()*timeperiod**.5
 
