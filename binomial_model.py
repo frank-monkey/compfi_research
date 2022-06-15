@@ -76,9 +76,39 @@ def np_binomial_model(pricing_method, S_0, K, n, r, u, d):
         for i in range(n-1, j-1, -1):
             V[j][i] = (1/(r+1))*(p_hat*V[j][i+1]+q_hat*V[j+1][i+1])
     print(V)
+    print(V[0][0])
 
 #print(non_recursive(put, S_0, K, n, r, u, d))
 #print(recursive_binomial_model(put, S_0, K, n, r, u, d))
-print(np_binomial_model(put, S_0, K, n, r, u, d))
-print(np_binomial_model(call, S_0, K, n, r, u, d))
-print(np_binomial_model(chooser, S_0, K, n, r, u, d))
+#print(np_binomial_model(put, S_0, K, n, r, u, d))
+#print(np_binomial_model(call, S_0, K, n, r, u, d))
+#print(np_binomial_model(chooser, S_0, K, n, r, u, d))
+
+def binomial_model_implied_volatility(pricing_method, S_0, K, n, T, r, sigma):
+    u=1+r*(T/n)+(sigma*math.sqrt((T/n)))
+    d=1+r*(T/n)-(sigma*math.sqrt((T/n)))
+    r=r*T/n
+
+    print('upside: ' + str(u) + ' downside: ' + str(d))
+    return np_binomial_model(pricing_method, S_0, K, n, r, u, d)
+    #return non_recursive(pricing_method, S_0, K, n, r, u, d)
+
+print(binomial_model_implied_volatility(call, 156.47, 155, 66, 66/365, 0, 0.6408)) 
+#19.02
+#print(binomial_model_implied_volatility(call, 157.57, 190, 100, (66/365), 0.016, 0.5483)) 
+#todays data - should be 4.85 - calculated is 4.92
+
+'''
+https://finance.yahoo.com/quote/NVDA220819C00155000?p=NVDA220819C00155000
+64.08%
+strike 155
+last traded is 17.50
+bid is 17.60 and ask is 18.50
+p and q are 0.5
+3 month option 
+figure out an r
+r is .016
+156.47 (previous close)
+'''
+
+
