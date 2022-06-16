@@ -45,6 +45,6 @@ while(queue):
     sum+=queue[0].w*queue[0].Y
     queue.pop(0)
 
-sum += (1/(1+r))**n*sum
+sum = (1/(1+r))**n*sum
 
 print(sum)
