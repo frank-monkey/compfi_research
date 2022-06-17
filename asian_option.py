@@ -1,11 +1,5 @@
 from dataclasses import dataclass
-
-S_0 = 8 #initial price
-k = 6 #strike
-n = 10 #periods till maturity
-r = 0.25 #interest rates (in decimal form)
-u = 2 #upside factor
-d = 0.5 #downside factor
+import random
 
 @dataclass
 class node:
@@ -41,10 +35,39 @@ def asian_opt(pricing_method, S_0, k, n, r, u, d):
 
     sum=0
     while(queue):
-        sum+=pricing_method(queue[0].Z/(n+1),k)
+        sum+=queue[0].w*pricing_method(queue[0].Z/(n+1),k)
         queue.pop(0)
 
     return (1/(1+r))**n*sum
 
+def asian_opt_montecarlo(pricing_method, S_0, k, n, r, u, d, iterations):
+    p = ((1+r-d)/(u-d))
+    q = 1 - p
+
+    sum = 0
+    for i in range(iterations):
+        x = node(1, S_0, S_0, 0)    
+        while (x.k!=n):
+            if(random.random() < p):
+                x.S*=u
+                x.Z+=x.S
+                x.k+=1
+            else:
+                x.S*=d
+                x.Z+=x.S
+                x.k+=1
+            sum += pricing_method((x.Z/(n+1)),k)
+
+    sum/=iterations
+    return (1/(1+r))**n*sum
+
+
+S_0 = 8 #initial price
+k = 8 #strike
+n = 10 #periods till maturity
+r = 0.25 #interest rates (in decimal form)
+u = 2 #upside factor
+d = 0.5 #downside factor
 
 print(asian_opt(call, S_0, k, n, r, u, d)) 
+print(asian_opt_montecarlo(call, S_0, k, n, r, u, d, 100000)) 
