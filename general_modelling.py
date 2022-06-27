@@ -66,7 +66,7 @@ def path_independent_pricing(prices, option_pricing, K, p, n, r):
     print(V)
     print(V[0][0])
 
-def path_dependent_pricing(prices, option_pricing, K, p, n, r):
+def path_dependent_pricing(prices, option_pricing, K, p, n):
     q=1-p
     sum = 0
     op = lambda z : option_pricing(z, K)
@@ -78,17 +78,19 @@ def path_dependent_pricing(prices, option_pricing, K, p, n, r):
         ret_prices = []
         row = 0
         col = 0
-        for i in len(comb):
-            if comb[i].equals('0'):
+        for i in comb:
+            if i=='0':
                 probability*=p
                 row+=1
                 col+=1
-                ret_prices[i]=prices[row][col]
+                ret_prices.append(prices[row][col])
             else:
                 probability*=q
                 col+=1
-                ret_prices[i] = prices[row][col]
-
+                ret_prices.append(prices[row][col])
         sum+=probability*op(ret_prices)
     print(sum)
 
+path_dependent_pricing(bachelier_model(10, 5, 0.3, 0.2), product_root, -1, 0.5, 5) 
+#K doesnt matter so I made it -1 cuz idk
+#path_dependent_pricing(arithmetic_bachelier_model(10, 5, 0.3, 0.2), product_root, -1, 0.5, 5) 
