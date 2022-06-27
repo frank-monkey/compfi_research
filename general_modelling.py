@@ -45,6 +45,7 @@ def chooser(S, K):
 def squared_price(S, K):
     return S**2
 
+#path independent options
 def summation_root(S, K):
     return np.sum(S)**(1/len(S))
 
@@ -68,14 +69,12 @@ def path_dependent_pricing(prices, option_pricing, K, p, n):
     q=1-p
     sum = 0
     op = lambda z : option_pricing(z, K)
-    
-    combinations = [list('{:03b}'.format(x)) for x in range(2**n)]
+    combinations = [list('{:03b}'.format(x)) for x in range(2**n)] #generates a list of 0s and 1s to represent paths possible
 
     for comb in combinations:
         probability = 1
-        ret_prices = []
-        row = 0
-        col = 0
+        ret_prices = [] #holds pathing of prices to put into pricing method
+        row, col = 0, 0
         for i in comb:
             if i=='0':
                 probability*=p
@@ -90,5 +89,5 @@ def path_dependent_pricing(prices, option_pricing, K, p, n):
     print(sum)
 
 path_dependent_pricing(bachelier_model(10, 5, 0.3, 0.2), product_root, -1, 0.5, 5) 
-#K doesnt matter so I made it -1 cuz idk
+#K doesnt matter so I made it -1
 #path_dependent_pricing(arithmetic_bachelier_model(10, 5, 0.3, 0.2), product_root, -1, 0.5, 5) 
