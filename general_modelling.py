@@ -1,5 +1,5 @@
 import numpy as np
-np.set_printoptions(suppress=True)
+np.set_printoptions(suppress=True, precision=3)
 
 #modelling methods
 def binomial_model(S_0, n, u, d):
@@ -75,7 +75,7 @@ def path_independent_pricing(prices, option_pricing, K, p, n, r):
     print(V[0][0])
 
 def path_dependent_pricing(prices, option_pricing, K, n, r):
-    probabilities = np.zeros((n, n))
+    probabilities = np.zeros((n, n)) #chance of going up each seperate move
     for j in range(0,n):
         for i in range(0, j+1):
             probabilities[i][j] =  ((1+r)*prices[i][j]-prices[i][j+1])/(prices[i+1][j+1]-prices[i][j+1])
@@ -103,10 +103,9 @@ def path_dependent_pricing(prices, option_pricing, K, n, r):
                 ret_prices.append(prices[row][col])
         #print(ret_prices)
         sum+=probability*op(ret_prices)
-        print(ret_prices)
     print(((1/(r+1))**n*sum))
 
-path_dependent_pricing(bachelier_model(10, 5, 1, 3), product_root, -1, 5, 0.03) 
+path_dependent_pricing(bachelier_model(10, 10, 1, 3), product_root, -1, 10, 0.03) 
 #K doesnt matter so I made it -1
 #path_dependent_pricing(binomial_model(8, 10, 2, 0.5), asian_call, 8, 10, 0.25) 
 #path_dependent_pricing(arithmetic_bachelier_model(10, 5, 0.3, 0.2), product_root, -1, 0.5, 5) 
