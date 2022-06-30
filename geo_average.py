@@ -31,4 +31,4 @@ def geo_average(pricing_method, S_0, K, n, r, u, d):
     #print(sum)
     return (1/(r+1))**n * sum
 
-print(geo_average(call, 10, 5, 2, 0.25, 2, 0.5))
+print(geo_average(call, 150, 150, 100, 0, 1.055, 0.945))
