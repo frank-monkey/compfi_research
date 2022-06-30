@@ -1,4 +1,4 @@
-#optimized geometric average for calls and puts O(n^3) complexity
+#optimized geometric average for calls and puts O(n^3) complexity - make an optimization for u*d=1
 import numpy as np
 np.set_printoptions(suppress=True)
 
@@ -18,15 +18,17 @@ def geo_average(pricing_method, S_0, K, n, r, u, d):
     q = 1 - p
     sum = 0
     for comb in combinations:
-        probability, price = 1, S_0
-        for i in range(len(comb)):
+        probability, price = 1, S_0**n
+        for i in range(0, len(comb)):
             if comb[i]=='1':
                 probability *= p
-                price *= u**i
+                price *= (u**(i+1))
             else:
                 probability *= q
-                price *= d**i
-        sum += probability * price
-    print(((1/(r+1))**n * sum))
+                price *= (d**(i+1))
+        sum += probability * pricing_method(price, K) ** (1/n)
+        #print(pricing_method(price, K) ** (1/n))
+    #print(sum)
+    return (1/(r+1))**n * sum
 
-geo_average(call, 10, 5, 5, 0.25, 2, 0.5)
+print(geo_average(call, 10, 5, 2, 0.25, 2, 0.5))
