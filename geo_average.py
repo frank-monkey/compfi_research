@@ -1,16 +1,8 @@
-#optimized geometric average for calls and puts O(n^3) complexity - make an optimization for u*d=1
+#optimized geometric average for calls and puts O(n^3) complexity
+import pricing_methods
 import numpy as np
 from dataclasses import dataclass
 np.set_printoptions(suppress=True)
-
-def call(S_0, K):
-    return max(0, S_0 - K)
-
-def put(S_0, K):
-    return max(0, K - S_0)
-
-def chooser(S_0, K):
-    return max(S_0 - K, K - S_0)
 
 @dataclass
 class node:
@@ -54,5 +46,5 @@ def geo_average(pricing_method, S_0, K, n, r, u, d):
 #print(geo_average(call, 150, 150, 30, 0, 1.055, 0.945))
 #print(geo_average(call, 150, 150, 10, 0.25, 2, 0.5)) #would of generate 1024 nodes, generates 385
 #print(geo_average(call, 150, 150, 20, 0.25, 2, 0.5)) #would of generate 1048576 nodes, generates 6213
-print(geo_average(call, 150, 150, 40, 0.25, 2, 0.5))
+print(geo_average(pricing_methods.call, 150, 150, 40, 0.25, 2, 0.5))
 #print(geo_average(call, 150, 150, 50, 0.25, 2, 0.5)) #would of generate 2251799813685248, generates 

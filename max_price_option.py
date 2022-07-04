@@ -21,8 +21,8 @@ def max_price_rec_helper(S_0, K, n, r, u, d, max_price, p_hat, q_hat):
 
 #print(max_price_rec(100, 80, 5, 0.25, 2, 1/2)) 
 
-#tree implementation (n^2 if u*d=1, n^3 otherwise)
 
+#tree implementation (n^2 if u*d=1, n^3 otherwise)
 S_0 = 8 #initial price
 n = 10 #periods till maturity
 r = 0.25 #interest rates (in decimal form)

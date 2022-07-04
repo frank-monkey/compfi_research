@@ -1,6 +1,3 @@
-#Frank Sacco Computational Finance Research
-#13/6/22
-
 import math
 import numpy as np
 np.set_printoptions(suppress=True)
@@ -93,9 +90,9 @@ def binomial_model_implied_volatility(pricing_method, S_0, K, n, T, r, sigma):
     return np_binomial_model(pricing_method, S_0, K, n, r, u, d)
     #return non_recursive(pricing_method, S_0, K, n, r, u, d)
 
-print(binomial_model_implied_volatility(call, 156.47, 155, 66, 66/365, 0, 0.6408)) 
+#print(binomial_model_implied_volatility(call, 8, 8, 10, 0.25, 2, 0.5)) 
 #19.02
-#print(binomial_model_implied_volatility(call, 157.57, 190, 100, (66/365), 0.016, 0.5483)) 
+print(binomial_model_implied_volatility(call, 157.57, 190, 100, (66/365), 0.016, 0.5483)) 
 #todays data - should be 4.85 - calculated is 4.92
 
 '''

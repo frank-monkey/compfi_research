@@ -1,4 +1,5 @@
 import numpy as np
+import pricing_methods
 np.set_printoptions(suppress=True, precision=3)
 
 #modelling methods
@@ -31,35 +32,6 @@ def arithmetic_bachelier_model(S_0, n, alpha, beta):
             prices[i][j] = prices[i][j-1]+alpha-beta
     print(prices)
     return prices
-
-#option pricing methods
-def call(S, K):
-    return max(0, S - K)
-
-def put(S, K):
-    return max(0, K - S)
-
-def chooser(S, K):
-    return abs(S - K)
-
-def squared_price(S, K):
-    return S**2
-
-#path independent options
-def summation_root(S, K):
-    return np.sum(S)**(1/len(S))
-
-def product_root(S, K):
-    return np.prod(S)**(1/len(S))
-
-def asian_call(S, K):
-    return call(np.sum(S)/len(S),K)
-
-def asian_put(S, K):
-    return put(np.sum(S)/len(S),K)
-
-def asian_chooser(S, K):
-    return chooser(np.sum(S)/len(S),K)
 
 def path_independent_pricing(prices, option_pricing, K, p, n, r):
     q=1-p
@@ -102,10 +74,13 @@ def path_dependent_pricing(prices, option_pricing, K, n, r):
                 col+=1
                 ret_prices.append(prices[row][col])
         #print(ret_prices)
-        sum+=probability*op(ret_prices)
+        #print(op(ret_prices))
+        sum += probability * op(ret_prices)
+    print(sum)
     print(((1/(r+1))**n*sum))
 
-path_dependent_pricing(bachelier_model(10, 10, 1, 3), product_root, -1, 10, 0.03) 
-#K doesnt matter so I made it -1
+path_dependent_pricing(binomial_model(10, 2, 2, 0.5), pricing_methods.geometric_asian_call, 5, 2, 0.25) 
+
+#path_dependent_pricing(bachelier_model(10, 10, 1, 2), product_root, -1, 10, 0.03) 
 #path_dependent_pricing(binomial_model(8, 10, 2, 0.5), asian_call, 8, 10, 0.25) 
 #path_dependent_pricing(arithmetic_bachelier_model(10, 5, 0.3, 0.2), product_root, -1, 0.5, 5) 
