@@ -38,7 +38,7 @@ def geo_average(pricing_method, S_0, K, n, r, u, d):
         queue.pop(0)
     sum=0
     while(queue):
-        sum+=queue[0].w*pricing_method(queue[0].Y ** (1/n), K)
+        sum+=queue[0].w*pricing_method(queue[0].Y ** (1/n), K/S_0)
         queue.pop(0)
     print(inc) #total nodes generated
     return (1/(r+1))**n * sum * S_0
