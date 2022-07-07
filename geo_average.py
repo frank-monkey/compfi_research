@@ -16,7 +16,7 @@ def geo_average(pricing_method, S_0, K, n, r, u, d):
     p = ((1 + r - d)/(u - d))
     q = 1 - p
     queue = []
-    queue.append(node(1, 1, 1, 0)) # 1 instead of S_0 cause linear scaling
+    queue.append(node(1, S_0, 1, 0))
     while(queue[0].k!=n):
         inc+=1
         up=node(queue[0].w*p, queue[0].S*u, queue[0].Y * queue[0].S*u, queue[0].k+1)
@@ -37,14 +37,17 @@ def geo_average(pricing_method, S_0, K, n, r, u, d):
             queue.append(down)
         queue.pop(0)
     sum=0
+    #print(queue)
     while(queue):
-        sum+=queue[0].w*pricing_method(queue[0].Y ** (1/n), K/S_0)
+        sum += queue[0].w * pricing_method(queue[0].Y ** (1/n), K)
         queue.pop(0)
-    print(inc) #total nodes generated
-    return (1/(r+1))**n * sum * S_0
+    #print(inc) #total nodes generated
+    print("no interest: " + str(sum))
+    return (1/(r+1))**n * sum
 
 #print(geo_average(call, 150, 150, 30, 0, 1.055, 0.945))
 #print(geo_average(call, 150, 150, 10, 0.25, 2, 0.5)) #would of generate 1024 nodes, generates 385
 #print(geo_average(call, 150, 150, 20, 0.25, 2, 0.5)) #would of generate 1048576 nodes, generates 6213
-print(geo_average(pricing_methods.call, 150, 150, 40, 0.25, 2, 0.5))
+#print(geo_average(pricing_methods.call, 150, 150, 40, 0.25, 2, 0.5))
 #print(geo_average(call, 150, 150, 50, 0.25, 2, 0.5)) #would of generate 2251799813685248, generates 
+print(geo_average(pricing_methods.call, 10, 10, 2, 0.25, 2, 0.5)) #would of generate 2251799813685248, generates 
