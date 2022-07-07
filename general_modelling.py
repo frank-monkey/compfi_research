@@ -63,7 +63,7 @@ def path_dependent_pricing(prices, option_pricing, K, n, r):
         row, col = 0, 0
         for i in comb:
             p = probabilities[row][col]
-            q = p-1
+            q = 1-p
             if i=='0':
                 probability*=p
                 row+=1
@@ -73,13 +73,10 @@ def path_dependent_pricing(prices, option_pricing, K, n, r):
                 probability*=q
                 col+=1
                 ret_prices.append(prices[row][col])
-        #print(ret_prices)
-        #print(op(ret_prices))
         sum += probability * op(ret_prices)
-    print(sum)
-    print(((1/(r+1))**n*sum))
+    return (((1/(r+1))**n * sum))
 
-path_dependent_pricing(binomial_model(10, 2, 2, 0.5), pricing_methods.geometric_asian_call, 5, 2, 0.25) 
+print(path_dependent_pricing(binomial_model(10, 2, 2, 0.5), pricing_methods.geometric_asian_call, 10, 2, 0.25) )
 
 #path_dependent_pricing(bachelier_model(10, 10, 1, 2), product_root, -1, 10, 0.03) 
 #path_dependent_pricing(binomial_model(8, 10, 2, 0.5), asian_call, 8, 10, 0.25) 
