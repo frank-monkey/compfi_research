@@ -1,0 +1,85 @@
+\documentclass[reqno]{amsart}
+
+\input{./pre/preamble.tex}
+\input{./pre/title.tex}
+
+\begin{document}
+
+
+
+%\input{./pre/abstract.tex}
+\begin{nouppercase}
+\maketitle
+\end{nouppercase}
+
+
+
+
+\tableofcontents
+\setcounter{part}{0}
+
+
+\section{Chooser options under the Blachelier Model}
+We consider the Blachelier model with where the stock prices $\{S_t\}_{t \ge 0}$ evolves according to 
+\begin{align}
+	 S_t = S_0 + \kappa W_t
+\end{align}
+where $S_0 > 0$ and $\{W_t\}_{t \ge 0}$ is a Brownian motion under the risk neutral measure $\tilde{\mathbb{P}}$.
+
+We consider a contract with maturity $T$ and strike price $K$, that allows an agent to decide on a choosing date $\tau < T$ to choose the underlying derivative. Many results are known when an agent is allowed to choose between a European call and a European put. In this section we consider a contract that allows an agent to decide between two securities that pays 
+\begin{align}
+     C_T = (A_T - K)^+, \; P_T = (K - A_T)^+, \; A_T = \frac{1}{T} \int_0^T S_t \; dt.
+\end{align}
+(fill in derivation that gives $V_\tau$, the value of the contract at time $\tau$).
+Here, we assume the agent chooses optimally with no outside information. At time $\tau$, the agent will choose the option of higher value between the put and call. The value of contract $V$ at time $\tau$ is 
+\begin{align}
+     V_\tau = \max(C_\tau, P_\tau).
+\end{align}
+We subtract $C_\tau$ out of the max function and get
+\begin{align}
+     V_\tau = C_\tau + \max(0, P_\tau - C_\tau)
+\end{align}
+which we want to evaluate through Put-Call Parity.
+
+Recall that Put-Call Parity tells us
+\begin{align}
+     P_T - C_T = K - A_T. 
+\end{align}
+We want to discount this entire equation back to time $\tau$, but note that we cannot bring $A_T$ back to time $\tau$ as $A_\tau$ (why?). So, we define $w_\tau$ to be the price at time $\tau$ of a contract to receive $A_T$ at time $T$. We can now use $w_\tau$ to bring the equation back to time $\tau$
+\begin{align}
+     P_\tau - C_\tau = Ke^{r(\tau - T)} - w_\tau
+\end{align}
+
+So in conclusion, we find that 
+\begin{align}
+     V_\tau = C_\tau + \left(K- S_0 + \frac{\kappa(T-\tau)}{T} W_\tau - \frac{\kappa}{T} \int_0^\tau W_t \; dt  \right)^+.
+\end{align}
+Then by the risk-neutral pricing formula, the time-zero price of this contract is given by 
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
