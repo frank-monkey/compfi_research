@@ -45,9 +45,17 @@ Recall that Put-Call Parity tells us
 \begin{align}
      P_T - C_T = K - A_T. 
 \end{align}
-We want to discount this entire equation back to time $\tau$, but note that we cannot bring $A_T$ back to time $\tau$ as $A_\tau$ (why?). So, we define $w_\tau$ to be the price at time $\tau$ of a contract to receive $A_T$ at time $T$. We can now use $w_\tau$ to bring the equation back to time $\tau$
+We can replicate the LHS of the above equation by going long a put and short a call at time $0$, both with strike $T$. 
+We also replicate the RHS by investing $Ke^{-rT}$ into the bank at time 0 and shorting a contract to receive $A_T$ at time $T$. 
+Since both portfolios are of equal price at time $T$, they have equal price at all times $t$ where $0 \leq t \leq T$. 
+At time $\tau$, the left portfolio is the value of the put minus the call at time $\tau$. 
+The right portfolio now has $Ke^{-rT + r\tau}$ in the bank and is short a contract which pays $A_T$ at $T$.
+Define $P_\tau$ and $C_\tau$ to be the respective values of a put and call with maturity $T$ at time $\tau$.
+Let $w_\tau$ be the value of the contract at time $\tau$ to receive $A_T$ at time $T$.
+By replication, our portfolios give us the following equation
+
 \begin{align}
-     P_\tau - C_\tau = Ke^{r(\tau - T)} - w_\tau
+     P_\tau - C_\tau = Ke^{r(\tau - T)} - w_\tau.
 \end{align}
 
 So in conclusion, we find that 
