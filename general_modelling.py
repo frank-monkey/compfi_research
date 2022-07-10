@@ -45,12 +45,10 @@ def path_dependent_pricing(prices, option_pricing, K, n, r, t=0):
 
     sum = 0
     op = lambda z : option_pricing(z, K, t)
-    combinations = [list(('{:0' + str(n) + 'b}').format(x)) for x in range(2**n)] #generates a list of 0s and 1s to represent paths possible
-    #print(combinations)
     for i in range(2**n):
-        comb = ('{:0' + str(n) + 'b}').format(i) #outputs combination of '1's and '0's
+        comb = ('{:0' + str(n) + 'b}').format(i) #outputs combination of '1's and '0's corresponding to binary code of i
         probability = 1
-        ret_prices = [] #holds pathing of prices to put into pricing method
+        ret_prices = [] #holds history of prices to put into pricing method
         row, col = 0, 0
         for i in comb:
             p = probabilities[row][col]
@@ -73,10 +71,6 @@ def path_dependent_pricing(prices, option_pricing, K, n, r, t=0):
 #bachelier_model(10,4,2,0.5)
 #arithmetic_bachelier_model(10,4,2,0.5)
 
-print(path_dependent_pricing(binomial_model(10, 5, 2, 0.5), pricing_methods.geometric_asian_call, 5, 5, 0.25) )
-#print(path_dependent_pricing(binomial_model(10, 2, 2, 0.5), pricing_methods.arithmetic_asian_call, 10, 2, 0.25, 1) )
-#print(path_dependent_pricing(bachelier_model(8, 5, 0.2, 0.5), pricing_methods.arithmetic_asian_call, 5, 5, 0.25, 1) )
-
-#path_dependent_pricing(bachelier_model(10, 10, 1, 2), product_root, -1, 10, 0.03) 
-#path_dependent_pricing(binomial_model(8, 10, 2, 0.5), asian_call, 8, 10, 0.25) 
-#path_dependent_pricing(arithmetic_bachelier_model(10, 5, 0.3, 0.2), product_root, -1, 0.5, 5) 
+#print(path_dependent_pricing(binomial_model(8, 3, 2, 0.5), pricing_methods.geometric_asian_call, 16, 3, 0.25, 2) )
+#print(path_dependent_pricing(binomial_model(10, 5, 2, 0.5), pricing_methods.geometric_asian_call, 5, 5, 0.25) )
+print(path_dependent_pricing(bachelier_model(100, 5, 0.3, 0.5), pricing_methods.arithmetic_asian_call, 5, 5, 0.25, 1) )
