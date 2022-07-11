@@ -1,3 +1,4 @@
+#Can do any asian model except choosers
 import numpy as np
 import pricing_methods
 np.set_printoptions(suppress=True, precision=3)

@@ -1,3 +1,4 @@
+#Calls and Puts in up-down model
 import math
 import numpy as np
 np.set_printoptions(suppress=True)
@@ -107,5 +108,3 @@ figure out an r
 r is .016
 156.47 (previous close)
 '''
-
-
