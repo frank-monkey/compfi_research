@@ -192,32 +192,29 @@ Since both portfolios are of equal price at time $T$, they have equal price at a
 At time $\tau$, the left portfolio is the value of the put minus the call at time $\tau$. 
 The right portfolio now has $Ke^{-rT + r\tau}$ in the bank and is short a contract which pays $A_T$ at $T$.
 Define $P_\tau$ and $C_\tau$ to be the respective values of a put and call with maturity $T$ at time $\tau$.
-Let $w_\tau$ be the value of the contract at time $\tau$ to receive $A_T$ at time $T$.
+Let $A_\tau$ be the value of the contract at time $\tau$ to receive $A_T$ at time $T$.
 By replication, our portfolios give us the following equation
 \begin{align}
-     P_\tau - C_\tau = Ke^{r(\tau - T)} - w_\tau.
+     P_\tau - C_\tau = Ke^{r(\tau - T)} - A_\tau.
 \end{align}
 Substituting this result back into 1.4 (FIXME: fix reference), the value of the contract $V$ at $\tau$ is
 \begin{align}
-     V_\tau = C_\tau + \max(0, Ke^{r(\tau - T)} - w_\tau).
+     V_\tau = C_\tau + \max(0, Ke^{r(\tau - T)} - A_\tau).
 \end{align}
-Now we want an expression for the price at time $\tau$ to receive $A_T$ at time $T$. 
+Our next goal is to find an explicit formula for $A_\tau$. 
 
-\newpage
-
-For simplicity, define $U_\tau$ to be the price at time $\tau$ to receive $Y_T$ at time $T$, where
-
-\begin{align}
-     Y_T = \int_0^T S_t \; dt
+For simplicity, we define $U_\tau$ to be the time $\tau$ price of a contract with payoff $Y_T$ at time $T$, where $Y_T$ is defined via
+\begin{align}\label{eq: y}
+     Y_T = \int_0^T S_t \; dt.
 \end{align}
+Once $U_tau$ is determined, then we can recover $A_\tau$ as $A_\tau = \tau U_\tau$. 
 
-Note that this integral can be split into
-
+Note that \eqref{eq: y} can be split into
+two parts, 
 \begin{align}
      Y_T = \int_0^\tau S_t \; dt + \int_\tau^T S_t \; dt.
 \end{align}
-
-Observe that the integral from $0$ to $\tau$ is known at time $\tau$. We can treat this integral as a constant and now try to replicate the integral from time $\tau$ to $T$.
+Observe that the integral from $0$ to $\tau$ is known at time $\tau$. We can treat this integral as a constant (FIXME: be more precise about this?) and now try to replicate the integral from time $\tau$ to $T$.
 
 We begin our replicating strategy by buying $x$ shares of stock at time $\tau$. For all times $t$ where $\tau \leq t \leq T$, we will continuously sell off stock at the rate $\alpha_t$ and invest the revenue.
 With this strategy, at time T, the bank has 
