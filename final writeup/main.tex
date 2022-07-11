@@ -45,7 +45,6 @@ Pittsburgh, PA 15213, USA
 
 
 \begin{abstract}
-
     This paper concerns \dots 
 \end{abstract}
 
@@ -56,10 +55,191 @@ Pittsburgh, PA 15213, USA
 
 \section{Introduction}
 
-\section{The Blachelier model}
+
+\section{Chooser options under the Blachelier Model}
+We consider the Blachelier model with where the stock prices $\{S_t\}_{t \ge 0}$ evolves according to 
+\begin{align}\label{eq: r not 0}
+	 S_t = e^{rt} \left( S_0 + \kappa^{-rt}W_t + \kappa r \int_0^t e^{-rs} W_s \; ds \right).
+\end{align}
+where $S_0 > 0$ and $\{W_t\}_{t \ge 0}$ is a Brownian motion under the risk neutral measure $\tilde{\mathbb{P}}$. When $r = 0$, this reduces to 
+\begin{align}\label{eq: r=0}
+      S_t = S_0 + \kappa W_t. 
+\end{align}
+
+According to 
 
 
-\section{Chooser options}
+We consider a contract with maturity $T$ and strike price $K$, that allows an agent to decide on a choosing date $\tau < T$ to choose the underlying derivative. Many results are known when an agent is allowed to choose between a European call and a European put. In this section we consider a contract that allows an agent to decide between two securities that pays 
+\begin{align}
+     C_T = (A_T - K)^+, \; P_T = (K - A_T)^+, \; A_T = \frac{1}{T} \int_0^T S_t \; dt.
+\end{align}
+
+Here, we assume the agent chooses optimally with no outside information. At time $\tau$, the agent will choose the option of higher value between the put and call, therefore the value of this contract at time $\tau$ is 
+\begin{align}
+     V_\tau = \max(C_\tau, P_\tau).
+\end{align}
+By properties of the max function (FIXME: maybe add this in intro and reference?)
+\begin{align}
+     V_\tau = C_\tau + \max(0, P_\tau - C_\tau)
+\end{align}
+which we want to evaluate through Put-Call Parity.
+
+Recall that Put-Call Parity tells us
+\begin{align}
+     P_T - C_T = K - A_T. 
+\end{align}
+We can replicate the LHS of the above equation by going long a put and short a call at time $0$, both with strike $T$. 
+We also replicate the RHS by investing $Ke^{-rT}$ into the bank at time 0 and shorting a contract to receive $A_T$ at time $T$. 
+Since both portfolios are of equal price at time $T$, they have equal price at all times $t$ where $0 \leq t \leq T$. 
+At time $\tau$, the left portfolio is the value of the put minus the call at time $\tau$. 
+The right portfolio now has $Ke^{-rT + r\tau}$ in the bank and is short a contract which pays $A_T$ at $T$.
+Define $P_\tau$ and $C_\tau$ to be the respective values of a put and call with maturity $T$ at time $\tau$.
+Let $w_\tau$ be the value of the contract at time $\tau$ to receive $A_T$ at time $T$.
+By replication, our portfolios give us the following equation
+
+\begin{align}
+     P_\tau - C_\tau = Ke^{r(\tau - T)} - w_\tau.
+\end{align}
+
+Substituting this result back into 1.4, the value of the contract $V$ at $\tau$ is
+
+\begin{align}
+     V_\tau = C_\tau + \max(0, Ke^{r(\tau - T)} - w_\tau).
+\end{align}
+
+Now we want an expression for the price at time $\tau$ to receive $A_T$ at time $T$. 
+
+\newpage
+
+For simplicity, define $U_\tau$ to be the price at time $\tau$ to receive $Y_T$ at time $T$, where
+
+\begin{align}
+     Y_T = \int_0^T S_t \; dt
+\end{align}
+
+Note that this integral can be split into
+
+\begin{align}
+     Y_T = \int_0^\tau S_t \; dt + \int_\tau^T S_t \; dt.
+\end{align}
+
+Observe that the integral from $0$ to $\tau$ is known at time $\tau$. We can treat this integral as a constant and now try to replicate the integral from time $\tau$ to $T$.
+
+We begin our replicating strategy by buying $x$ shares of stock at time $\tau$. For all times $t$ where $\tau \leq t \leq T$, we will continuously sell off stock at the rate $\alpha_t$ and invest the revenue.
+With this strategy, at time T, the bank has 
+
+\begin{align}
+     \int_\tau^T \alpha_t S_t e^{r(T-t)} \; dt
+\end{align}
+
+To finish the replication, we want our replicating portfolio to be equal to the integral we are replicating:
+
+\begin{align}
+     \int_\tau^T \alpha_t S_t e^{r(T-t)} \; dt = \int_\tau^T S_t \; dt.
+\end{align}
+
+Solving for $\alpha_t$, we find that
+
+\begin{align}
+     \alpha_t = e^{r(t-T)}
+\end{align}
+
+Thus, the amount of shares our strategy started with was
+
+\begin{align}
+     x = \int_\tau^T e^{r(t-T)} \; dt = \dfrac{1}{r} - \dfrac{e^{r(\tau - T)}}{r}.
+\end{align}
+
+This tells us that the cost at time $\tau$ to receive the stock from times $\tau$ to $T$ continuously is $x S_\tau$. This gives us 
+
+\begin{align}
+     U_\tau = \int_0^\tau S_t \; dt + \dfrac{S_\tau}{r}\left( 1 - e^{r(\tau - T)} \right)
+\end{align}
+
+Recall that $w_\tau$ is the price at time $\tau$ to receive $A_T$, equivalent to $\dfrac{Y_T}{T}$, at time T.
+Thus, the price at $\tau$ to receive just $A_T$ is 
+
+\begin{align}
+     w_\tau = \dfrac{U_\tau}{T} = \dfrac{\int_0^\tau S_t \; dt + \dfrac{S_\tau}{r}\left( 1 - e^{r(\tau - T)} \right)}{T}
+\end{align}
+
+Returning to 1.6 Put-Call Parity, we can write out the equation as
+
+\begin{align}
+     P_\tau - C_\tau = Ke^{r(\tau - T)} - \dfrac{\int_0^\tau S_t \; dt + \dfrac{S_\tau}{r}\left( 1 - e^{r(\tau - T)} \right)}{T}.
+\end{align}
+
+Substituting this into the chooser option from 1.7, the value of $V_\tau$ is
+
+\begin{align}
+     V_\tau = C_\tau + \max(0, Ke^{r(\tau - T)} - \dfrac{\int_0^\tau S_t \; dt + \dfrac{S_\tau}{r}\left( 1 - e^{r(\tau - T)} \right)}{T})
+\end{align}
+
+(insert simplification for when r != 0)
+
+The above formula breaks when $r = 0$ since we divide by $r$. To fix this, we return to our replicating strategy for $w_\tau$ accounting for this special case.
+
+Define $U_\tau$ and $Y_T$ the same way as above. Again, split the integral $Y_T$ such that
+
+\begin{align}
+     Y_T = \int_0^\tau S_t \; dt + \int_\tau^T S_t \; dt
+\end{align}
+
+We now replicate the integral from time $\tau$ to $T$ for the special case. We follow the same replicating strategy as before. Purchase $x$ shares of stock. For all times $t$ where $\tau \leq t \leq T$, we continuously sell off at the rate $\alpha_t$ and invest the revenue. 
+By time $T$, the bank will have 
+
+\begin{align}
+     \int_\tau^T \alpha_t S_t \; dt
+\end{align}
+
+We finish the replication by setting this equal to the value we're replicating
+
+\begin{align}
+     \int_\tau^T \alpha_t S_t \; dt = \int_\tau^T S_t \; dt
+\end{align}
+
+Solving for $\alpha_t$, we see that when $r = 0$ that $\alpha_t = 1$. Thus, the number of shares the strategy started with was
+
+\begin{align}
+     \int_\tau^T dt = T - \tau
+\end{align}
+
+Similar to the $r \neq 0$ case, it then follows that
+
+\begin{align}
+     U_\tau = \int_0^\tau S_t dt + S_\tau (T - \tau), \; w_\tau = \dfrac{U_\tau}{T} = \dfrac{\int_0^\tau S_t dt + S_\tau (T - \tau)}{T}
+\end{align}
+
+Thus, Put-Call Parity in the special case tells us that 
+
+\begin{align}
+     P_\tau - C_\tau = K - \dfrac{U_\tau}{T} = \dfrac{\int_0^\tau S_t dt + S_\tau (T - \tau)}{T}.
+\end{align}
+
+Substituting this result into the chooser option formula, we have
+
+\begin{align}
+     V_\tau = C_\tau + \max(0, K - \dfrac{\int_0^\tau S_t \; dt + S_\tau (T - \tau)}{T})
+\end{align}
+
+Note that when the interest rate is $0$, the stock prices evolve according to 
+
+\begin{align}
+     S_t = S_0 + \kappa W_t
+\end{align}
+
+where $S_0 > 0$ and $\{W_t\}_{t \ge 0}$ is a Brownian motion under the risk neutral measure. We can now rewrite our chooser option formula as
+
+\begin{align}
+     V_\tau = C_\tau + \max(0, K - \dfrac{\int_0^\tau \left( S_0 + \kappa W_t \right) \; dt + (S_0 + \kappa W_\tau) (T - \tau)}{T})
+\end{align}
+
+So in conclusion, we find that 
+\begin{align}
+     V_\tau = C_\tau + \left(K- S_0 - \frac{\kappa(T-\tau)}{T} W_\tau - \frac{\kappa}{T} \int_0^\tau W_t \; dt  \right)^+.
+\end{align}
+Then by the risk-neutral pricing formula, the time-zero price of this contract is given by 
+
 
 \subsection*{Acknowledgement} The authors would like to thank Prof. Hrusa for \dots 
 
