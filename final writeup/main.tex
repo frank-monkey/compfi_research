@@ -145,7 +145,7 @@ Therefore
 To compute the price of a put, one can use put-call parity. 
 \subsubsection{Arithmetic Asian call}
 Consider an arithmetic Asian call where the payoff at time $T$ is given by 
-\begin{align}\label{eq: asian}
+\begin{align} \label{eq: asian}
 	 V_T = (A_T - K)^T, \; A_T = \frac{1}{T}\int_0^T S_t \; dt = S_0 + \frac{\kappa}{T} \int_0^T W_t \; dt. 
 \end{align}
 Using Ito's formula, one can show that under the risk neutral measure $\tilde{\mathbb{P}}$, 
@@ -157,7 +157,7 @@ Therefore we have
 	 A_T \sim N(S_0, \kappa^2 T/3) \; \text{under the risk neutral measure} \; \tilde{\mathbb{P}}.
 \end{align}
 Comparing this to \eqref{eq: S_T dist}, we see that $A_T$ has a similar distribution, the only difference is that the variance of $A_T$ is smaller by a factor of $1/3$, so the standard deviation of $A_T$ is smaller by a factor of $1/\sqrt{3}$. By performing the exact same set of calculation as before, the time-0 price of an Asian option is 
-\begin{align}\label{eq: asian op}
+\begin{align} \label{eq: asian op}
 	 V_0 = -\frac{\nu}{\sqrt{3}\sqrt{2\pi}} e^{-3d_-^2/2} + (K-\mu) \Phi(\sqrt{3}d_-),
 \end{align}
 where 
@@ -173,7 +173,7 @@ In this section we consider a more complicated type of financial contracts known
 \end{align}
 where $A_T$ is defined via \eqref{eq: asian}.
 Here, we assume the agent chooses optimally with no outside information. At time $\tau$, the agent will choose the option of higher value between the put and call, therefore the value of this contract at time $\tau$ is 
-\begin{align}
+\begin{align}\label{eq: V_tau}
      V_\tau = \max(C_\tau, P_\tau).
 \end{align}
 By properties of the max function (FIXME: maybe add this in intro and reference?)
@@ -197,7 +197,7 @@ By replication, our portfolios give us the following equation
 \begin{align}
      P_\tau - C_\tau = Ke^{r(\tau - T)} - A_\tau.
 \end{align}
-Substituting this result back into 1.4 (FIXME: fix reference), the value of the contract $V$ at $\tau$ is
+Substituting this result back into \eqref{eq: V_tau}, the value of the contract $V$ at $\tau$ is
 \begin{align}
      V_\tau = C_\tau + \max(0, Ke^{r(\tau - T)} - A_\tau).
 \end{align}
@@ -214,7 +214,7 @@ two parts,
 \begin{align}
      Y_T = \int_0^\tau S_t \; dt + \int_\tau^T S_t \; dt.
 \end{align}
-Observe that the integral from $0$ to $\tau$ is known at time $\tau$. We can treat this integral as a constant (FIXME: be more precise about this?) and now try to replicate the integral from time $\tau$ to $T$.
+Observe that the integral from $0$ to $\tau$ is known at time $\tau$ as each price $S_t$ will be known by the time $\tau$. So we can treat this integral as a constant and now try to replicate the integral from time $\tau$ to $T$.
 
 We begin our replicating strategy by buying $x$ shares of stock at time $\tau$. For all times $t$ where $\tau \leq t \leq T$, we will continuously sell off stock at the rate $\alpha_t$ and invest the revenue.
 With this strategy, at time T, the bank has 
@@ -331,6 +331,78 @@ So in conclusion, we find that
 \end{align}
 Then by the risk-neutral pricing formula, the time-zero price of this contract is given by 
 
+\begin{align} \label{eq: expect form}
+     V_0 = \tilde{\E}(C_\tau) + \tilde{\E}\left(\left(K- S_0 - \frac{\kappa(T-\tau)}{T} W_\tau - \frac{\kappa}{T} \int_0^\tau W_t \; dt  \right)^+\right).
+\end{align}
+
+Let 
+\begin{align}
+     X &= \tilde{\E}(C_\tau) + \tilde{\E}\left(\left(K- S_0 - \frac{\kappa(T-\tau)}{T} W_\tau - \frac{\kappa}{T} \int_0^\tau W_t \; dt  \right)^+\right).
+\end{align}
+
+It follows that the mean and variance of $X$ can be computed as 
+\begin{align}
+     \mu &= \E(X) = 0\\
+     \sigma &= Var(X) = \tau(\frac{\kappa(T-\tau)}{T})^2 + \frac{\tau^3}{3}(\frac{\kappa}{T})^2 + \tau^2\frac{\kappa^2(T-\tau)}{T^2}.\\
+     \nu &= \sqrt{\sigma}\\
+\end{align}
+
+We can show that $X$ is normally distributed, but this proof has been ejected as it is beyond the scope of this research. Therefore we can define the probability density function as
+\begin{align}
+     \phi(x) &=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\\
+     \psi(x) &= \frac{1}{\nu}\phi(\frac{x-\mu}{\nu})
+\end{align}
+
+Now we can substitute back into our equation from \eqref{eq: expect form} and use the definition of expectation on a continuous random variable to get 
+
+\begin{align} \label{eq: prechange}
+     V_0 = \tilde{\E}(C_\tau) + \left(\int_{-\infty}^{\infty}\left(K- S_0 - X\right)\psi(X) \; dX\right)^+.
+\end{align}
+
+To integrate the second term in $V_0$ we will let
+
+\begin{align}
+     Z &= \frac{X-\mu}{\sigma}.
+\end{align}
+
+it follows that 
+\begin{align}\label{eq: change variable}
+     X &= Z\nu + \mu\\
+     dX &= \nu dZ.
+\end{align}
+
+Note that the second term can only be positive when 
+\begin{align}
+     X \leq K - S_0.
+\end{align}
+
+Which is equivalent to 
+\begin{align} \label{eq: bound}
+     \frac{X-\mu}{\sigma} \leq \frac{K-S_0-\mu}{\nu}
+\end{align}
+
+let
+\begin{align}
+     d_ = \frac{K-S_0-\mu}{\nu}.
+\end{align}
+
+then \eqref{eq: bound} is 
+
+\begin{align} \label{eq: change bound}
+     Z \leq d_.
+\end{align}
+
+Now using \eqref{eq: change variable} and \eqref{eq: change bound} we can rearrange \eqref{eq: prechange} as:
+
+\begin{align}
+     V_0 = \tilde{\E}(C_\tau) + \left(\int_{-\infty}^{d\_}\left(K- S_0 - Z\nu - \mu\right)\frac{1}{\nu}\phi(Z)\nu \; dZ\right).
+\end{align}
+
+Simplifying this expression we get the form
+\begin{align}
+     V_0 = \tilde{\E}(C_\tau) + (K- S_0 - \mu)\int_{-\infty}^{d\_}\phi(Z) \; dZ - \nu \int_{-\infty}^{d\_}Z\phi(Z)\nu \; dZ.
+\end{align}
+
 
 \subsection*{Acknowledgement} The authors would like to thank Prof. Hrusa for \dots 
 
@@ -349,18 +421,6 @@ Then by the risk-neutral pricing formula, the time-zero price of this contract i
 
 
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

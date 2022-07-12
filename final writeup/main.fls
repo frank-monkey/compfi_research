@@ -1,8 +1,8 @@
-PWD /Users/albertzhang/Documents/GitHub/compfi_research/final writeup
+PWD /Users/william/Desktop/compfi_research/final writeup
 INPUT /usr/local/texlive/2022/texmf.cnf
 INPUT /usr/local/texlive/2022/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/albertzhang/Documents/GitHub/compfi_research/final writeup/main.tex
+INPUT /Users/william/Desktop/compfi_research/final writeup/main.tex
 OUTPUT main.log
 INPUT /usr/local/texlive/2022/texmf-dist/tex/latex/amscls/amsart.cls
 INPUT /usr/local/texlive/2022/texmf-dist/tex/latex/amscls/amsart.cls
@@ -1290,11 +1290,12 @@ INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out
-INPUT /Users/albertzhang/Library/texlive/2022/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk
+INPUT /Users/william/Library/texlive/2022/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb
