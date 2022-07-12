@@ -6,4 +6,4 @@
 \contentsline {subsubsection}{\tocsubsubsection {}{2.0.1}{European Call}}{1}{subsubsection.2.0.1}%
 \contentsline {subsubsection}{\tocsubsubsection {}{2.0.2}{Arithmetic Asian call}}{2}{subsubsection.2.0.2}%
 \contentsline {section}{\tocsection {}{3}{Chooser options}}{3}{section.3}%
-\contentsline {subsection}{\tocsubsection {}{}{Acknowledgement}}{5}{section*.2}%
+\contentsline {subsection}{\tocsubsection {}{}{Acknowledgement}}{6}{section*.2}%
