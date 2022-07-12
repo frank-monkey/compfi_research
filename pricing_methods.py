@@ -13,33 +13,20 @@ def squared_price(S_0, K):
     return S_0**2
 
 #path dependent options
-def summation_root(S, K, t):
+def summation_root(S, K):
     return max(0,np.sum(S)**(1/len(S)))
 
-def product_root(S, K, t):
+def product_root(S, K):
     return max(0,np.prod(S)**(1/len(S)))
 
-def arithmetic_asian_call(S, K, t):
-    S=S[t:]
+def arithmetic_asian_call(S, K):
     return call(np.sum(S)/len(S),K)
 
-def arithmetic_asian_put(S, K, t):
-    S=S[t:]
+def arithmetic_asian_put(S, K):
     return put(np.sum(S)/len(S),K)
 
-def arithmetic_asian_chooser(S, K, t):
-    S=S[t:]
-    return chooser(np.sum(S)/len(S),K)
-
-def geometric_asian_call(S, K, t):
-    S=S[t:]
+def geometric_asian_call(S, K):
     return call(np.prod(S)**(1/len(S)),K)
 
-def geometric_asian_put(S, K, t):
-    S=S[t:]
+def geometric_asian_put(S, K):
     return put(np.prod(S)**(1/len(S)),K)
-
-def geometric_asian_chooser(S, K, t):
-    S=S[t:]
-    return chooser(np.prod(S)**(1/len(S)),K)
-    
