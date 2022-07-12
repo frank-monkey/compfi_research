@@ -36,16 +36,16 @@ Pittsburgh, PA 15213, USA
 }
 \email[A. Zhang]{albertzh@andrew.cmu.edu}
 
-\thanks{J. Chen, L. Jiang, F. Sacco, A. Zhang were supported by MFSURP \dots }
+\thanks{J. Chen, L. Jiang, F. Sacco, A. Zhang were supported by the MFSURP program at Carnegie Mellon University.}
 
-\keywords{Blachelier model, Chooser options, \dots}
+\keywords{Blachelier model, Chooser options, Exotic options.}
 
 
 \begin{document}
 
 
 \begin{abstract}
-    This paper concerns \dots 
+    In this set of notes we derive the time-zero prices of various \emph{chooser options}. These are contracts with a fixed maturity date $T$ and a chooser date $\tau$ satisfying $0 \le \tau \le T$, for which an agent is allowed to choose at time $\tau$ the underlying security that determines the structure of the payoff at time $T$.  
 \end{abstract}
 
 
@@ -57,39 +57,48 @@ Pittsburgh, PA 15213, USA
 
 \subsection{Arbitrage-free pricing}
 
+(FIXME: add some background information on arbitrage-free pricing, aka summarize what you learned in 21-270. We can also add this to an appendix.)
 
 \subsection{The Blachelier Model}
 In this paper we work within the context of the \emph{Blachelier model}, where the stock prices $\{S_t\}_{t \ge 0}$ evolves according to 
 \begin{align}\label{eq: r not 0}
-	 S_t = e^{rt} \left( S_0 + \kappa^{-rt}W_t + \kappa r \int_0^t e^{-rs} W_s \; ds \right).
+	 S_t = e^{rt} \left( S_0 + \kappa^{-rt}W_t + \kappa r \int_0^t e^{-rs} W_s \; ds \right),
 \end{align}
-where $S_0 > 0$ and $\{W_t\}_{t \ge 0}$ is a Brownian motion under the risk neutral measure $\tilde{\mathbb{P}}$. We note to the reader that when $r = 0$, this reduces to 
+where $S_0 > 0$ denotes the initial stock price at time 0 and $\{W_t\}_{t \ge 0}$ is a Brownian motion under the risk neutral measure $\tilde{\mathbb{P}}$. We note to the reader that in the special case when $r = 0$, \eqref{eq: r not 0} reduces to 
 \begin{align}\label{eq: r=0}
       S_t = S_0 + \kappa W_t. 
 \end{align}
 
+(FIXME: explain to the reader why the Blachlier model is interesting).
+
+
 \subsection{Notation and conventions}
 
-In this paper we often use the notation $f^+$ to denote $\max(f,0)$. We note that by definition, we have 
+For a random variable $X$ we use the notation $X^+$ to denote the random variable $\max(X,0)$. We note that by definition, we have 
 \begin{align}\label{eq: pos part decomp}
-      f = f^+ - (-f)^+.
+      X = X^+ - (-X)^+,
 \end{align}
+from which the \emph{put-call parity} can be derived. 
 
+(FIXME: some common notation that needs to be explained: 
+\begin{enumerate}
+      \item the notation $X \sim N(\mu,\sigma^2)$
+      \item $\ldots$
+\end{enumerate}
+)
 
-
-\section{Asian options}
+\section{Arbitrage-free pricing under the Blachelier model}
 In this section we derive the arbitrage-free prices of some contracts in the simplest setting when $r = 0$.  
 
 \subsubsection{European Call}
 We first consider a European call where the payoff at time $T$ is given by 
 \begin{align}
-	 V_T = (S_T - K)^+.
+	 V_T = (S_T - K)^+
 \end{align}
-We note that under $\tilde{\mathbb{P}}$, $ W_T \sim N(0, T)$, therefore
+for a fixed strike price $K$. We note that under $\tilde{\mathbb{P}}$, $ W_T \sim N(0, T)$, therefore
 \begin{align}\label{eq: S_T dist}
 S_T \sim N(S_0, \kappa^2T) \; \text{under the risk neutral measure} \; \tilde{\mathbb{P}}.
 \end{align}
-
 According to the risk neutral pricing formula, the time-0 price of this security is given by 
 \begin{align}
 	 V_0 = \tilde{\E}[(S_T - K)^+].
@@ -102,7 +111,7 @@ In our setting, we have
 \begin{align}
 	 g(S_T) = (S_T - K)^+,
 \end{align}
-and the distribution of $S_T$ under $\tilde{\bP}$ as a random variable is given in \eqref{eq: S_T dist}. Therefore 
+and the distribution of $S_T$ under $\tilde{\bP}$ as a random variable is given in \eqref{eq: S_T dist}. Therefore, the time-zero price $V_0$ is given by 
 \begin{align}\label{eq: call int}
 	 V_0 = \tilde{\E}[(S_T - K)^+] =  \tilde{\E}[g(S_T)] = \int_{-\infty}^\infty (x-K)^+ \psi(x) \; dx,
 \end{align}
@@ -116,7 +125,7 @@ and
 \end{align}
 To compute \eqref{eq: call int}, we first note that since $(x-K)^+ = 0$ for $x \le K$, the domain of integration is the set $\{x \mid x \ge K\}$. Now we use the change of variables 
 \begin{align}
-	 y = -\frac{x-\mu}{\nu} \Longleftrightarrow x = \mu - \nu y
+	 y = -\frac{x-\mu}{\nu} \Longleftrightarrow x = \mu - \nu y,
 \end{align}
 and we note that since $\nu > 0$, 
 \begin{align}
@@ -128,11 +137,11 @@ Then by performing a change of variables, \eqref{eq: call int} becomes
 \end{align}
 We define the cumulative distribution function of a standard normal random variable $X$ under $\mathbb{P}$ via 
 \begin{align}
-	 \Phi(x) = \mathbb{P}[X \le x] = \E[ \mathbbm{1}_{X \le x}] = \int_{-\infty}^x \varphi(y) \; dy.
+	 \varphi(x) = \mathbb{P}[X \le x] = \E[ \mathbbm{1}_{X \le x}] = \int_{-\infty}^x \varphi(y) \; dy.
 \end{align}
 With this notation in hand, we can write 
 \begin{align}
-	 II = (K-\mu) \int_{-\infty}^{d_-} \varphi(y) \; dy = (K-\mu) \Phi(d_-),
+	 II = (K-\mu) \int_{-\infty}^{d_-} \varphi(y) \; dy = (K-\mu) \varphi(d_-),
 \end{align}
 and 
 \begin{align}
@@ -140,15 +149,15 @@ and
 \end{align}
 Therefore 
 \begin{align}
-	 V_0 =  -\frac{\nu}{\sqrt{2\pi}} e^{-d_-^2/2} + (K-\mu) \Phi(d_-).
+	 V_0 =  -\frac{\nu}{\sqrt{2\pi}} e^{-d_-^2/2} + (K-\mu) \varphi(d_-).
 \end{align}
-To compute the price of a put, one can use put-call parity. 
-\subsubsection{Arithmetic Asian call}
-Consider an arithmetic Asian call where the payoff at time $T$ is given by 
+To compute the price of a put, one can use put-call parity (FIXME: derive put-call parity somewhere and reference it). 
+\subsubsection{Arithmetic Asian calls}
+Next we consider an \emph{arithmetic Asian call} where the payoff at time $T$ is given by 
 \begin{align} \label{eq: asian}
 	 V_T = (A_T - K)^T, \; A_T = \frac{1}{T}\int_0^T S_t \; dt = S_0 + \frac{\kappa}{T} \int_0^T W_t \; dt. 
 \end{align}
-Using Ito's formula, one can show that under the risk neutral measure $\tilde{\mathbb{P}}$, 
+Using tools from Stochastic calculus, one can show that under the risk neutral measure $\tilde{\mathbb{P}}$, 
 \begin{align}
 	 \int_0^T W_t \; dt \sim N(0, T^3/3).
 \end{align}
@@ -158,7 +167,7 @@ Therefore we have
 \end{align}
 Comparing this to \eqref{eq: S_T dist}, we see that $A_T$ has a similar distribution, the only difference is that the variance of $A_T$ is smaller by a factor of $1/3$, so the standard deviation of $A_T$ is smaller by a factor of $1/\sqrt{3}$. By performing the exact same set of calculation as before, the time-0 price of an Asian option is 
 \begin{align} \label{eq: asian op}
-	 V_0 = -\frac{\nu}{\sqrt{3}\sqrt{2\pi}} e^{-3d_-^2/2} + (K-\mu) \Phi(\sqrt{3}d_-),
+	 V_0 = -\frac{\nu}{\sqrt{3}\sqrt{2\pi}} e^{-3d_-^2/2} + (K-\mu) \varphi(\sqrt{3}d_-),
 \end{align}
 where 
 \begin{align}
@@ -176,28 +185,38 @@ Here, we assume the agent chooses optimally with no outside information. At time
 \begin{align}\label{eq: V_tau}
      V_\tau = \max(C_\tau, P_\tau).
 \end{align}
-By properties of the max function (FIXME: maybe add this in intro and reference?)
+The time-zero price of this contract is then 
+\begin{align}
+      V_0 = \tilde{\E}[V_\tau].
+\end{align}
+In the next subsection, we simplify the expression for $V_\tau$ via the method of replication. 
+\subsection{Replication}
+We first note that by properties of the max function (FIXME: maybe add this in intro and reference?), we can write 
 \begin{align}
      V_\tau = C_\tau + \max(0, P_\tau - C_\tau).
 \end{align}
-Note that by \eqref{eq: pos part decomp}, we have
-\begin{align}
+By \eqref{eq: pos part decomp}, we have
+\begin{align}\label{eq: P - C}
      P_T - C_T = (K-S_T)^+ - (S_T - K)^+ = K - A_T. 
 \end{align}
-Next we want to identify the time-$\tau$ prices of contracts paying $P_T - C_T$ and $K - A_T$ at time $T$. To compute these arbitrage prices, we use the method of replication.
+Combining \eqref{eq: V_tau} and \eqref{eq: P - C} then gives us 
+\begin{align}
+      V_\tau = C_\tau + \max(0, K - A_T).
+\end{align}
+Next, we identify the time-$\tau$ prices of contracts paying $P_T - C_T$ and $K - A_T$ at time $T$.
 
-We can replicate the LHS of the above equation by going long a put and short a call at time $0$, both with strike $T$. 
-We also replicate the RHS by investing $Ke^{-rT}$ into the bank at time 0 and shorting a contract to receive $A_T$ at time $T$. 
-Since both portfolios are of equal price at time $T$, they have equal price at all times $t$ where $0 \leq t \leq T$. 
-At time $\tau$, the left portfolio is the value of the put minus the call at time $\tau$. 
-The right portfolio now has $Ke^{-rT + r\tau}$ in the bank and is short a contract which pays $A_T$ at $T$.
-Define $P_\tau$ and $C_\tau$ to be the respective values of a put and call with maturity $T$ at time $\tau$.
-Let $A_\tau$ be the value of the contract at time $\tau$ to receive $A_T$ at time $T$.
-By replication, our portfolios give us the following equation
+To replicate a security with payoff $P_T - C_T$, we consider a portfolio that longs a put and shorts a call at time $0$, both with strike $T$ (FIXME: what's the maturity?). To replicate a security with payoff $K - A_T$,  we consider a portfolio investing $Ke^{-rT}$ into the money account at time 0 and shorting a contract (FIXME: what kind of contract?) to receive $A_T$ at time $T$. 
+
+Since both portfolios have the same payoff at time $T$ by \eqref{eq: P - C}, they have the same price for all times $t$ where $0 \leq t \leq T$ (FIXME: in the intro explain why this is true in terms of arbitrage). 
+
+For any $t$ satisfying $0 \le t \le T$, we define $P_t$ to be the time-$t$ value of a put with payoff $P_T$ at time $T$, $C_t$ to be the time-$t$ value of a call with payoff $C_T$ at time $t$, $A_t$ to be the time-$t$ value of an asian option paying $A_T$ at time $t$. (FIXME: maybe move to intro?)
+
+Using this notation, at time $\tau$ the value of the first portfolio is $P_\tau - C_\tau$. Also, at time $\tau$ the second portfolio has $Ke^{-rT + r\tau}$ in the bank and is shorting a contract which pays $A_T$ at $T$, therefore the time-$\tau$ value of the second portfolio is $Ke^{r(\tau - T)} - A_\tau$.
+By replication, the time $\tau$ prices of the portfolios are equal, therefore we have 
 \begin{align}
      P_\tau - C_\tau = Ke^{r(\tau - T)} - A_\tau.
 \end{align}
-Substituting this result back into \eqref{eq: V_tau}, the value of the contract $V$ at $\tau$ is
+Substituting this result back into \eqref{eq: V_tau}, the value of the original chooser contract at $\tau$ is
 \begin{align}
      V_\tau = C_\tau + \max(0, Ke^{r(\tau - T)} - A_\tau).
 \end{align}
@@ -216,195 +235,153 @@ two parts,
 \end{align}
 Observe that the integral from $0$ to $\tau$ is known at time $\tau$ as each price $S_t$ will be known by the time $\tau$. So we can treat this integral as a constant and now try to replicate the integral from time $\tau$ to $T$.
 
-We begin our replicating strategy by buying $x$ shares of stock at time $\tau$. For all times $t$ where $\tau \leq t \leq T$, we will continuously sell off stock at the rate $\alpha_t$ and invest the revenue.
-With this strategy, at time T, the bank has 
 
+\subsection{Replicating Asian options when $r > 0$}
+We begin our replicating strategy by buying $x$ shares of stock at time $\tau$. For all times $t$ where $\tau \leq t \leq T$, we will continuously sell off stock at the rate $\alpha_t$ and invest the revenue.
+With this strategy, at time $T$, the bank has 
 \begin{align}
      \int_\tau^T \alpha_t S_t e^{r(T-t)} \; dt
 \end{align}
-
 To finish the replication, we want our replicating portfolio to be equal to the integral we are replicating:
-
 \begin{align}
      \int_\tau^T \alpha_t S_t e^{r(T-t)} \; dt = \int_\tau^T S_t \; dt.
 \end{align}
-
 Solving for $\alpha_t$, we find that
-
 \begin{align}
      \alpha_t = e^{r(t-T)}
 \end{align}
-
 Thus, the amount of shares our strategy started with was
-
 \begin{align}
      x = \int_\tau^T e^{r(t-T)} \; dt = \dfrac{1}{r} - \dfrac{e^{r(\tau - T)}}{r}.
 \end{align}
-
 This tells us that the cost at time $\tau$ to receive the stock from times $\tau$ to $T$ continuously is $x S_\tau$. This gives us 
-
 \begin{align}
      U_\tau = \int_0^\tau S_t \; dt + \dfrac{S_\tau}{r}\left( 1 - e^{r(\tau - T)} \right)
 \end{align}
-
-Recall that $w_\tau$ is the price at time $\tau$ to receive $A_T$, equivalent to $\dfrac{Y_T}{T}$, at time T.
+Recall that $w_\tau$ is the price at time $\tau$ to receive $A_T$, equivalent to $\dfrac{Y_T}{T}$, at time $T$.
 Thus, the price at $\tau$ to receive just $A_T$ is 
-
 \begin{align}
      w_\tau = \dfrac{U_\tau}{T} = \dfrac{\int_0^\tau S_t \; dt + \dfrac{S_\tau}{r}\left( 1 - e^{r(\tau - T)} \right)}{T}
 \end{align}
-
-Returning to 1.6 Put-Call Parity, we can write out the equation as
-
+Returning to 1.6 Put-Call Parity (FIXME: fix reference), we can write out the equation as
 \begin{align}
      P_\tau - C_\tau = Ke^{r(\tau - T)} - \dfrac{\int_0^\tau S_t \; dt + \dfrac{S_\tau}{r}\left( 1 - e^{r(\tau - T)} \right)}{T}.
 \end{align}
-
 Substituting this into the chooser option from 1.7, the value of $V_\tau$ is
-
 \begin{align}
      V_\tau = C_\tau + \max(0, Ke^{r(\tau - T)} - \dfrac{\int_0^\tau S_t \; dt + \dfrac{S_\tau}{r}\left( 1 - e^{r(\tau - T)} \right)}{T})
 \end{align}
 
-(insert simplification for when r != 0)
 
-The above formula breaks when $r = 0$ since we divide by $r$. To fix this, we return to our replicating strategy for $w_\tau$ accounting for this special case.
+\subsection{Replicating Asian options when $r = 0$}
+The above formula breaks when $r = 0$ since we divide by $r$ (FIXME: this is a little confusing since the interest rate was never specified. maybe specify that you are assuming $r > 0$ initially and now you're considering $r = 0$ as a special case. If you choose to do this I recommend breaking this section into different subsections). To fix this, we return to our replicating strategy for $w_\tau$ accounting for this special case.
 
 Define $U_\tau$ and $Y_T$ the same way as above. Again, split the integral $Y_T$ such that
-
 \begin{align}
      Y_T = \int_0^\tau S_t \; dt + \int_\tau^T S_t \; dt
 \end{align}
-
 We now replicate the integral from time $\tau$ to $T$ for the special case. We follow the same replicating strategy as before. Purchase $x$ shares of stock. For all times $t$ where $\tau \leq t \leq T$, we continuously sell off at the rate $\alpha_t$ and invest the revenue. 
 By time $T$, the bank will have 
-
 \begin{align}
      \int_\tau^T \alpha_t S_t \; dt
 \end{align}
-
 We finish the replication by setting this equal to the value we're replicating
-
 \begin{align}
      \int_\tau^T \alpha_t S_t \; dt = \int_\tau^T S_t \; dt
 \end{align}
-
 Solving for $\alpha_t$, we see that when $r = 0$ that $\alpha_t = 1$. Thus, the number of shares the strategy started with was
-
 \begin{align}
      \int_\tau^T dt = T - \tau
 \end{align}
-
 Similar to the $r \neq 0$ case, it then follows that
-
 \begin{align}
      U_\tau = \int_0^\tau S_t dt + S_\tau (T - \tau), \; w_\tau = \dfrac{U_\tau}{T} = \dfrac{\int_0^\tau S_t dt + S_\tau (T - \tau)}{T}
 \end{align}
-
 Thus, Put-Call Parity in the special case tells us that 
-
 \begin{align}
      P_\tau - C_\tau = K - \dfrac{U_\tau}{T} = \dfrac{\int_0^\tau S_t dt + S_\tau (T - \tau)}{T}.
 \end{align}
-
 Substituting this result into the chooser option formula, we have
-
 \begin{align}
      V_\tau = C_\tau + \max(0, K - \dfrac{\int_0^\tau S_t \; dt + S_\tau (T - \tau)}{T})
 \end{align}
-
 Note that when the interest rate is $0$, the stock prices evolve according to 
-
 \begin{align}
      S_t = S_0 + \kappa W_t
 \end{align}
-
 where $S_0 > 0$ and $\{W_t\}_{t \ge 0}$ is a Brownian motion under the risk neutral measure. We can now rewrite our chooser option formula as
-
 \begin{align}
      V_\tau = C_\tau + \max(0, K - \dfrac{\int_0^\tau \left( S_0 + \kappa W_t \right) \; dt + (S_0 + \kappa W_\tau) (T - \tau)}{T})
 \end{align}
-
 So in conclusion, we find that 
 \begin{align}
      V_\tau = C_\tau + \left(K- S_0 - \frac{\kappa(T-\tau)}{T} W_\tau - \frac{\kappa}{T} \int_0^\tau W_t \; dt  \right)^+.
 \end{align}
-Then by the risk-neutral pricing formula, the time-zero price of this contract is given by 
-
+Then by the risk-neutral pricing formula and the linearity of expection, the time-zero price $V_0$ is given by
 \begin{align} \label{eq: expect form}
-     V_0 = \tilde{\E}(C_\tau) + \tilde{\E}\left(\left(K- S_0 - \frac{\kappa(T-\tau)}{T} W_\tau - \frac{\kappa}{T} \int_0^\tau W_t \; dt  \right)^+\right).
+     V_0 = \tilde{\E}[C_\tau] + \tilde{\E}\left[\left(K- S_0 - \frac{\kappa(T-\tau)}{T} W_\tau - \frac{\kappa}{T} \int_0^\tau W_t \; dt  \right)^+\right].
 \end{align}
-
-Let 
+Let $X$ be the random variable defined via 
 \begin{align}
-     X &= \tilde{\E}(C_\tau) + \tilde{\E}\left(\left(K- S_0 - \frac{\kappa(T-\tau)}{T} W_\tau - \frac{\kappa}{T} \int_0^\tau W_t \; dt  \right)^+\right).
+     X &= \frac{\kappa(T-\tau)}{T} W_\tau + \frac{\kappa}{T} \int_0^\tau W_t \; dt.
 \end{align}
-
-It follows that the mean and variance of $X$ can be computed as 
+It follows that the mean and variance of $X$ can be computed as (IMPORTANT FIXME: add details of this computation!)
 \begin{align}
      \mu &= \E(X) = 0\\
      \sigma &= Var(X) = \tau(\frac{\kappa(T-\tau)}{T})^2 + \frac{\tau^3}{3}(\frac{\kappa}{T})^2 + \tau^2\frac{\kappa^2(T-\tau)}{T^2}.\\
      \nu &= \sqrt{\sigma}\\
 \end{align}
+(FIXME: typically $\sigma$ denotes the standard deviation, so this isn't very consistent with standard notation)
 
-We can show that $X$ is normally distributed, but this proof has been ejected as it is beyond the scope of this research. Therefore we can define the probability density function as
+Using methods of stochastic calculus (FIXME: we need to find a reference to cite), $X$ is normally distributed with mean $\mu$ and variance $\sigma^2$. Therefore we can define the probability density function as
 \begin{align}
-     \phi(x) &=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\\
-     \psi(x) &= \frac{1}{\nu}\phi(\frac{x-\mu}{\nu})
+     \varphi(x) &=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\\
+     \psi(x) &= \frac{1}{\nu}\varphi(\frac{x-\mu}{\nu})
 \end{align}
-
 Now we can substitute back into our equation from \eqref{eq: expect form} and use the definition of expectation on a continuous random variable to get 
-
 \begin{align} \label{eq: prechange}
-     V_0 = \tilde{\E}(C_\tau) + \left(\int_{-\infty}^{\infty}\left(K- S_0 - X\right)\psi(X) \; dX\right)^+.
+     V_0 = \tilde{\E}[C_\tau] + \int_{-\infty}^{\infty}\left(K- S_0 - x\right)^+ \psi(x) \; dx.
 \end{align}
-
 To integrate the second term in $V_0$ we will let
-
 \begin{align}
-     Z &= \frac{X-\mu}{\sigma}.
+     z &= \frac{x-\mu}{\sigma}.
 \end{align}
-
 it follows that 
 \begin{align}\label{eq: change variable}
-     X &= Z\nu + \mu\\
-     dX &= \nu dZ.
+     x &= z\nu + \mu\\
+     dx &= \nu dz.
 \end{align}
-
-Note that the second term can only be positive when 
+We note that 
+\begin{align} \label{eq: int domain}
+    K - S_0 - x \ge 0 \Longleftrightarrow x \leq K- S_0 \Longleftrightarrow  \frac{x-\mu}{\sigma} \leq \frac{K-S_0-\mu}{\nu}.
+\end{align}
+We define $d_-$ via
 \begin{align}
-     X \leq K - S_0.
+      d_- =  \frac{K-S_0-\mu}{\nu}
 \end{align}
-
-Which is equivalent to 
-\begin{align} \label{eq: bound}
-     \frac{X-\mu}{\sigma} \leq \frac{K-S_0-\mu}{\nu}
-\end{align}
-
-let
-\begin{align}
-     d_ = \frac{K-S_0-\mu}{\nu}.
-\end{align}
-
-then \eqref{eq: bound} is 
-
+so by \eqref{eq: int domain}, we have 
 \begin{align} \label{eq: change bound}
-     Z \leq d_.
+     K - S_0 - x \ge 0  \Longleftrightarrow z \leq d_.
 \end{align}
-
 Now using \eqref{eq: change variable} and \eqref{eq: change bound} we can rearrange \eqref{eq: prechange} as:
-
 \begin{align}
-     V_0 = \tilde{\E}(C_\tau) + \left(\int_{-\infty}^{d\_}\left(K- S_0 - Z\nu - \mu\right)\frac{1}{\nu}\phi(Z)\nu \; dZ\right).
+     V_0 = \tilde{\E}[C_\tau] + \left(\int_{-\infty}^{d\_}\left(K- S_0 - z\nu - \mu\right)\varphi(z) \; dz\right).
 \end{align}
-
 Simplifying this expression we get the form
 \begin{align}
-     V_0 = \tilde{\E}(C_\tau) + (K- S_0 - \mu)\int_{-\infty}^{d\_}\phi(Z) \; dZ - \nu \int_{-\infty}^{d\_}Z\phi(Z)\nu \; dZ.
+     V_0 = \tilde{\E}[C_\tau] - \nu \int_{-\infty}^{d_-}z\varphi(z)\nu \; dz +  (K- S_0 - \mu)\int_{-\infty}^{d_-}\varphi(z) \; dz 
 \end{align}
+(FIXME: continue with this computation, write down an explicit formula for $V_0$, and also the price for the variant.)
+
+\subsection*{Acknowledgement} The authors would like to thank Prof. Hrusa for his patient guidance on this project.  
 
 
-\subsection*{Acknowledgement} The authors would like to thank Prof. Hrusa for \dots 
+\appendix
+\section{Various replicating strategies}
+
+\subsection{Replicating European options}
+
+\subsection{Replicating Asian options}
 
 %\printbibliography
 
