@@ -185,19 +185,25 @@ Here, we assume the agent chooses optimally with no outside information. At time
 \begin{align}\label{eq: V_tau}
      V_\tau = \max(C_\tau, P_\tau).
 \end{align}
-By properties of the max function (FIXME: maybe add this in intro and reference?)
+The time-zero price of this contract is then 
+\begin{align}
+      V_0 = \tilde{\E}[V_\tau].
+\end{align}
+In the next subsection, we simplify the expression for $V_\tau$ via the method of replication. 
+\subsection{Replication}
+We first note that by properties of the max function (FIXME: maybe add this in intro and reference?), we can write 
 \begin{align}
      V_\tau = C_\tau + \max(0, P_\tau - C_\tau).
 \end{align}
-Note that by \eqref{eq: pos part decomp}, we have
+By \eqref{eq: pos part decomp}, we have
 \begin{align}\label{eq: P - C}
      P_T - C_T = (K-S_T)^+ - (S_T - K)^+ = K - A_T. 
 \end{align}
-Therefore combining \eqref{eq: V_tau} and \eqref{eq: P - C} gives us 
+Combining \eqref{eq: V_tau} and \eqref{eq: P - C} then gives us 
 \begin{align}
       V_\tau = C_\tau + \max(0, K - A_T).
 \end{align}
-To simplify the expression for $V_\tau$, next we identify the time-$\tau$ prices of contracts paying $P_T - C_T$ and $K - A_T$ at time $T$ via the method of replication.
+Next, we identify the time-$\tau$ prices of contracts paying $P_T - C_T$ and $K - A_T$ at time $T$.
 
 To replicate a security with payoff $P_T - C_T$, we consider a portfolio that longs a put and shorts a call at time $0$, both with strike $T$ (FIXME: what's the maturity?). To replicate a security with payoff $K - A_T$,  we consider a portfolio investing $Ke^{-rT}$ into the money account at time 0 and shorting a contract (FIXME: what kind of contract?) to receive $A_T$ at time $T$. 
 
@@ -205,7 +211,7 @@ Since both portfolios have the same payoff at time $T$ by \eqref{eq: P - C}, the
 
 For any $t$ satisfying $0 \le t \le T$, we define $P_t$ to be the time-$t$ value of a put with payoff $P_T$ at time $T$, $C_t$ to be the time-$t$ value of a call with payoff $C_T$ at time $t$, $A_t$ to be the time-$t$ value of an asian option paying $A_T$ at time $t$. (FIXME: maybe move to intro?)
 
-Using this notation, at time-$\tau$ the value of the first portfolio is $P_\tau - C_\tau$. Also, at time $\tau$ the second portfolio has $Ke^{-rT + r\tau}$ in the bank and is shorting a contract which pays $A_T$ at $T$, therefore the time-$\tau$ value of the second portfolio is $Ke^{r(\tau - T)} - A_\tau$.
+Using this notation, at time $\tau$ the value of the first portfolio is $P_\tau - C_\tau$. Also, at time $\tau$ the second portfolio has $Ke^{-rT + r\tau}$ in the bank and is shorting a contract which pays $A_T$ at $T$, therefore the time-$\tau$ value of the second portfolio is $Ke^{r(\tau - T)} - A_\tau$.
 By replication, the time $\tau$ prices of the portfolios are equal, therefore we have 
 \begin{align}
      P_\tau - C_\tau = Ke^{r(\tau - T)} - A_\tau.
@@ -229,6 +235,8 @@ two parts,
 \end{align}
 Observe that the integral from $0$ to $\tau$ is known at time $\tau$ as each price $S_t$ will be known by the time $\tau$. So we can treat this integral as a constant and now try to replicate the integral from time $\tau$ to $T$.
 
+
+\subsection{Replicating Asian options when $r > 0$}
 We begin our replicating strategy by buying $x$ shares of stock at time $\tau$. For all times $t$ where $\tau \leq t \leq T$, we will continuously sell off stock at the rate $\alpha_t$ and invest the revenue.
 With this strategy, at time $T$, the bank has 
 \begin{align}
@@ -264,6 +272,8 @@ Substituting this into the chooser option from 1.7, the value of $V_\tau$ is
      V_\tau = C_\tau + \max(0, Ke^{r(\tau - T)} - \dfrac{\int_0^\tau S_t \; dt + \dfrac{S_\tau}{r}\left( 1 - e^{r(\tau - T)} \right)}{T})
 \end{align}
 
+
+\subsection{Replicating Asian options when $r = 0$}
 The above formula breaks when $r = 0$ since we divide by $r$ (FIXME: this is a little confusing since the interest rate was never specified. maybe specify that you are assuming $r > 0$ initially and now you're considering $r = 0$ as a special case. If you choose to do this I recommend breaking this section into different subsections). To fix this, we return to our replicating strategy for $w_\tau$ accounting for this special case.
 
 Define $U_\tau$ and $Y_T$ the same way as above. Again, split the integral $Y_T$ such that
@@ -359,11 +369,19 @@ Now using \eqref{eq: change variable} and \eqref{eq: change bound} we can rearra
 \end{align}
 Simplifying this expression we get the form
 \begin{align}
-     V_0 = \tilde{\E}[C_\tau] - \nu \int_{-\infty}^{d\_}z\varphi(z)\nu \; dz +  (K- S_0 - \mu)\int_{-\infty}^{d\_}\varphi(z) \; dz 
+     V_0 = \tilde{\E}[C_\tau] - \nu \int_{-\infty}^{d_-}z\varphi(z)\nu \; dz +  (K- S_0 - \mu)\int_{-\infty}^{d_-}\varphi(z) \; dz 
 \end{align}
-(FIXME: continue with this computation, write down an explicit formula for $V_0$, and also the price for the variant)
+(FIXME: continue with this computation, write down an explicit formula for $V_0$, and also the price for the variant.)
 
 \subsection*{Acknowledgement} The authors would like to thank Prof. Hrusa for his patient guidance on this project.  
+
+
+\appendix
+\section{Various replicating strategies}
+
+\subsection{Replicating European options}
+
+\subsection{Replicating Asian options}
 
 %\printbibliography
 
