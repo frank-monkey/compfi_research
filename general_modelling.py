@@ -54,11 +54,12 @@ def path_dependent_pricing(price_generation, option_pricing, S_0, K, n, r, var1,
     for i in range(2**n):
         comb = ('{:0' + str(n) + 'b}').format(i) #outputs combination of '1's and '0's corresponding to binary code of i
         probability = 1
+        #print(ret_prices)
+        row, col = 0, 0
         if(prev_prices): #if previous prices are passed in use those
-            ret_prices=prev_prices
+            ret_prices = prev_prices.copy()
         else:
             ret_prices = [prices[0][0]] #holds history of prices to put into pricing method
-        row, col = 0, 0
         for i in comb:
             p = probabilities[row][col]
             q = 1 - p
@@ -72,16 +73,15 @@ def path_dependent_pricing(price_generation, option_pricing, S_0, K, n, r, var1,
                 row*=2
                 col+=1
                 ret_prices.append(prices[row][col])
-        #print(ret_prices)
         sum += probability * op(ret_prices)
-    #print("interest-free price = " + str(sum))
     return ((sum * (1/(r+1))**n))
 
-#Returns arithmetic average of price between tau and T
+#Returns arithmetic average of price between tau and T - non zero interest rates don't work
 def arithmetic_asian_tail_chooser(pricing_model, S_0, K, n, tau, r, var1, var2):
-    op = lambda S : max(path_dependent_pricing(pricing_model, pricing_methods.arithmetic_asian_call, S, K, n-tau, r, var1, var2), path_dependent_pricing(pricing_model, pricing_methods.arithmetic_asian_put, S, K, n-tau, r, var1, var2))
+    r=0
+    op = lambda S: max(path_dependent_pricing(pricing_model, pricing_methods.arithmetic_asian_call, S, K, n-tau, r, var1, var2), path_dependent_pricing(pricing_model, pricing_methods.arithmetic_asian_put, S, K, n-tau, r, var1, var2))
     if(tau==0):
-        return op(S_0)
+        return max(path_dependent_pricing(pricing_model, pricing_methods.arithmetic_asian_call, S_0, K, n, r, var1, var2), path_dependent_pricing(pricing_model, pricing_methods.arithmetic_asian_put, S_0, K, n, r, var1, var2))
     prices = pricing_model(S_0, tau, var1, var2)
     probabilities = np.zeros((2**(tau-1), tau)) #p_hat of each move
     for j in range(0,tau):
@@ -108,18 +108,20 @@ def arithmetic_asian_tail_chooser(pricing_model, S_0, K, n, tau, r, var1, var2):
                 probability*=q
                 row*=2
                 col+=1
-        price = (prices[row][col])
+            price=prices[row][col]
         #print('price processing -> ' + str(price))
-        #print('localized price ' + str(op(price)))
+        #print('localized price ' + str(op(passed_prices[-1], passed_prices)))
+        #print(passed_prices)
         sum += probability * op(price)
     #print("final interest-free price = " + str(sum))
     return (((1/(r+1))**(n-tau)) * sum)
 
-#returns price between 0 and T regardless of tau
+#returns price between 0 and T regardless of tau, nonzero interest rates don't work
 def arithmetic_asian_full_chooser(pricing_model, S_0, K, n, tau, r, var1, var2):
+    r=0
     op = lambda S, passed_prices : max(path_dependent_pricing(pricing_model, pricing_methods.arithmetic_asian_call, S, K, n-tau, r, var1, var2, passed_prices), path_dependent_pricing(pricing_model, pricing_methods.arithmetic_asian_put, S, K, n-tau, r, var1, var2, passed_prices))
     if(tau==0):
-        return op(S_0, [])
+        return max(path_dependent_pricing(pricing_model, pricing_methods.arithmetic_asian_call, S_0, K, n, r, var1, var2), path_dependent_pricing(pricing_model, pricing_methods.arithmetic_asian_put, S_0, K, n, r, var1, var2))
     prices = pricing_model(S_0, tau, var1, var2)
     probabilities = np.zeros((2**(tau-1), tau)) #p_hat of each move
     for j in range(0,tau):
@@ -132,10 +134,10 @@ def arithmetic_asian_full_chooser(pricing_model, S_0, K, n, tau, r, var1, var2):
 
     sum = 0
     for i in range(2**tau):
-        passed_prices = [prices[0][0]]
         comb = ('{:0' + str(tau) + 'b}').format(i) #outputs combination of '1's and '0's corresponding to binary code of i
         probability = 1
         row, col = 0, 0
+        passed_prices = [prices[0][0]]
         for i in comb:
             p = probabilities[row][col]
             q = 1 - p
@@ -151,6 +153,7 @@ def arithmetic_asian_full_chooser(pricing_model, S_0, K, n, tau, r, var1, var2):
                 passed_prices.append(prices[row][col])
         #print('price processing -> ' + str(price))
         #print('localized price ' + str(op(passed_prices[-1], passed_prices)))
+        #print(passed_prices)
         sum += probability * op(passed_prices[-1], passed_prices)
     #print("final interest-free price = " + str(sum))
     return (((1/(r+1))**(n-tau)) * sum)
@@ -164,11 +167,11 @@ def arithmetic_asian_full_chooser(pricing_model, S_0, K, n, tau, r, var1, var2):
 
 S_0 = 8 #initial price
 K = 13 #strike
-n : int  = 10 #periods till maturity
-r = 0.25 #interest rates (in decimal form)
+n : int  = 15 #periods till maturity
+r = 0 #interest rates (in decimal form)
 u = 2 #upside factor
 d = 0.5 #downside factor
-tau : int = 10 #time call or put has to be chosen
+tau : int = 0 #time call or put has to be chosen
 
 #print(arithmetic_asian_chooser(binomial_model, S_0, K, u, d, n, tau, r) )
 #print(path_dependent_pricing(binomial_model, pricing_methods.arithmetic_asian_put, S_0, K, n, r, u, d) )
@@ -176,10 +179,11 @@ tau : int = 10 #time call or put has to be chosen
 
 
 #print(path_dependent_pricing(binomial_model, pricing_methods.arithmetic_asian_call, S_0, K, n, r, u, d) )
-
-print("full chooser = " + str(arithmetic_asian_full_chooser(binomial_model, S_0, K, n, tau, r, u, d)))
-print("tail chooser = " + str(arithmetic_asian_tail_chooser(binomial_model, S_0, K, n, tau, r, u, d)))
-print("price of a put = " + str(path_dependent_pricing(binomial_model, pricing_methods.arithmetic_asian_put, S_0, K, n, r, u, d)))
-print("price of a call = " + str(path_dependent_pricing(binomial_model, pricing_methods.arithmetic_asian_call, S_0, K, n, r, u, d)))
-print("price of a put and a call = " + str(path_dependent_pricing(binomial_model, pricing_methods.arithmetic_asian_call, S_0, K, n, r, u, d)+ path_dependent_pricing(binomial_model, pricing_methods.arithmetic_asian_put, S_0, K, n, r, u, d) ))
+'''
+print("full chooser = " + str(arithmetic_asian_full_chooser(binomial_model, S_0, K, n, tau, r, u, d)/((1+r)**tau)))
+#print("tail chooser = " + str(arithmetic_asian_tail_chooser(binomial_model, S_0, K, n, tau, r, u, d)))
+'''
+#print("price of a put = " + str(path_dependent_pricing(binomial_model, pricing_methods.arithmetic_asian_put, S_0, K, n, r, u, d)))
+#print("price of a call = " + str(path_dependent_pricing(binomial_model, pricing_methods.arithmetic_asian_call, S_0, K, n, r, u, d)))
+#print("price of a put and a call = " + str(path_dependent_pricing(binomial_model, pricing_methods.arithmetic_asian_call, S_0, K, n, r, u, d)+ path_dependent_pricing(binomial_model, pricing_methods.arithmetic_asian_put, S_0, K, n, r, u, d) ))
 # ^^^^ price of a put and a call expiring at T at time 0
