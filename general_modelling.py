@@ -21,7 +21,7 @@ def bachelier_model(S_0, n, mu, beta):
         for i in range(0, 2**j):
             prices[2*i+1][j+1] = mu*prices[i][j]+beta #up case
             prices[2*i][j+1] = mu*prices[i][j]-beta #down case
-    #print(prices)
+    print(prices)
     return prices
 
 def arithmetic_bachelier_model(S_0, n, alpha, beta): 
@@ -158,12 +158,12 @@ def arithmetic_asian_full_chooser(pricing_model, S_0, K, n, tau, r, var1, var2):
     #print("final interest-free price = " + str(sum))
     return (((1/(r+1))**(n-tau)) * sum)
 #binomial_model(10,4,2,0.5)
-#bachelier_model(10,4,2,0.5)
+#bachelier_model(10,4,1.1,0.5)
 #arithmetic_bachelier_model(10,4,2,0.5)
 
 #print(path_dependent_pricing(binomial_model(8, 3, 2, 0.5), pricing_methods.geometric_asian_call, 16, 3, 0.25, 2) )
 #print(path_dependent_pricing(binomial_model(10, 5, 2, 0.5), pricing_methods.geometric_asian_call, 5, 5, 0.25) )
-#print(path_dependent_pricing(bachelier_model(100, 5, 0.3, 0.5), pricing_methods.arithmetic_asian_call, 5, 5, 0.25, 1) )
+#print(path_dependent_pricing(bachelier_model(10,4,1.1,0.5), pricing_methods.arithmetic_asian_call, 5, 5, 0.25, 1) )
 
 S_0 = 8 #initial price
 K = 13 #strike
@@ -173,7 +173,6 @@ u = 2 #upside factor
 d = 0.5 #downside factor
 tau : int = 0 #time call or put has to be chosen
 
-#print(arithmetic_asian_chooser(binomial_model, S_0, K, u, d, n, tau, r) )
 #print(path_dependent_pricing(binomial_model, pricing_methods.arithmetic_asian_put, S_0, K, n, r, u, d) )
 #print(path_dependent_pricing(binomial_model(S_0, n, u, d), pricing_methods.arithmetic_asian_put, K, n, r) )
 
@@ -187,3 +186,17 @@ print("full chooser = " + str(arithmetic_asian_full_chooser(binomial_model, S_0,
 #print("price of a call = " + str(path_dependent_pricing(binomial_model, pricing_methods.arithmetic_asian_call, S_0, K, n, r, u, d)))
 #print("price of a put and a call = " + str(path_dependent_pricing(binomial_model, pricing_methods.arithmetic_asian_call, S_0, K, n, r, u, d)+ path_dependent_pricing(binomial_model, pricing_methods.arithmetic_asian_put, S_0, K, n, r, u, d) ))
 # ^^^^ price of a put and a call expiring at T at time 0
+
+
+
+
+#print(arithmetic_asian_full_chooser(bachelier_model, 100, 120, 5, 1, 0, 1.1, 50))
+#print(arithmetic_asian_full_chooser(bachelier_model, 100, 120, 5, 2, 0, 1.1, 50))
+
+n=2
+
+#print(arithmetic_asian_full_chooser(bachelier_model, 100, 120, n, 0, 0, 1.1, 50))
+#print(arithmetic_asian_full_chooser(bachelier_model, 100, 120, n, 1, 0, 1.1, 50))#should be 62.44
+#print(arithmetic_asian_full_chooser(bachelier_model, 100, 120, n, 2, 0, 1.1, 50))#should also be 62.44
+
+print(arithmetic_asian_full_chooser(bachelier_model, 100, 120, 3, 3, 0, 1.1, 50))

@@ -1,26 +1,34 @@
 import plotly.express as px
 import pandas as pd
-import plotly.graph_objects as go
 import general_modelling
-import matplotlib.pyplot as plt
 
-S_0 = 8 #initial price
-K = 13 #strike
+S_0 = 100 #initial price
+K = 250 #strike
 n : int  = 10 #periods till maturity
-r = 0.25 #interest rates (in decimal form)
-u = 2 #upside factor
-d = 0.5 #downside factor
-tau : int = 10 #time call or put has to be chosen
-
+r = 0 #interest rates (in decimal form)
+a = 1.1 
+b = 50
+#tau : int = 10 #time call or put has to be chosen
 
 x=[]
 y=[]
 z=[]
 for i in range(0, n+1, 1):
     x.append(i)
-    y.append(general_modelling.arithmetic_asian_full_chooser(general_modelling.binomial_model, S_0, K, n, i, r, u, d))
-    z.append(general_modelling.arithmetic_asian_tail_chooser(general_modelling.binomial_model, S_0, K, n, i, r, u, d))
+    y.append(general_modelling.arithmetic_asian_full_chooser(general_modelling.bachelier_model, S_0, K, n, i, r, a, b))
+    z.append(general_modelling.arithmetic_asian_tail_chooser(general_modelling.bachelier_model, S_0, K, n, i, r, a, b))
 
-plt.scatter(x, y, alpha=0.5, color='r')
-plt.scatter(x, z, alpha=0.5, color='g')
-plt.show()
+df = pd.DataFrame(list(zip(y, z)), columns = ['Full', 'Tail'])
+fig=px.scatter(df, x=df.index, y=[df.Full, df.Tail], labels={'index' : 'time', 'value' : 'time-zero price'}, 
+template='plotly_dark', title = 'Arithmetic Asian Choosers')
+fig.add_hline(y=general_modelling.arithmetic_asian_full_chooser(general_modelling.bachelier_model, S_0, K, n, 0, r, a, b), line_dash='dash')
+fig.add_hline(y=general_modelling.arithmetic_asian_full_chooser(general_modelling.bachelier_model, S_0, K, n, n, r, a, b), line_dash='dash')
+fig.show()
+print(df)
+print(y)
+print(z)
+
+'''
+plt=px.scatter(df, x=index, y='ret', color='sharpe', labels={'stdev': "Standard Deviation",
+'ret': 'Average Return', 'sharpe': 'Sharpe Ratio'}, hover_data=tickers, template='plotly_dark', title='Sharpe Optimization')
+'''
