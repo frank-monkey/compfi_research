@@ -176,7 +176,7 @@ Next we consider an \emph{arithmetic Asian call} where the payoff at time $T$ is
 \begin{align} \label{eq: asian}
 	 V_T = (A_T - K)^T, \; A_T = \frac{1}{T}\int_0^T S_t \; dt = S_0 + \frac{\kappa}{T} \int_0^T W_t \; dt. 
 \end{align}
-Using tools from Stochastic calculus, one can show that under the risk neutral measure $\tilde{\mathbb{P}}$, 
+Using tools from stochastic calculus, one can show that under the risk neutral measure $\tilde{\mathbb{P}}$, 
 \begin{align}
 	 \int_0^T W_t \; dt \sim N(0, T^3/3).
 \end{align}
@@ -211,7 +211,7 @@ The time-zero price of this contract is then
 In the next subsection, we simplify the expression for $V_\tau$ via the method of replication. 
 \subsection{Replication}
 We first note that by properties of the max function (FIXME: maybe add this in intro and reference?), we can write 
-\begin{align}
+\begin{align}\label{eq: chooser formula PC}
      V_\tau = C_\tau + \max(0, P_\tau - C_\tau).
 \end{align}
 By \eqref{eq: pos part decomp}, we have
@@ -293,7 +293,7 @@ Substituting this into the chooser option from 1.7, the value of $V_\tau$ is
 
 
 \subsection{Replicating Asian options when $r = 0$}
-The above formula breaks when $r = 0$ since we divide by $r$ (FIXME: this is a little confusing since the interest rate was never specified. maybe specify that you are assuming $r > 0$ initially and now you're considering $r = 0$ as a special case. If you choose to do this I recommend breaking this section into different subsections). To fix this, we return to our replicating strategy for $w_\tau$ accounting for this special case.
+We now consider the case when $r=0$. Observe we cannot plug $r=0$ into the formula we got for $r > 0$ since we divide by $r$. However, we can apply a similar replication argument as before. (FIXME: this is a little confusing since the interest rate was never specified. maybe specify that you are assuming $r > 0$ initially and now you're considering $r = 0$ as a special case. If you choose to do this I recommend breaking this section into different subsections). To fix this, we return to our replicating strategy for $w_\tau$ accounting for this special case.
 
 Define $U_\tau$ and $Y_T$ the same way as above. Again, split the integral $Y_T$ such that
 \begin{align}
@@ -445,6 +445,77 @@ Thus, our final simplified form is
 \end{align}
 
 (FIXME: continue with this computation, write down an explicit formula for $V_0$, and also the price for the variant.) (FOLLOWUP still have to write up variant)
+
+\section{Chooser Option Variants}
+
+\subsection{Asian Tail Choosers when $r = 0$}
+We will now consider a variant of the Asian chooser we looked at earlier. We assume all conditions remain the same, except we now define $A_{\tau, T}$ as
+\begin{align}
+     A_{\tau, T} = \int_\tau^T S_t \;dt
+\end{align}
+where $\tau$ is the choice date, and $T$ is the time of maturity.
+
+To price this option, we slightly modify the replication strategy from before. Let $Y_T = \int_\tau^T S_t \;dt$ and $U_\tau$ be the price at $\tau$ to receive $Y_T$ at time $T$.
+
+We proceed with the replication of $Y_T$. Suppose an agent purchases $x$ shares at time $\tau$, and chooses to sell them off continuously at rate $\alpha_t$ at time $t$.
+At time $T$, the agent's portfolio is worth
+\begin{align}
+     \int_\tau^T \alpha_t S_t e^{r(T-t)} \;dt
+\end{align}
+Since we assume here that $r=0$, this reduces to
+\begin{align}
+     \int_\tau^T \alpha_t S_t \;dt
+\end{align}
+To complete the replication, we set this equal to the value we are trying to reproduce:
+\begin{align}
+     \int_\tau^T \alpha_t S_t \;dt = \int_\tau^T S_t \;dt
+\end{align}
+It follows that
+\begin{align}
+     \alpha_t = 1
+\end{align}
+for all $t$ where $\tau \leq t \leq T$. Thus,
+\begin{align}
+     x = \int_\tau^T \alpha_t \;dt = T - \tau.
+\end{align}
+It then follows that $U_\tau = (T - \tau) S_\tau$. Observe that 
+\begin{align}
+     A_{\tau, T} = \dfrac{U_\tau}{T - \tau}.
+\end{align}
+Again using the notation $w_\tau$ as the price needed at time $\tau$ to receive $A_{\tau, T}$ at time $T$, it follows that
+\begin{align}
+     w_\tau = \dfrac{(T - \tau) S_\tau}{T - \tau} = S_\tau.
+\end{align}
+Referring back to \eqref{eq: P-C Parity} and using $r = 0$, we have
+\begin{align}
+     P_\tau - C_\tau = K - S_\tau.
+\end{align}
+Using \eqref{eq: chooser formula PC}, the price of the tail chooser option with choice date $\tau$, which we write as $V_\tau$, is
+\begin{align}
+     V_\tau = C_\tau + (K - S_\tau)^+.
+\end{align}
+Recall in the Bachelier model that the stock evolves according to $S_t = S_0 + \kappa W_t$ when $r = 0$, $S_0 > 0$, and $W_t$ is a brownian motion under the risk-neutral measure. Then,
+\begin{align}
+     V_\tau = C_\tau + (K - (S_0 + \kappa W_\tau))^+.
+\end{align}
+Applying the risk-neutral pricing formula and linearity of expectations, we have
+\begin{align} \label{eq: expect form}
+     V_0 = \tilde{\E}[C_\tau] + \tilde{\E}((K - S_0 - \kappa W_\tau)^+).
+\end{align}
+To simplify the above, define random variable $X$ and function $g(X)$ as 
+\begin{align} \label{eq: expect form}
+     X = \kappa W_\tau, \;g(X) = (k - S_0 - X)^+
+\end{align}
+Applying the law of the unconscious statistician, we can now simplify $V_0$ down to 
+\begin{align}
+     V_0 = \tilde{\E}[C_\tau] + \int_{-\infty}^{\infty} (k - S_0 - X)^+ \psi(x) dx
+\end{align}
+where
+\begin{align}
+     \psi(x) = \dfrac{1}{\nu} \varphi \left( \dfrac{x - \mu}{\nu} \right)\\
+     \varphi(x) = \dfrac{1}{\sqrt{2\pi}} e^\frac{-x^2}{2}
+\end{align}
+
 
 \subsection*{Acknowledgement} The authors would like to thank Prof. Hrusa for his patient guidance on this project.  
 

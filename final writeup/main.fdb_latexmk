@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1657687985 "/Users/albertzhang/Documents/GitHub/compfi_research/final writeup/main.tex" "main.pdf" "main" 1657687986
-  "/Users/albertzhang/Documents/GitHub/compfi_research/final writeup/main.tex" 1657687984 23542 a163802b118cb8632d63be31ec5aaff9 ""
+["pdflatex"] 1657757009 "/Users/albertzhang/Documents/GitHub/compfi_research/final writeup/main.tex" "main.pdf" "main" 1657757010
+  "/Users/albertzhang/Documents/GitHub/compfi_research/final writeup/main.tex" 1657757008 26669 47ff93a99f9e381b14a9d11fdfb0d78f ""
   "/Users/albertzhang/Library/texlive/2022/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk" 1657587833 6964 f671eb67ef56075d34fcb2c425c47c3a ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -289,10 +289,10 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1657247608 2826445 99c7e780326df52453cd4fadda49b80c ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "main.aux" 1657687986 4378 d1f9e6f92fb0ca6a5fb6c56e2dc23415 "pdflatex"
-  "main.out" 1657687986 2928 5ac6c83287ee0bcce0d78b73e565a083 "pdflatex"
-  "main.tex" 1657687984 23542 a163802b118cb8632d63be31ec5aaff9 ""
-  "main.toc" 1657687986 1527 15a9b33a73fa1c9d5ff8c8f9a65f0acf "pdflatex"
+  "main.aux" 1657757010 4899 464b926200523a258c98578858dace53 "pdflatex"
+  "main.out" 1657757010 3365 63a0d1105b6369c60b19e326e04b1b07 "pdflatex"
+  "main.tex" 1657757008 26669 47ff93a99f9e381b14a9d11fdfb0d78f ""
+  "main.toc" 1657757010 1715 314c4fcb71299c4e027c9e8127fae287 "pdflatex"
   "preamble.tex" 1657563781 6407 ac2c8a82c9c56dd993077fbaae017f5f ""
   (generated)
   "main.aux"
