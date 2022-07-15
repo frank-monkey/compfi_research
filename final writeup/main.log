@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.7)  13 JUL 2022 20:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.7)  14 JUL 2022 20:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -757,9 +757,6 @@ LaTeX Font Info:    Overwriting math alphabet `\mathbbmss' in version `bold'
 
 LaTeX Warning: Label `eq: expect form' multiply defined.
 
-
-LaTeX Warning: Label `eq: expect form' multiply defined.
-
 )
 \openout1 = `main.aux'.
 
@@ -914,7 +911,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 452.
 
-[8] [9] (./main.aux)
+[8] [9] [10] (./main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -922,18 +919,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 63A0D1105B6369C60B19E326E04B1B07;3365.
  ) 
 Here is how much of TeX's memory you used:
- 39008 strings out of 478268
- 877592 string characters out of 5846348
+ 39022 strings out of 478268
+ 877772 string characters out of 5846348
  1436247 words of memory out of 5000000
- 56239 multiletter control sequences out of 15000+600000
+ 56243 multiletter control sequences out of 15000+600000
  480561 words of font info for 82 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
  105i,15n,107p,3326b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/albertzhang/Library/texlive/2022/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/esint-type1/esint10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (9 pages, 292384 bytes).
+Output written on main.pdf (10 pages, 295420 bytes).
 PDF statistics:
- 402 PDF objects out of 1000 (max. 8388607)
- 342 compressed objects within 4 object streams
- 131 named destinations out of 1000 (max. 500000)
+ 422 PDF objects out of 1000 (max. 8388607)
+ 361 compressed objects within 4 object streams
+ 141 named destinations out of 1000 (max. 500000)
  141 words of extra memory for PDF output out of 10000 (max. 10000000)
 

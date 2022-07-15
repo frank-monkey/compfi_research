@@ -432,7 +432,7 @@ Simplifying this expression we get the form
      V_0 = \tilde{\E}[C_\tau] - \nu \int_{-\infty}^{d_-}z\varphi(z)\nu \; dz +  (K- S_0 - \mu)\int_{-\infty}^{d_-}\varphi(z) \; dz 
 \end{align}
 Excluding the call, we can easily simplify the latter of the terms by defining the cumulative distribution function
-\begin{align}
+\begin{align} \label{eq: cdfnormal}
      \Phi(x) = \int_{-\infty}^x \varphi(y) dy.
 \end{align}
 We resolve the former term by first substituting in \eqref{eq: phi-PDF}
@@ -503,19 +503,55 @@ Applying the risk-neutral pricing formula and linearity of expectations, we have
      V_0 = \tilde{\E}[C_\tau] + \tilde{\E}((K - S_0 - \kappa W_\tau)^+).
 \end{align}
 To simplify the above, define random variable $X$ and function $g(X)$ as 
-\begin{align} \label{eq: expect form}
+\begin{align} 
      X = \kappa W_\tau, \;g(X) = (k - S_0 - X)^+
 \end{align}
-Applying the law of the unconscious statistician, we can now simplify $V_0$ down to 
-\begin{align}
+Applying the law of the unconscious statistician, we can express $V_0$ as 
+\begin{align} \label{eq: gxtailint}
      V_0 = \tilde{\E}[C_\tau] + \int_{-\infty}^{\infty} (k - S_0 - X)^+ \psi(x) dx
 \end{align}
 where
-\begin{align}
+\begin{align} 
      \psi(x) = \dfrac{1}{\nu} \varphi \left( \dfrac{x - \mu}{\nu} \right)\\
+     \label{eq: pdfphieq}
      \varphi(x) = \dfrac{1}{\sqrt{2\pi}} e^\frac{-x^2}{2}
 \end{align}
-
+Let $y = \dfrac{x - \mu}{\nu}$. Observe that
+\begin{align} \label{eq: ysubst}
+     y = \dfrac{x - \mu}{\nu} \implies x = y\nu + \mu \implies dx = \nu \;dy
+\end{align}
+We can now take the positive part of the integral from \eqref{eq: gxtailint}
+\begin{align}
+     k - S_0 - x \geq 0 \implies -x \geq S_0 - k
+\end{align}
+Adding $\mu$ and dividing by $\nu$ on both sides,
+\begin{align}
+     -y = \dfrac{-x + \mu}{\nu} \geq \dfrac{S_0 - k + \mu}{\nu}
+\end{align}
+It follows that 
+\begin{align}
+     y \leq \dfrac{k - S_0 - \mu}{\nu} = d_-
+\end{align}
+We now evaluate \refeq{eq: gxtailint} using \refeq{eq: ysubst}
+\begin{align} 
+     V_0 = \tilde{\E}[C_\tau] + \int_{-\infty}^{d_-} (k - S_0 - y\nu - \mu) (\dfrac{1}{\nu} \varphi(y)) (-\nu) \;dy
+\end{align}
+Simplifying and splitting the integral, we have
+\begin{align} 
+     V_0 = \tilde{\E}[C_\tau] - \int_{-\infty}^{d_-} (k - S_0 - \mu) \varphi(y) \;dy + \int_{-\infty}^{d_-} y\nu \varphi(y)) \;dy
+\end{align}
+Define the CDF the same as \eqref{eq: cdfnormal}. 
+\begin{align} 
+     V_0 = \tilde{\E}[C_\tau] - (k - S_0 - \mu) \Phi(d_-) + \int_{-\infty}^{d_-} y\nu \varphi(y) \;dy
+\end{align}
+The remaining integral term can be simplified through \eqref{eq: pdfphieq}.
+\begin{align} 
+     \nu \int_{-\infty}^{d_-} y \varphi(y) \;dy = \nu \int_{-\infty}^{d_-} y \dfrac{1}{\sqrt{2\pi}} e^{\frac{-y^2}{2}} \;dy = -\dfrac{\nu}{2\pi} e^{\frac{-d_-^2}{2}}
+\end{align}
+The final form for the time 0 price of the tail chooser is then 
+\begin{align} 
+     V_0 = \tilde{\E}[C_\tau] - (k - S_0 - \mu) \Phi(d_-) -\dfrac{\nu}{2\pi} e^{\frac{-d_-^2}{2}}
+\end{align}
 
 \subsection*{Acknowledgement} The authors would like to thank Prof. Hrusa for his patient guidance on this project.  
 
