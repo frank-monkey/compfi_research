@@ -19,6 +19,8 @@ def chooser(S_0, K):
     return max(S_0 - K, K - S_0)
 
 def asian_arithmetic(pricing_method, S_0, k, n, r, u, d):
+    if(n==0):
+        return pricing_method(S_0, k)
     p = ((1+r-d)/(u-d))
     q = 1 - p
 
@@ -101,6 +103,54 @@ r = 0.25 #interest rates (in decimal form)
 u = 2 #upside factor
 d = 0.5 #downside factor
 
-print(asian_arithmetic(call, S_0, k, n, r, u, d)) 
-print(asian_arithmetic_montecarlo(call, S_0, k, n, r, u, d, 1000000)) 
-print(asian_geometric(call, 10, 10, 2, 0.25, 2, 0.5))
+#print(asian_arithmetic(call, S_0, k, n, r, u, d)) 
+#print(asian_arithmetic_montecarlo(call, S_0, k, n, r, u, d, 1000000)) 
+#print(asian_geometric(call, 10, 10, 2, 0.25, 2, 0.5))
+
+#interest rates don't work as intended
+def arithmetic_asian_bachlier(pricing_method, S_0, K, n, r, mu, beta):
+    if(n==0):
+        return pricing_method(S_0, K)
+    inc = 0
+    queue = []
+    queue.append(node(1, S_0, S_0, 0))
+    while(queue[0].k!=n):
+        inc+=1
+        up_price = queue[0].S*mu+beta
+        down_price = queue[0].S*mu-beta
+        p = (((1 + r)*queue[0].S - down_price)/(up_price - down_price))
+        q = 1 - p
+        up=node(queue[0].w*p, up_price, queue[0].Z+up_price, queue[0].k+1)
+        down=node(queue[0].w*q, down_price, queue[0].Z+down_price, queue[0].k+1)
+        flag1=True
+        flag2=True
+        for i in queue:
+            match i:
+                case node(S=up.S, Z=up.Z, k=up.k):
+                    i.w+=up.w
+                    flag1=False
+                case node(S=down.S, Z=down.Z, k=down.k):
+                    i.w+=down.w
+                    flag2=False
+        if(flag1):
+            queue.append(up)
+        if(flag2):
+            queue.append(down)
+        queue.pop(0)
+    sum=0
+    #print(queue)
+    while(queue):
+        sum += queue[0].w * pricing_method((queue[0].Z/n), K)
+        queue.pop(0)
+    #print(inc) #total nodes generated
+    #print("no interest: " + str(sum))
+    return (1/(r+1))**n * sum
+
+print(arithmetic_asian_bachlier(call, 100, 120, 20, 0, 1, 3)) 
+'''
+class node:
+    w: float #weight out of 1
+    S: float #Stock price currently
+    Z: float #Sum or Product of stock prices up to now
+    k: int #iteration
+'''

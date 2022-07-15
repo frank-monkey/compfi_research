@@ -76,7 +76,8 @@ def np_binomial_model(pricing_method, S_0, K, n, r, u, d):
     print(V)
     print(V[0][0])
 
-#print(non_recursive(put, S_0, K, n, r, u, d))
+#print(non_recursive(call, S_0, K, n, r, u, d))
+print(non_recursive(call, 100, 100, 20, 0, 1.099, 0.909))
 #print(recursive_binomial_model(put, S_0, K, n, r, u, d))
 #print(np_binomial_model(put, S_0, K, n, r, u, d))
 #print(np_binomial_model(call, S_0, K, n, r, u, d))
@@ -93,7 +94,7 @@ def binomial_model_implied_volatility(pricing_method, S_0, K, n, T, r, sigma):
 
 #print(binomial_model_implied_volatility(call, 8, 8, 10, 0.25, 2, 0.5)) 
 #19.02
-print(binomial_model_implied_volatility(call, 157.57, 190, 100, (66/365), 0.016, 0.5483)) 
+#print(binomial_model_implied_volatility(call, 157.57, 190, 100, (66/365), 0.016, 0.5483)) 
 #todays data - should be 4.85 - calculated is 4.92
 
 '''
