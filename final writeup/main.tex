@@ -546,11 +546,11 @@ Define the CDF the same as \eqref{eq: cdfnormal}.
 \end{align}
 The remaining integral term can be simplified through \eqref{eq: pdfphieq}.
 \begin{align} 
-     \nu \int_{-\infty}^{d_-} y \varphi(y) \;dy = \nu \int_{-\infty}^{d_-} y \dfrac{1}{\sqrt{2\pi}} e^{\frac{-y^2}{2}} \;dy = -\dfrac{\nu}{2\pi} e^{\frac{-d_-^2}{2}}
+     \nu \int_{-\infty}^{d_-} y \varphi(y) \;dy = \nu \int_{-\infty}^{d_-} y \dfrac{1}{\sqrt{2\pi}} e^{\frac{-y^2}{2}} \;dy = -\dfrac{\nu}{\sqrt{2\pi}} e^{\frac{-d_-^2}{2}}
 \end{align}
 The final form for the time 0 price of the tail chooser is then 
 \begin{align} 
-     V_0 = \tilde{\E}[C_\tau] - (k - S_0 - \mu) \Phi(d_-) -\dfrac{\nu}{2\pi} e^{\frac{-d_-^2}{2}}
+     V_0 = \tilde{\E}[C_\tau] - (k - S_0 - \mu) \Phi(d_-) -\dfrac{\nu}{\sqrt{2\pi}} e^{\frac{-d_-^2}{2}}
 \end{align}
 
 \subsection*{Acknowledgement} The authors would like to thank Prof. Hrusa for his patient guidance on this project.  
