@@ -77,10 +77,10 @@ def np_binomial_model(pricing_method, S_0, K, n, r, u, d):
     print(V[0][0])
 
 #print(non_recursive(call, S_0, K, n, r, u, d))
-print(non_recursive(call, 100, 100, 20, 0, 1.099, 0.909))
-#print(recursive_binomial_model(put, S_0, K, n, r, u, d))
+print(non_recursive(call, 100, 100, 5, 0, 1.0563, 1/1.0563))
+print(recursive_binomial_model(call, 100, 100, 5, 0, 1.0563, 1/1.0563))
 #print(np_binomial_model(put, S_0, K, n, r, u, d))
-#print(np_binomial_model(call, S_0, K, n, r, u, d))
+#print(np_binomial_model(call, 100, 100, 20, 0, 1.0563, 1/1.0563))
 #print(np_binomial_model(chooser, S_0, K, n, r, u, d))
 
 def binomial_model_implied_volatility(pricing_method, S_0, K, n, T, r, sigma):

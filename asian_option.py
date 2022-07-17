@@ -33,12 +33,12 @@ def asian_arithmetic(pricing_method, S_0, k, n, r, u, d):
         queue.append(down)
         queue.pop(0)
 
-    print(queue)
-    print(len(queue))
+    #print(queue)
+    #print(len(queue))
 
     sum=0
     while(queue):
-        sum+=queue[0].w*pricing_method(queue[0].Z/(n+1),k)
+        sum+=queue[0].w*pricing_method(queue[0].Z/(n),k)
         queue.pop(0)
 
     return (1/(1+r))**n*sum
@@ -51,16 +51,16 @@ def asian_geometric(pricing_method, S_0, K, n, r, u, d):
     queue.append(node(1, S_0, 1, 0))
     while(queue[0].k!=n):
         inc+=1
-        up=node(queue[0].w*p, queue[0].S*u, queue[0].Y * queue[0].S*u, queue[0].k+1)
-        down=node(queue[0].w*q, queue[0].S*d, queue[0].Y * queue[0].S*d, queue[0].k+1)
+        up=node(queue[0].w*p, queue[0].S*u, queue[0].Z * queue[0].S*u, queue[0].k+1)
+        down=node(queue[0].w*q, queue[0].S*d, queue[0].Z * queue[0].S*d, queue[0].k+1)
         flag1=True
         flag2=True
         for i in queue:
             match i:
-                case node(S=up.S, Y=up.Y, k=up.k):
+                case node(S=up.S, Z=up.Z, k=up.k):
                     i.w+=up.w
                     flag1=False
-                case node(S=down.S, Y=down.Y, k=down.k):
+                case node(S=down.S, Z=down.Z, k=down.k):
                     i.w+=down.w
                     flag2=False
         if(flag1):
@@ -71,11 +71,11 @@ def asian_geometric(pricing_method, S_0, K, n, r, u, d):
     sum=0
     #print(queue)
     while(queue):
-        sum += queue[0].w * pricing_method(queue[0].Y ** (1/n), K)
+        sum += queue[0].w * pricing_method(queue[0].Z ** (1/n), K)
         queue.pop(0)
-    #print(inc) #total nodes generated
+    print(inc) #total nodes generated
     print("no interest: " + str(sum))
-    return (1/(r+1))**n * sum
+    return (1/(r+1))**n * sum 
 
 def asian_arithmetic_montecarlo(pricing_method, S_0, k, n, r, u, d, iterations):
     p = ((1+r-d)/(u-d))
@@ -146,7 +146,10 @@ def arithmetic_asian_bachlier(pricing_method, S_0, K, n, r, mu, beta):
     #print("no interest: " + str(sum))
     return (1/(r+1))**n * sum
 
-print(arithmetic_asian_bachlier(call, 100, 120, 20, 0, 1, 3)) 
+#print(arithmetic_asian_bachlier(call, 100, 120, 20, 0, 1, 3)) 
+#print(asian_geometric(call, 100, 100, 5, 0, 1.0955, 1/1.0955)) 
+print(asian_arithmetic(call, 100, 100, 5, 0, 1.0955, 1/1.0955)) 
+#print(asian_arithmetic(call, 100, 100, 5, 0.25, 2, 0.5)) 
 '''
 class node:
     w: float #weight out of 1
