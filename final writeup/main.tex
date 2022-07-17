@@ -38,7 +38,7 @@ Pittsburgh, PA 15213, USA
 
 \thanks{J. Chen, L. Jiang, F. Sacco, A. Zhang were supported by the MFSURP program at Carnegie Mellon University.}
 
-\keywords{Blachelier model, Chooser options, Exotic options.}
+\keywords{Bachelier model, Chooser options, Exotic options.}
 
 
 \begin{document}
@@ -57,7 +57,7 @@ Pittsburgh, PA 15213, USA
 
 \subsection{Arbitrage-free pricing}
 
-(FIXME: add some background information on arbitrage-free pricing, aka summarize what you learned in 21-270. We can also add this to an appendix.)
+(FIXME: Consider adding this to an appendix.)
 Before defining arbitrage-free pricing, we first must define arbitrage. An arbitrage strategy has three properties. 
 \begin{enumerate}
      \item the agent's initial capital is zero.
@@ -68,17 +68,17 @@ Under this definition of arbitrage, the arbitrage-free price of an asset is the 
 
 \subsection{Arbitrage-free Market}
 
-In this paper we work under the assumption that the market is arbitrage free. As such, we claim that if the values of two portfolios are equal at time $T > 0$, then for all times $tau$ where $0 \leq \tau \leq T$, the values of both portfolios are equal.
+In this paper we work under the assumption that the market is arbitrage free. As such, we claim that if the values of two portfolios are equal at time $T > 0$, then for all times $\tau$ where $0 \leq \tau \leq T$, the values of both portfolios are equal.
 
 We prove by contrapositive. Assume that at time $T > 0$ the prices of two portfolios are equal, and that at time $\tau$ where $0 \leq \tau \leq T$ that one portfolio is worth more than the other. 
 Let $P_1$ be the value of portfolio 1 and $P_2$ be the value of portfolio 2. WLOG, at time $\tau$, let $P_1 > P_2$.
-At time $tau$, we buy portfolio 2 and sell portfolio 1. We can pocket the difference $P_1 - P_2$. At time $T$, we can then sell portfolio 2 and use that money to pay off what we owe from portfolio 1. 
-Thus, there exists an arbitrage strategy, a strategy with zero initial capital and a strictly positive probability of profit.
+At time $\tau$, we buy portfolio 2 and sell portfolio 1. We can pocket the difference $P_1 - P_2$. At time $T$, we can then sell portfolio 2 and use that money to pay off what we owe from portfolio 1. 
+Thus, there exists an arbitrage strategy.
 
 By contrapositive, it thus follows that under an arbitrage-free model, if two portfolios have equal value at time $T$, they must have equal value at all times from $0$ to $T$.
 
-\subsection{The Blachelier Model}
-In this paper we work within the context of the \emph{Blachelier model}, where the stock prices $\{S_t\}_{t \ge 0}$ evolves according to 
+\subsection{The Bachelier Model}
+In this paper we work within the context of the \emph{Bachelier model}, where the stock prices $\{S_t\}_{t \ge 0}$ evolves according to 
 \begin{align}\label{eq: r not 0}
 	 S_t = e^{rt} \left( S_0 + \kappa^{-rt}W_t + \kappa r \int_0^t e^{-rs} W_s \; ds \right),
 \end{align}
@@ -101,12 +101,12 @@ from which the \emph{put-call parity} can be derived.
 
 (FIXME: some common notation that needs to be explained: 
 \begin{enumerate}
-      \item the notation $X \sim N(\mu,\sigma^2)$
+      \item the notation $X \sim N(\mu,\sigma^2)$ describes a normal random variable $X$ with mean $\mu$ and variance $\sigma^2$
       \item $\ldots$
 \end{enumerate}
 )
 
-\section{Arbitrage-free pricing under the Blachelier model}
+\section{Arbitrage-free pricing under the Bachelier model}
 In this section we derive the arbitrage-free prices of some contracts in the simplest setting when $r = 0$.  
 
 \subsubsection{European Call}
@@ -226,9 +226,9 @@ Next, we identify the time-$\tau$ prices of contracts paying $P_T - C_T$ and $K 
 
 To replicate a security with payoff $P_T - C_T$, we consider a portfolio that longs a put and shorts a call at time $0$, both with maturity $T$ and strike $K$ (FIXME: what's the maturity?). To replicate a security with payoff $K - A_T$,  we consider a portfolio investing $Ke^{-rT}$ into the money account at time 0 and shorting a contract (FIXME: what kind of contract?) (FOLLOWUP I'm tempted to say ZCB but I'm not sure) to receive $A_T$ at time $T$. 
 
-Since both portfolios have the same payoff at time $T$ by \eqref{eq: P - C}, they have the same price for all times $t$ where $0 \leq t \leq T$ (FIXME: in the intro explain why this is true in terms of arbitrage). (FOLLOWUP added to section 1.2 in intro, idk how to ref)
+Since both portfolios have the same payoff at time $T$ by \eqref{eq: P - C}, they have the same price for all times $t$ where $0 \leq t \leq T$ (FIXME: in the intro explain why this is true in terms of arbitrage). 
 
-For any $t$ satisfying $0 \le t \le T$, we define $P_t$ to be the time-$t$ value of a put with payoff $P_T$ at time $T$, $C_t$ to be the time-$t$ value of a call with payoff $C_T$ at time $t$, $A_t$ to be the time-$t$ value of an asian option paying $A_T$ at time $t$. (FIXME: maybe move to intro?)
+For any $t$ satisfying $0 \le t \le T$, we define $P_t$ to be the time-$t$ value of a put with payoff $P_T$ at time $T$, $C_t$ to be the time-$t$ value of a call with payoff $C_T$ at time $t$, $w_t$ to be the time-$t$ value of an asian option paying $A_T$ at time $t$. (FIXME: maybe move to intro?)
 
 Using this notation, at time $\tau$ the value of the first portfolio is $P_\tau - C_\tau$. Also, at time $\tau$ the second portfolio has $Ke^{-rT + r\tau}$ in the bank and is shorting a contract which pays $A_T$ at $T$, therefore the time-$\tau$ value of the second portfolio is $Ke^{r(\tau - T)} - A_\tau$. We denote the value of a contract at time $\tau$ which pays $A_T$ at time $T$ as $w_\tau$.
 By replication, the time $\tau$ prices of the portfolios are equal, therefore we have 
@@ -409,13 +409,13 @@ To integrate the second term in $V_0$ we will let
 it follows that 
 \begin{align}\label{eq: change variable}
      x &= z\nu + \mu\\
-     dx &= \nu dz.
+     dx &= \nu dz
 \end{align}
 We note that 
 \begin{align} \label{eq: int domain}
-    K - S_0 - x \ge 0 \Longleftrightarrow x \leq K- S_0 \Longleftrightarrow  \frac{x-\mu}{\sigma} \leq \frac{K-S_0-\mu}{\nu}.
+    K - S_0 - x \ge 0 \Longleftrightarrow x \leq K- S_0 \Longleftrightarrow  \frac{x-\mu}{\sigma} \leq \frac{K-S_0-\mu}{\nu}
 \end{align}
-We define $d_-$ via
+and define $d_-$ via
 \begin{align}
       d_- =  \frac{K-S_0-\mu}{\nu}
 \end{align}
