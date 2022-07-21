@@ -38,16 +38,15 @@ Pittsburgh, PA 15213, USA
 
 \thanks{J. Chen, L. Jiang, F. Sacco, A. Zhang were supported by the MFSURP program at Carnegie Mellon University.}
 
-\keywords{Bachelier model, Chooser options, Exotic options.}
-
+\keywords{Asian Option, Chooser Option, Bachelier Model, Exotic Option, Option Pricing, Quantitative Finance.}
+%In most research papers I read, they just sorta spam keywords from most to least specific?
 
 \begin{document}
 
-
 \begin{abstract}
-    In this set of notes we derive the time-zero prices of various \emph{chooser options}. These are contracts with a fixed maturity date $T$ and a chooser date $\tau$ satisfying $0 \le \tau \le T$, for which an agent is allowed to choose at time $\tau$ the underlying security that determines the structure of the payoff at time $T$.  
+     In this set of notes we derive the time-zero prices of various \emph{chooser options} under the continuous Bachelier model.
+     These are contracts with a fixed maturity date $T$ and a chooser date $\tau$ satisfying $0 \le \tau \le T$, for which an agent is allowed to choose at time $\tau$ the underlying security that determines the structure of the payoff at time $T$.  
 \end{abstract}
-
 
 
 \maketitle  
@@ -71,7 +70,7 @@ Under this definition of arbitrage, the arbitrage-free price of an asset is the 
 In this paper we work under the assumption that the market is arbitrage free. As such, we claim that if the values of two portfolios are equal at time $T > 0$, then for all times $\tau$ where $0 \leq \tau \leq T$, the values of both portfolios are equal.
 
 We prove by contrapositive. Assume that at time $T > 0$ the prices of two portfolios are equal, and that at time $\tau$ where $0 \leq \tau \leq T$ that one portfolio is worth more than the other. 
-Let $P_1$ be the value of portfolio 1 and $P_2$ be the value of portfolio 2. WLOG, at time $\tau$, let $P_1 > P_2$.
+Let $P_1$ be the value of portfolio 1 and $P_2$ be the value of portfolio 2. Thus, without loss of generality, at time $\tau$, let $P_1 > P_2$.
 At time $\tau$, we buy portfolio 2 and sell portfolio 1. We can pocket the difference $P_1 - P_2$. At time $T$, we can then sell portfolio 2 and use that money to pay off what we owe from portfolio 1. 
 Thus, there exists an arbitrage strategy.
 
@@ -87,9 +86,9 @@ where $S_0 > 0$ denotes the initial stock price at time 0 and $\{W_t\}_{t \ge 0}
       S_t = S_0 + \kappa W_t. 
 \end{align}
 
-(FIXME: explain to the reader why the Blachlier model is interesting).
-Recently, in April 2020, oil prices finished in the negatives. The often used Black-Scholes model, however, is unable to handle negative prices, which sparked interest in the Bachelier model, a mathematically similar model with the advantage of being able to handle negative prices.
-
+In April 2020, oil futures price went negative.
+The often used Black-Scholes model, however, is unable to model assets with negative prices, due to it's assumption that asset price follows a log-normal distribution.
+This sparked interest in the Bachelier model, a similar mathematical model where asset prices follow a normal distribution, with the advantage of being able to handle negative prices.
 
 \subsection{Notation and conventions}
 
@@ -195,7 +194,9 @@ where
 We note that since $\sqrt{3} > 1$, we see from \eqref{eq: asian op} that the price of an Asian option is higher than the price of a European call. This should be expected as one is paying a premium for a less volatile product. 
 
 \section{Chooser options}
-In this section we consider a more complicated type of financial contracts known as \emph{chooser options}. These are contracts with a fixed maturity date $T$ and a strike price $K$, and an agent is allowed to decide on a choosing date $\tau < T$ to choose the underlying derivative in the contract. Many results are known when an agent is allowed to choose between a European call and a European put; we are interested in a variant of this type of contract that allows an agent to decide between two securities that pays 
+In this section we consider a more complicated type of financial contracts known as \emph{chooser options}. 
+These are contracts with a fixed maturity date $T$ and a strike price $K$, and an agent is allowed to decide on a choosing date $\tau < T$ to choose the underlying derivative in the contract.
+Many results are known when an agent is allowed to choose between a European call and a European put; we are interested in a variant of this type of contract that allows an agent to decide between two securities that pays 
 \begin{align}
      C_T = (A_T - K)^+, \; P_T = (K - A_T)^+,
 \end{align}
@@ -282,7 +283,7 @@ Thus, the price at $\tau$ to receive just $A_T$ is
 \begin{align}
      w_\tau = \dfrac{U_\tau}{T} = \dfrac{\int_0^\tau S_t \; dt + \dfrac{S_\tau}{r}\left( 1 - e^{r(\tau - T)} \right)}{T}
 \end{align}
-Returning to \eqref{eq: P-C Parity} (FIXME: fix reference), we can write out the equation as
+Returning to \eqref{eq: P-C Parity}, we can write out the equation as
 \begin{align}
      P_\tau - C_\tau = Ke^{r(\tau - T)} - \dfrac{\int_0^\tau S_t \; dt + \dfrac{S_\tau}{r}\left( 1 - e^{r(\tau - T)} \right)}{T}.
 \end{align}
