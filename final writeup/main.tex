@@ -176,7 +176,7 @@ The time-zero price of this contract is then
 \end{align}
 In the next subsection, we simplify the expression for $V_\tau$ via the method of replication. 
 \subsection{Replication}
-We first note that by properties of the max function (FIXME: maybe add this in intro and reference?), we can write 
+We first note that by properties of the max function (FIXME: add this to appendix and reference), we can write 
 \begin{align}\label{eq: chooser formula PC}
      V_\tau = C_\tau + \max(0, P_\tau - C_\tau).
 \end{align}
@@ -194,7 +194,7 @@ To replicate a security with payoff $P_T - C_T$, we consider a portfolio that lo
 
 Since both portfolios have the same payoff at time $T$ by \eqref{eq: P - C}, they have the same price for all times $t$ where $0 \leq t \leq T$ (FIXME: in the intro explain why this is true in terms of arbitrage). 
 
-For any $t$ satisfying $0 \le t \le T$, we define $P_t$ to be the time-$t$ value of a put with payoff $P_T$ at time $T$, $C_t$ to be the time-$t$ value of a call with payoff $C_T$ at time $t$, $w_t$ to be the time-$t$ value of an asian option paying $A_T$ at time $t$. (FIXME: maybe move to intro?)
+For any $t$ satisfying $0 \le t \le T$, we define $P_t$ to be the time-$t$ value of a put with payoff $P_T$ at time $T$, $C_t$ to be the time-$t$ value of a call with payoff $C_T$ at time $t$, $w_t$ to be the time-$t$ value of an asian option paying $A_T$ at time $t$. (FIXME: Move logic to appendix and reference it)
 
 Using this notation, at time $\tau$ the value of the first portfolio is $P_\tau - C_\tau$. Also, at time $\tau$ the second portfolio has $Ke^{-rT + r\tau}$ in the bank and is shorting a contract which pays $A_T$ at $T$, therefore the time-$\tau$ value of the second portfolio is $Ke^{r(\tau - T)} - A_\tau$. We denote the value of a contract at time $\tau$ which pays $A_T$ at time $T$ as $w_\tau$.
 By replication, the time $\tau$ prices of the portfolios are equal, therefore we have 
@@ -564,7 +564,6 @@ By contrapositive, it thus follows that under an arbitrage-free model, if two po
 
 \section{Put-Call Parity}
 \section{Max Transformation}
-\section{$x^+$ Notation}
 \section{Various replicating strategies}
 \subsection{Replicating European options}
 \subsection{Replicating Asian options}
