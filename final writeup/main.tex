@@ -2,7 +2,7 @@
 
 \input{preamble.tex}
 
-\title{MFSURP}
+\title{Pricing Arithmetic Asian Options under the Bachelier Model} %Discuss title change? FIXME
 
 \author{Jessica Chen}
 \address{
@@ -49,9 +49,8 @@ Pittsburgh, PA 15213, USA
 \tableofcontents
 
 \section{Introduction}
-
 In April 2020, oil futures price went negative.
-The often used Black-Scholes model, however, is unable to model assets with negative prices, due to it's assumption that asset price follows a log-normal distribution.
+The often used Black-Scholes model, however, is unable to model assets with negative prices, due to its assumption that asset price follows a log-normal distribution.
 This reignited interest for the scarcely-used Bachelier model, a similar mathematical model where asset prices follow a normal distribution, with the advantage of being able to handle negative prices (which was considered a limitation at it's inception).
 
 \section{The Bachelier Model}
@@ -59,8 +58,7 @@ In this paper we work within the context of the \emph{Bachelier model}, where th
 \begin{align}\label{eq: r not 0}
 	 S_t = e^{rt} \left( S_0 + \kappa^{-rt}W_t + \kappa r \int_0^t e^{-rs} W_s \; ds \right),
 \end{align}
-where $S_0 > 0$ denotes the initial stock price at time 0 and $\{W_t\}_{t \ge 0}$ is a Brownian motion under the risk neutral measure $\tilde{\mathbb{P}}$.
-(FIXME: Define $\kappa$)
+where $S_0 > 0$ denotes the initial stock price at time 0 and $\{W_t\}_{t \ge 0}$ is a Brownian motion under the risk neutral measure $\tilde{\mathbb{P}}$, and $\kappa$ is a measure of volatility.
 We note to the reader that in the special case when $r = 0$, \eqref{eq: r not 0} reduces to 
 \begin{align}\label{eq: r=0}
       S_t = S_0 + \kappa W_t. 
@@ -135,7 +133,8 @@ where
 \end{align}
 
 \subsection{European Put}
-To compute the price of a put, one can use put-call parity (FIXME: derive put-call parity in appendix and reference it). 
+To compute the price of a put, one can use put-call parity.
+(FIXME: derive put-call parity in appendix and reference it). 
 
 \subsection{Arithmetic Asian Call}
 Next we consider an \emph{arithmetic Asian call} where the payoff at time $T$ is given by 
@@ -152,13 +151,17 @@ Therefore we have
 \end{align}
 Comparing this to \eqref{eq: S_T dist}, we see that $A_T$ has a similar distribution, the only difference is that the variance of $A_T$ is smaller by a factor of $1/3$, so the standard deviation of $A_T$ is smaller by a factor of $1/\sqrt{3}$. By performing the exact same set of calculation as before, the time-0 price of an Asian option is 
 \begin{align} \label{eq: asian op}
-	 V_0 = -\frac{\nu}{\sqrt{3}\sqrt{2\pi}} e^{-3d_-^2/2} + (K-\mu) \varphi(\sqrt{3}d_-),
+	 V_0 = -\frac{\nu}{\sqrt{6\pi}} e^{-3d_-^2/2} + (K-\mu) \varphi(\sqrt{3}d_-),
 \end{align}
 where 
 \begin{align}
 	 \mu = S_0, \; \nu = \kappa \sqrt{T}, \; d_- = \frac{\mu - K}{\nu}.
 \end{align}
-We note that since $\sqrt{3} > 1$, we see from \eqref{eq: asian op} that the price of an Asian option is higher than the price of a European call. This should be expected as one is paying a premium for a less volatile product. 
+We note that since $\sqrt{3} > 1$, we see from \eqref{eq: asian op} that the price of an Asian call is higher than the price of a European call. This should be expected as the taker is paying a premium for a less volatile product. 
+
+
+\subsection{Arithmetic Asian Put}
+FIXME: derive Put-Call parity in appendix and reference it.
 
 \section{Chooser Pricing under the Bachelier Model}
 In this section we derive the arbitrage-free prices of some contracts in the simplest setting when $r = 0$.  
@@ -584,24 +587,4 @@ FIXME
 %\printbibliography
 
 
-
-
-
-
-
-
-
-
-
-
-
 \end{document}
-
-
-
-
-
-
-
-
-

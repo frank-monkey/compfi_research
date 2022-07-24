@@ -1285,14 +1285,12 @@ INPUT /usr/share/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 INPUT /usr/share/texmf-dist/fonts/tfm/public/bbm/bbm10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/bbm/bbm7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/bbm/bbm5.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out
 INPUT /home/frank/.texlive/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
