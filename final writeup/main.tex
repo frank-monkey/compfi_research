@@ -1,6 +1,9 @@
 \documentclass[reqno]{amsart}
 
+\newcommand{\Expect}[1]{\tilde{\E}[#1]}
+
 \input{preamble.tex}
+
 
 \title{Pricing Arithmetic Asian Options under the Bachelier Model} %Discuss title change? FIXME
 
@@ -526,6 +529,52 @@ The final form for the time 0 price of the tail chooser is then
      V_0 = \tilde{\E}[C_\tau] - (k - S_0 - \mu) \Phi(d_-) -\dfrac{\nu}{\sqrt{2\pi}} e^{\frac{-d_-^2}{2}}
 \end{align}
 
+\section{Approximating Arithmetic Asian under Black-Scholes Model, $r=0$}
+(FIXME: find reference for why this is an acceptable approximation, flesh out reasoning)
+When $r=0$ stock price evolves according to
+\begin{align} 
+     S_t = S_0e^{\sigma W_t-\frac{1}{2}\sigma^2t}
+\end{align}
+Remember
+\begin{align}
+     A_T = \frac{1}{T}\int_0^T S_t \; dt
+\end{align}
+We model $A_t$ with $Y_t$ with the same mean and variance, which leaves us with equations
+\begin{align} \label{r=0 E}
+     \tilde{\E}[A_T] = \tilde{\E}[Y_T] \; 
+\end{align}
+\begin{align} \label{r=0 E^2}
+     \tilde{\E}[A_T^2] = \tilde{\E}[Y_T^2]
+\end{align}
+
+\begin{align} 
+     Y_t = Y_0e^{\Gamma W_t-\frac{1}{2}\Gamma^2t}
+\end{align}
+
+\begin{align} 
+     \Expect{A_T} = \frac{1}{T} \int_0^T \tilde{\E}[S_t] \; dt = \frac{1}{T} \int_0^T \tilde{\E}[S_0 e^{\sigma W_t-\frac{1}{2}\sigma^2t}] \; dt
+\end{align}
+
+Using Moment Generating Functions (FIXME: add to appendix and add intermediate steps)
+\begin{align} 
+     \frac{1}{T} \int_0^T \Expect{S_0 e^{\sigma W_t-\frac{1}{2}\sigma^2t}} \; dt 
+     = \frac{1}{T} \int_0^T S_0 \; dt
+     = S_0
+\end{align}
+(FIXME: better explain)
+\begin{align} 
+     \Expect{Y_T} = Y_0 
+\end{align}
+
+According to \eqref{r=0 E}
+\begin{align} 
+     S_0 = Y_0
+\end{align}
+\begin{align}
+     \Expect{A_T^2} = 
+\end{align}
+
+
 \subsection*{Acknowledgement} The authors would like to thank Prof. Hrusa for his patient guidance on this project.  
 
 
@@ -571,6 +620,8 @@ By contrapositive, it thus follows that under an arbitrage-free model, if two po
 \section{Put-Call Parity}
 FIXME
 \section{Max Transformation}
+FIXME
+\section{Moment Generating Functions}
 FIXME
 \section{Various replicating strategies}
 FIXME

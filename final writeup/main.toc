@@ -1,5 +1,5 @@
 \contentsline {section}{\tocsection {}{1}{Introduction}}{1}{section.1}%
-\contentsline {section}{\tocsection {}{2}{The Bachelier Model}}{1}{section.2}%
+\contentsline {section}{\tocsection {}{2}{The Bachelier Model}}{2}{section.2}%
 \contentsline {subsection}{\tocsubsection {}{2.1}{European Call}}{2}{subsection.2.1}%
 \contentsline {subsection}{\tocsubsection {}{2.2}{European Put}}{3}{subsection.2.2}%
 \contentsline {subsection}{\tocsubsection {}{2.3}{Arithmetic Asian Call}}{3}{subsection.2.3}%
@@ -12,12 +12,14 @@
 \contentsline {section}{\tocsection {}{4}{Chooser Option Variants}}{8}{section.4}%
 \contentsline {subsection}{\tocsubsection {}{4.1}{Tail Chooser}}{8}{subsection.4.1}%
 \contentsline {subsection}{\tocsubsection {}{4.2}{Asian Tail Choosers when $r = 0$}}{8}{subsection.4.2}%
-\contentsline {subsection}{\tocsubsection {}{}{Acknowledgement}}{9}{section*.2}%
-\contentsline {section}{\tocsection {Appendix}{A}{Notation and conventions}}{9}{appendix.A}%
+\contentsline {section}{\tocsection {}{5}{Approximating Arithmetic Asian under Black-Scholes Model, $r=0$}}{10}{section.5}%
+\contentsline {subsection}{\tocsubsection {}{}{Acknowledgement}}{10}{section*.2}%
+\contentsline {section}{\tocsection {Appendix}{A}{Notation and conventions}}{10}{appendix.A}%
 \contentsline {section}{\tocsection {Appendix}{B}{Arbitrage-free pricing}}{10}{appendix.B}%
-\contentsline {subsection}{\tocsubsection {}{B.1}{Arbitrage-free Market}}{10}{subsection.B.1}%
-\contentsline {section}{\tocsection {Appendix}{C}{Put-Call Parity}}{10}{appendix.C}%
-\contentsline {section}{\tocsection {Appendix}{D}{Max Transformation}}{10}{appendix.D}%
-\contentsline {section}{\tocsection {Appendix}{E}{Various replicating strategies}}{10}{appendix.E}%
-\contentsline {subsection}{\tocsubsection {}{E.1}{Replicating European options}}{10}{subsection.E.1}%
-\contentsline {subsection}{\tocsubsection {}{E.2}{Replicating Asian options}}{10}{subsection.E.2}%
+\contentsline {subsection}{\tocsubsection {}{B.1}{Arbitrage-free Market}}{11}{subsection.B.1}%
+\contentsline {section}{\tocsection {Appendix}{C}{Put-Call Parity}}{11}{appendix.C}%
+\contentsline {section}{\tocsection {Appendix}{D}{Max Transformation}}{11}{appendix.D}%
+\contentsline {section}{\tocsection {Appendix}{E}{Moment Generating Functions}}{11}{appendix.E}%
+\contentsline {section}{\tocsection {Appendix}{F}{Various replicating strategies}}{11}{appendix.F}%
+\contentsline {subsection}{\tocsubsection {}{F.1}{Replicating European options}}{11}{subsection.F.1}%
+\contentsline {subsection}{\tocsubsection {}{F.2}{Replicating Asian options}}{11}{subsection.F.2}%
