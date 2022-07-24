@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.5.9)  22 JUL 2022 12:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.5.9)  23 JUL 2022 22:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -753,11 +753,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathbbmss' in version `bold'
 (Font)                  U/bbmss/m/n --> U/bbmss/bx/n on input line 35.
 )
 \c@thm=\count346
-) (./main.aux
-
-LaTeX Warning: Label `eq: expect form' multiply defined.
-
-)
+) (./main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
@@ -827,7 +823,6 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 40.
 LaTeX Info: Redefining \pageref on input line 40.
 LaTeX Info: Redefining \nameref on input line 40.
- (./main.out) (./main.out)
 \@outlinefile=\write5
 \openout5 = `main.out'.
 
@@ -877,74 +872,167 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
 Package pgfplots notification 'compat/show suggested version=true': you might benefit from \pgfplotsset{compat=1.18} (current compat level: 1.17).
 
-(./main.toc)
 \tf@toc=\write6
 \openout6 = `main.toc'.
 
- [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Trying to load font information for U+bbm on input line 117.
- (/usr/share/texmf-dist/tex/latex/bbm-macros/ubbm.fd
+
+LaTeX Warning: Reference `eq: r not 0' on page 1 undefined on input line 64.
+
+
+LaTeX Warning: Reference `eq: S_T dist' on page 1 undefined on input line 92.
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+
+LaTeX Warning: Reference `eq: call int' on page 2 undefined on input line 104.
+
+
+LaTeX Warning: Reference `eq: call int' on page 2 undefined on input line 112.
+
+LaTeX Font Info:    Trying to load font information for U+bbm on input line 119.
+(/usr/share/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [2] [3]
+)
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 224.
+LaTeX Warning: Reference `eq: S_T dist' on page 2 undefined on input line 153.
 
+[2]
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 224.
-
-[4]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 261.
+LaTeX Warning: Reference `eq: asian op' on page 3 undefined on input line 161.
 
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 261.
-
-[5] [6] [7]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 419.
+LaTeX Warning: Reference `eq: asian' on page 3 undefined on input line 172.
 
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 419.
+LaTeX Warning: Reference `eq: pos part decomp' on page 3 undefined on input line 187.
 
-[8] [9]
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 567.
+LaTeX Warning: Reference `eq: V_tau' on page 3 undefined on input line 191.
+
+
+LaTeX Warning: Reference `eq: P - C' on page 3 undefined on input line 191.
+
+
+LaTeX Warning: Reference `eq: P - C' on page 3 undefined on input line 199.
+
+
+LaTeX Warning: Reference `eq: V_tau' on page 3 undefined on input line 208.
+
+[3]
+
+LaTeX Warning: Reference `eq: y' on page 4 undefined on input line 220.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 567.
+(hyperref)                removing `math shift' on input line 228.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 567.
+(hyperref)                removing `math shift' on input line 228.
 
-[10] (./main.aux)
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: Reference `eq: P-C Parity' on page 4 undefined on input line 254.
 
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B9B673835C2981DFCA5903FCB5E675BF;4651.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 265.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 265.
+
+[4] [5]
+
+LaTeX Warning: Reference `eq: expect form' on page 6 undefined on input line 370.
+
+[6]
+
+LaTeX Warning: Reference `eq: int domain' on page 7 undefined on input line 391.
+
+
+LaTeX Warning: Reference `eq: change variable' on page 7 undefined on input line 395.
+
+
+LaTeX Warning: Reference `eq: change bound' on page 7 undefined on input line 395.
+
+
+LaTeX Warning: Reference `eq: prechange' on page 7 undefined on input line 395.
+
+
+LaTeX Warning: Reference `eq: phi-PDF' on page 7 undefined on input line 407.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 428.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 428.
+
+[7]
+
+LaTeX Warning: Reference `eq: P-C Parity' on page 8 undefined on input line 459.
+
+
+LaTeX Warning: Reference `eq: chooser formula PC' on page 8 undefined on input line 463.
+
+
+LaTeX Warning: Reference `eq: gxtailint' on page 8 undefined on input line 493.
+
+
+LaTeX Warning: Reference `eq: gxtailint' on page 8 undefined on input line 505.
+
+
+LaTeX Warning: Reference `eq: ysubst' on page 8 undefined on input line 505.
+
+
+LaTeX Warning: Reference `eq: cdfnormal' on page 8 undefined on input line 513.
+
+
+LaTeX Warning: Reference `eq: pdfphieq' on page 8 undefined on input line 517.
+
+[8]
+
+/home/frank/Dox/compfi_research/final writeup/main.tex:573: LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.573 
+      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[9] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  985FFBF84E10E117D1F8BBFCAEA4A56C;4482.
  ) 
 Here is how much of TeX's memory you used:
- 39062 strings out of 478238
- 871921 string characters out of 5850457
- 1436415 words of memory out of 5000000
- 56308 multiletter control sequences out of 15000+600000
+ 39030 strings out of 478238
+ 871531 string characters out of 5850457
+ 1437415 words of memory out of 5000000
+ 56284 multiletter control sequences out of 15000+600000
  480561 words of font info for 82 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
  105i,15n,107p,3306b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/frank/.texlive/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texmf-dist/fonts/type1/public/esint-type1/esint10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (10 pages, 296055 bytes).
+Output written on main.pdf (9 pages, 290828 bytes).
 PDF statistics:
- 457 PDF objects out of 1000 (max. 8388607)
- 396 compressed objects within 4 object streams
- 146 named destinations out of 1000 (max. 500000)
- 197 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 329 PDF objects out of 1000 (max. 8388607)
+ 270 compressed objects within 3 object streams
+ 144 named destinations out of 1000 (max. 500000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

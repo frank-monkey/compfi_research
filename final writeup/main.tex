@@ -59,14 +59,16 @@ In this paper we work within the context of the \emph{Bachelier model}, where th
 \begin{align}\label{eq: r not 0}
 	 S_t = e^{rt} \left( S_0 + \kappa^{-rt}W_t + \kappa r \int_0^t e^{-rs} W_s \; ds \right),
 \end{align}
-where $S_0 > 0$ denotes the initial stock price at time 0 and $\{W_t\}_{t \ge 0}$ is a Brownian motion under the risk neutral measure $\tilde{\mathbb{P}}$. We note to the reader that in the special case when $r = 0$, \eqref{eq: r not 0} reduces to 
+where $S_0 > 0$ denotes the initial stock price at time 0 and $\{W_t\}_{t \ge 0}$ is a Brownian motion under the risk neutral measure $\tilde{\mathbb{P}}$.
+(FIXME: Define $\kappa$)
+We note to the reader that in the special case when $r = 0$, \eqref{eq: r not 0} reduces to 
 \begin{align}\label{eq: r=0}
       S_t = S_0 + \kappa W_t. 
 \end{align}
 
 
 \subsection{European Call}
-
+(FIXME: is this with r = 0? I think so but it should be said so if it is)
 We first consider a European call where the payoff at time $T$ is given by 
 \begin{align}
 	 V_T = (S_T - K)^+
@@ -127,18 +129,20 @@ Therefore
 \begin{align}
 	 V_0 =  -\frac{\nu}{\sqrt{2\pi}} e^{-d_-^2/2} + (K-\mu) \varphi(d_-).
 \end{align}
-To compute the price of a put, one can use put-call parity (FIXME: derive put-call parity somewhere and reference it). 
-
+where 
+\begin{align}
+	 \mu = S_0, \; \nu = \kappa \sqrt{T}, \; d_- = \frac{\mu - K}{\nu}.
+\end{align}
 
 \subsection{European Put}
-FIXME - European Put using Put- call Parity
+To compute the price of a put, one can use put-call parity (FIXME: derive put-call parity in appendix and reference it). 
 
 \subsection{Arithmetic Asian Call}
 Next we consider an \emph{arithmetic Asian call} where the payoff at time $T$ is given by 
 \begin{align} \label{eq: asian}
 	 V_T = (A_T - K)^T, \; A_T = \frac{1}{T}\int_0^T S_t \; dt = S_0 + \frac{\kappa}{T} \int_0^T W_t \; dt. 
 \end{align}
-Using tools from stochastic calculus, one can show that under the risk neutral measure $\tilde{\mathbb{P}}$, 
+Using tools from stochastic calculus (FIXME: what tools), one can show that under the risk neutral measure $\tilde{\mathbb{P}}$, 
 \begin{align}
 	 \int_0^T W_t \; dt \sim N(0, T^3/3).
 \end{align}
@@ -192,7 +196,7 @@ Next, we identify the time-$\tau$ prices of contracts paying $P_T - C_T$ and $K 
 
 To replicate a security with payoff $P_T - C_T$, we consider a portfolio that longs a put and shorts a call at time $0$, both with maturity $T$ and strike $K$ (FIXME: what's the maturity?). To replicate a security with payoff $K - A_T$,  we consider a portfolio investing $Ke^{-rT}$ into the money account at time 0 and shorting a contract (FIXME: what kind of contract?) (FOLLOWUP I'm tempted to say ZCB but I'm not sure) to receive $A_T$ at time $T$. 
 
-Since both portfolios have the same payoff at time $T$ by \eqref{eq: P - C}, they have the same price for all times $t$ where $0 \leq t \leq T$ (FIXME: in the intro explain why this is true in terms of arbitrage). 
+Since both portfolios have the same payoff at time $T$ by \eqref{eq: P - C}, they have the same price for all times $t$ where $0 \leq t \leq T$ (FIXME: reference appendix some sorta arbitrage). 
 
 For any $t$ satisfying $0 \le t \le T$, we define $P_t$ to be the time-$t$ value of a put with payoff $P_T$ at time $T$, $C_t$ to be the time-$t$ value of a call with payoff $C_T$ at time $t$, $w_t$ to be the time-$t$ value of an asian option paying $A_T$ at time $t$. (FIXME: Move logic to appendix and reference it)
 
@@ -297,7 +301,7 @@ where $S_0 > 0$ and $\{W_t\}_{t \ge 0}$ is a Brownian motion under the risk neut
 \begin{align}
      V_\tau = C_\tau + \max(0, K - \dfrac{\int_0^\tau \left( S_0 + \kappa W_t \right) \; dt + (S_0 + \kappa W_\tau) (T - \tau)}{T})
 \end{align}
-So in conclusion, we find that 
+Simplifying, we find that 
 \begin{align}
      V_\tau = C_\tau + \left(K- S_0 - \frac{\kappa(T-\tau)}{T} W_\tau - \frac{\kappa}{T} \int_0^\tau W_t \; dt  \right)^+.
 \end{align}
@@ -402,7 +406,7 @@ Excluding the call, we can easily simplify the latter of the terms by defining t
 \end{align}
 We resolve the former term by first substituting in \eqref{eq: phi-PDF}
 \begin{align}
-     \dfrac{-\nu}{\sqrt{2\pi}} \;\int_{-\inf}^{d_{-}} ye^{-y^2} = \dfrac{\nu}{\sqrt{2\pi}} \;e^{\frac{-d_-^2}{2}}
+     \dfrac{-\nu}{\sqrt{2\pi}} \;\int_{-\infty}^{d_{-}} ye^{-y^2} = \dfrac{\nu}{\sqrt{2\pi}} \;e^{\frac{-d_-^2}{2}}
 \end{align}
 Thus, our final simplified form is
 \begin{align}
@@ -414,14 +418,13 @@ Thus, our final simplified form is
 \section{Chooser Option Variants}
 
 \subsection{Tail Chooser}
-
-\subsection{Asian Tail Choosers when $r = 0$}
 We will now consider a variant of the Asian chooser we looked at earlier. We assume all conditions remain the same, except we now define $A_{\tau, T}$ as
 \begin{align}
      A_{\tau, T} = \int_\tau^T S_t \;dt
 \end{align}
 where $\tau$ is the choice date, and $T$ is the time of maturity.
 
+\subsection{Asian Tail Choosers when $r = 0$}
 To price this option, we slightly modify the replication strategy from before. Let $Y_T = \int_\tau^T S_t \;dt$ and $U_\tau$ be the price at $\tau$ to receive $Y_T$ at time $T$.
 
 We proceed with the replication of $Y_T$. Suppose an agent purchases $x$ shares at time $\tau$, and chooses to sell them off continuously at rate $\alpha_t$ at time $t$.
@@ -567,6 +570,11 @@ By contrapositive, it thus follows that under an arbitrage-free model, if two po
 \section{Various replicating strategies}
 \subsection{Replicating European options}
 \subsection{Replicating Asian options}
+
+%$\tilde{\E}[A_ T] = \tilde{\E}[Y_ T]$ \\
+%$\tilde{\E}[A_ T^2] = \tilde{\E}[Y_ T^2]$ \\
+%$\tilde{\E}(e^{-rt}(A_T - K)^+ ) \approx \tilde{\E}(e^{-rt}(Y_T - K)^+ )$ \\
+%$\tilde{\E}(A_T^2) = 1/T^2 (e^{-rt}(Y_T - K)^+ )$ \\
 
 %\printbibliography
 
