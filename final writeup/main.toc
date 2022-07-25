@@ -1,7 +1,7 @@
 \contentsline {section}{\tocsection {}{1}{Introduction}}{1}{section.1}%
 \contentsline {section}{\tocsection {}{2}{The Bachelier Model}}{2}{section.2}%
-\contentsline {subsection}{\tocsubsection {}{2.1}{European Call}}{2}{subsection.2.1}%
-\contentsline {subsection}{\tocsubsection {}{2.2}{European Put}}{3}{subsection.2.2}%
+\contentsline {subsection}{\tocsubsection {}{2.1}{European Call when r = 0}}{2}{subsection.2.1}%
+\contentsline {subsection}{\tocsubsection {}{2.2}{European Put when r = 0}}{3}{subsection.2.2}%
 \contentsline {subsection}{\tocsubsection {}{2.3}{Arithmetic Asian Call}}{3}{subsection.2.3}%
 \contentsline {subsection}{\tocsubsection {}{2.4}{Arithmetic Asian Put}}{3}{subsection.2.4}%
 \contentsline {section}{\tocsection {}{3}{Chooser Pricing under the Bachelier Model}}{3}{section.3}%
@@ -22,4 +22,4 @@
 \contentsline {section}{\tocsection {Appendix}{E}{Moment Generating Functions}}{11}{appendix.E}%
 \contentsline {section}{\tocsection {Appendix}{F}{Various replicating strategies}}{11}{appendix.F}%
 \contentsline {subsection}{\tocsubsection {}{F.1}{Replicating European options}}{11}{subsection.F.1}%
-\contentsline {subsection}{\tocsubsection {}{F.2}{Replicating Asian options}}{11}{subsection.F.2}%
+\contentsline {subsection}{\tocsubsection {}{F.2}{Replicating Asian options}}{12}{subsection.F.2}%

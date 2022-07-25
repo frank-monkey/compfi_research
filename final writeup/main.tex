@@ -52,7 +52,7 @@ Pittsburgh, PA 15213, USA
 \tableofcontents
 
 \section{Introduction}
-In April 2020, oil futures price went negative.
+In April 2020, the price of oil futures went negative.
 The often used Black-Scholes model, however, is unable to model assets with negative prices, due to its assumption that asset price follows a log-normal distribution.
 This reignited interest for the scarcely-used Bachelier model, a similar mathematical model where asset prices follow a normal distribution, with the advantage of being able to handle negative prices (which was considered a limitation at it's inception).
 
@@ -61,15 +61,16 @@ In this paper we work within the context of the \emph{Bachelier model}, where th
 \begin{align}\label{eq: r not 0}
 	 S_t = e^{rt} \left( S_0 + \kappa^{-rt}W_t + \kappa r \int_0^t e^{-rs} W_s \; ds \right),
 \end{align}
-where $S_0 > 0$ denotes the initial stock price at time 0 and $\{W_t\}_{t \ge 0}$ is a Brownian motion under the risk neutral measure $\tilde{\mathbb{P}}$, and $\kappa$ is a measure of volatility.
+where $S_0 > 0$ denotes the initial stock price at time 0, $\{W_t\}_{t \ge 0}$ is a Brownian motion under the risk neutral measure $\tilde{\mathbb{P}}$, r is the interest rate, and $\kappa$ is a measure of volatility.
 We note to the reader that in the special case when $r = 0$, \eqref{eq: r not 0} reduces to 
 \begin{align}\label{eq: r=0}
       S_t = S_0 + \kappa W_t. 
 \end{align}
 
 
-\subsection{European Call}
+\subsection{European Call when r = 0}
 (FIXME: is this with r = 0? I think so but it should be said so if it is)
+(FOLLOWUP: I have put it as r = 0 since the variance in \eqref{eq: S_T dist} is written as $\kappa^2T$)
 We first consider a European call where the payoff at time $T$ is given by 
 \begin{align}
 	 V_T = (S_T - K)^+
@@ -135,7 +136,7 @@ where
 	 \mu = S_0, \; \nu = \kappa \sqrt{T}, \; d_- = \frac{\mu - K}{\nu}.
 \end{align}
 
-\subsection{European Put}
+\subsection{European Put when r = 0}
 To compute the price of a put, one can use put-call parity.
 (FIXME: derive put-call parity in appendix and reference it). 
 
@@ -618,7 +619,40 @@ Thus, there exists an arbitrage strategy.
 By contrapositive, it thus follows that under an arbitrage-free model, if two portfolios have equal value at time $T$, they must have equal value at all times from $0$ to $T$.
 
 \section{Put-Call Parity}
-FIXME
+
+An important result used repeatedly throughout this paper is put-call parity. 
+
+For some stock of price $S_T$ at time $T$, define the European put and call of strike $K$ as 
+\begin{align} 
+     P^E_T = (K - S_T)^+ \\
+     C^E_T = (S_T - K)^+.
+\end{align}
+By \eqref{eq: pos part decomp}, 
+\begin{align} 
+     P^E_T - C^E_T = K - S_T.
+\end{align}
+We can replicate the LHS portfolio by going long a put and short a call at time $\tau$. The RHS can be replicated by investing $Ke^{r(\tau - T)}$ and shorting the stock at $T = \tau$.
+Under the assumption of the arbitrage-free market, it follows that
+\begin{align} 
+     P^E_\tau - C^E_\tau = Ke^{r(\tau - T)} - S_\tau.
+\end{align}
+
+We apply a similar argument towards Asian puts and calls. Again define a stock with price $S_T$ at time $T$. Define the Asian put and call of strike $K$ as
+\begin{align} 
+     P^A_T = (K - \int_0^T S_t \;dt)^+ \\
+     C^A_T = (\int_0^T S_t \;dt - K)^+.
+\end{align}
+By \eqref{eq: pos part decomp}, 
+\begin{align} 
+     P^A_T - C^A_T = K - \int_0^T S_t \;dt.
+\end{align}
+We replicate the LHS by going long the put and short the call at time $\tau$. The RHS can be replicated by investing $Ke^{r(\tau - T)}$ and shorting an option at $w_\tau$ which pays $A_T$ at time $T$, all at time time $\tau$.
+Thus, 
+\begin{align} 
+     P^A_\tau - C^A_\tau = Ke^{r(\tau - T)} - w_\tau.
+\end{align}
+The calculation of $w_\tau$ is demonstrated in the above sections.
+
 \section{Max Transformation}
 FIXME
 \section{Moment Generating Functions}
