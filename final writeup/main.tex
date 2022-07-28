@@ -181,7 +181,7 @@ Here, we assume the agent chooses optimally with no outside information. At time
 \end{align}
 The time-zero price of this contract is then 
 \begin{align}
-      V_0 = \tilde{\E}[V_\tau].
+      V_0 = e^{-r\tau}\tilde{\E}[V_\tau].
 \end{align}
 In the next subsection, we simplify the expression for $V_\tau$ via the method of replication. 
 \subsection{Replication}
@@ -194,10 +194,7 @@ By \eqref{eq: pos part decomp}, we have
 \begin{align}\label{eq: P - C}
      P_T - C_T = (K-A_T)^+ - (A_T - K)^+ = K - A_T. 
 \end{align}
-Combining \eqref{eq: V_tau} and \eqref{eq: P - C} then gives us 
-\begin{align}
-      V_\tau = C_\tau + \max(0, K - A_T).
-\end{align}
+
 Next, we identify the time-$\tau$ prices of contracts paying $P_T - C_T$ and $K - A_T$ at time $T$.
 
 To replicate a security with payoff $P_T - C_T$, we consider a portfolio that longs a put and shorts a call at time $0$, both with maturity $T$ and strike $K$ (FIXME: what's the maturity?). To replicate a security with payoff $K - A_T$,  we consider a portfolio investing $Ke^{-rT}$ into the money account at time 0 and shorting a contract (FIXME: what kind of contract?) (FOLLOWUP I'm tempted to say ZCB but I'm not sure) to receive $A_T$ at time $T$. 
@@ -293,7 +290,7 @@ Similar to the $r \neq 0$ case, it then follows that
 \end{align}
 Thus, Put-Call Parity in the special case tells us that 
 \begin{align}
-     P_\tau - C_\tau = K - \dfrac{U_\tau}{T} = \dfrac{\int_0^\tau S_t dt + S_\tau (T - \tau)}{T}.
+     P_\tau - C_\tau = K - \dfrac{U_\tau}{T} = K - \dfrac{\int_0^\tau S_t dt + S_\tau (T - \tau)}{T}.
 \end{align}
 Substituting this result into the chooser option formula, we have
 \begin{align}
@@ -335,16 +332,16 @@ It is known that
 \end{align}
 Recall from the intro (add later) the variances of brownian motion. It follows that 
 \begin{align}
-     Var(Y) &= \tau(\frac{\kappa(T-\tau)}{T})^2\\
-     Var(Z) &= \frac{\tau^3}{3}(\frac{\kappa}{T})^2
+     Var(Y) &= \tau \left(\frac{\kappa(T-\tau)}{T} \right)^2\\
+     Var(Z) &= \frac{\tau^3}{3} \left(\frac{\kappa}{T}\right)^2
 \end{align}
 To calculate the covariance term, we expand it out in terms of expected value. Recall that the expected values of the brownian motions are 0.
 \begin{align}
-     Cov(XY) = \E(XY) - \E(X)\E(Y) = \E(XY)
+     Cov(YZ) = \E(YZ) - \E(Y)\E(Z) = \E(YZ)
 \end{align}
 We can now rewrite the covariance as
 \begin{align}
-     Cov(XY) = \E(W_\tau \int_0^\tau W_t \; dt) \;\dfrac{\kappa^2 (T - \tau)}{T^2}
+     Cov(YZ) = \E(W_\tau \int_0^\tau W_t \; dt) \;\dfrac{\kappa^2 (T - \tau)}{T^2}
 \end{align}
 For simplicity, let $\alpha = \dfrac{\kappa^2 (T - \tau)}{T^2}$. By a property of integrals and expected value, we can move the integral outside the expected value as such (probably need to fix this).
 \begin{align}
@@ -414,7 +411,7 @@ We resolve the former term by first substituting in \eqref{eq: phi-PDF}
 \begin{align}
      \dfrac{-\nu}{\sqrt{2\pi}} \;\int_{-\infty}^{d_{-}} ye^{-y^2} = \dfrac{\nu}{\sqrt{2\pi}} \;e^{\frac{-d_-^2}{2}}
 \end{align}
-Thus, our final simplified form is
+Thus, our final simplified form is (FIXME: pull back call)
 \begin{align}
      V_0 = \tilde{\E}[C_\tau] + \dfrac{\nu}{\sqrt{2\pi}} \;e^{\frac{-d_-^2}{2}} +  (K- S_0 - \mu) \Phi(d_-) 
 \end{align}
