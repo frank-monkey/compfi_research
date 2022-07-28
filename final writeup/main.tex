@@ -187,11 +187,12 @@ In the next subsection, we simplify the expression for $V_\tau$ via the method o
 \subsection{Replication}
 We first note that by properties of the max function (FIXME: add this to appendix and reference), we can write 
 \begin{align}\label{eq: chooser formula PC}
-     V_\tau = C_\tau + \max(0, P_\tau - C_\tau).
+     V_\tau = C_\tau + \max(0, P_\tau - C_\tau)
 \end{align}
+where $P_\tau$ and $C_\tau$ are an Asian put and call, respectively.
 By \eqref{eq: pos part decomp}, we have
 \begin{align}\label{eq: P - C}
-     P_T - C_T = (K-S_T)^+ - (S_T - K)^+ = K - A_T. 
+     P_T - C_T = (K-A_T)^+ - (A_T - K)^+ = K - A_T. 
 \end{align}
 Combining \eqref{eq: V_tau} and \eqref{eq: P - C} then gives us 
 \begin{align}
@@ -530,26 +531,21 @@ The final form for the time 0 price of the tail chooser is then
 
 \section{Approximating Arithmetic Asian under Black-Scholes Model}
 (FIXME: find reference for why this is an acceptable approximation, flesh out reasoning)
-Stock price evolves according to the following in the Black-Scholes model
+In the Black-Scholes Model, the stock price evolves according to
 \begin{align} 
-     S_t = S_0e^{\sigma W_t+rt+-\frac{1}{2}\sigma^2t}
+     S_t = S_0e^{\sigma W_t+(r - \frac{1}{2} \sigma^2)t}.
 \end{align}
-Remember
+Recall the notation
 \begin{align}
-     A_T = \frac{1}{T}\int_0^T S_t \; dt
+     A_T = \frac{1}{T}\int_0^T S_t \; dt.
 \end{align}
-We model $A_t$ with a log-normal $Y_t$ with the same mean and variance, which leaves us with equations
+Note that the integrand $S_t$ is a lognormal random variable. However, the integral of this variable will not be lognormal (cite somewhere). Thus, we model $A_t$ with a log-normal $Y_t$ with the same mean and variance, which leaves us with equations
 \begin{align} \label{expect approx 1}
-     \tilde{\E}[A_T] = \tilde{\E}[Y_T] \; 
+     \tilde{\E}[A_T] = \tilde{\E}[Y_T] \; \\
+     \label{expect approx 2}
+     \tilde{\E}[A_T^2] = \tilde{\E}[Y_T^2] \; \\
+     Y_t = Y_0e^{\Gamma W_t+rt-\frac{1}{2}\Gamma^2t} \;
 \end{align}
-\begin{align} \label{expect approx 2}
-     \tilde{\E}[A_T^2] = \tilde{\E}[Y_T^2]
-\end{align}
-
-\begin{align} 
-     Y_t = Y_0e^{\Gamma W_t+rt-\frac{1}{2}\Gamma^2t}
-\end{align}
-
 Starting with the RHS of \eqref{expect approx 1}
 \begin{align} 
      \rE{A_T} 
@@ -557,100 +553,116 @@ Starting with the RHS of \eqref{expect approx 1}
      = \frac{1}{T} \int_0^T \tilde{\E}[S_0 e^{\sigma W_t+rt-\frac{1}{2}\sigma^2t}] \; dt
      = \frac{S_0}{T} \int_0^T\rE{e^{\sigma W_t}e^{rt-\frac{1}{2}\sigma^2t}} \; dt
 \end{align}
-
-Using Moment Generating Function $e^{yx}$ we know if $x$ is normally distributed with a mean of $\mu$ and variance of $\sigma^2$
+We can factor out the constant part of the expected value and are left to evaluate
+\begin{align} \label{simplified expected A_T}
+     \rE{A_T} = \frac{S_0}{T} \int_0^T e^{rt-\frac{1}{2}\sigma^2t} \rE{e^{\sigma W_t}}  \; dt
+\end{align}
+Using Moment Generating Function $e^{yX}$, we know if $X$ is a normally distributed random variable with mean $\mu$ and variance $\sigma^2$ then
 \begin{align} \label{moment 1}
-     \rE{e^{yx}}
+     \rE{e^{yX}}
      = e^{\mu y + \frac{1}{2} \sigma^2 y^2}
 \end{align}
-This means that
+Recalling that the Brownian motion $W_t$ is of mean $\mu$ and variance $\sigma^2$, 
 \begin{align} 
      \rE{e^{\sigma W_t}}
-     = e^{\frac{1}{2}\sigma^2 t}
+     = e^{\frac{1}{2}\sigma^2 t},
 \end{align}
-Which we can plug in to get
+which we can plug in to \eqref{simplified expected A_T} to get
 \begin{align} 
-     \frac{S_0}{T} \int_0^T\rE{e^{\sigma W_t}e^{rt-\frac{1}{2}\sigma^2t}} \; dt
+     \rE{A_T}
+     = \frac{S_0}{T} \int_0^T e^{rt-\frac{1}{2}\sigma^2t} \rE{e^{\sigma W_t}}  \; dt
      = \frac{S_0}{T} \int_0^T e^{\frac{1}{2}\sigma^2 t} e^{rt-\frac{1}{2}\sigma^2t} \; dt
      = \frac{S_0}{T} \int_0^T e^{rt} \; dt
-     = \frac{S_0}{rT} e^{rT}-1
+     = \frac{S_0}{rT} (e^{rT}-1)
 \end{align}
-Continuing with the LHS of \eqref{expect approx 1} we use \eqref{moment 1} to simplify
+We can then simplify the LHS of \eqref{expect approx 1} using the moment generating function \eqref{moment 1} to get
 \begin{align} 
      \rE{Y_T} 
-     = \rE{Y_0} \frac{\rE{e^{\Gamma W_t}}\rE{e^{rT}}}{\rE{e^{\frac{1}{2}\Gamma^2T}}} 
-     = Y_0 \frac{\rE{e^{\frac{1}{2}\Gamma^2T}}\rE{e^{rT}}}{\rE{e^{\frac{1}{2}\Gamma^2T}}} 
+     = \rE{Y_0e^{\Gamma W_t+rt-\frac{1}{2}\Gamma^2t}} \;
+     = \rE{Y_0} \rE{e^{rt - \frac{1}{2}\Gamma^2t}} \rE{\Gamma W_t}
+     = Y_0 e^{rt - \frac{1}{2}\Gamma^2t} e^{\frac{1}{2}\Gamma^2 t}
      = Y_0 e^{rT}
 \end{align}
-So, according to \eqref{expect approx 1}
-\begin{align} 
+So, according to \eqref{expect approx 1}, we have
+\begin{align} \label{calibration 1 r neq 0}
      Y_0 = \frac{S_0}{rT}(1-e^{-rT})
 \end{align}
-Moving onto the LHS of  \eqref{expect approx 2}
+We next simplify the second equation. Moving onto the LHS of \eqref{expect approx 2},
 \begin{align}
      \rE{A_T^2}
-     = {\frac{1}{T^2} (\int_0^T \rE{S_t} \; dt)^2}
+     = {\frac{1}{T^2} \left(\int_0^T \rE{S_t} \; dt\right)^2}
 \end{align}
-We can convert this into a double integral as so
+Observe that the square of an integral can be rewritten as a double integral as follows
 \begin{align}
-     {\frac{1}{T^2} (\int_0^T \rE{S_t} \; dt)^2}
-     = {\frac{1}{T^2} \int_0^T \rE{S_s} \; ds \int_0^T \rE{S_t} \; dt}
+     {\frac{1}{T^2} \left(\int_0^T \rE{S_t} \; dt\right)^2}
+     = {\frac{1}{T^2} \int_0^T \int_0^T \rE{S_s} \rE{S_t} \; ds \; dt}
      = {\frac{1}{T^2} \int_0^T \int_0^T \rE{S_s S_t} \; ds \; dt}
 \end{align}
-WLOG we can assume that $0 \leq S \leq t$. Through a symmetry argument we can conclude
+WLOG, assume that $0 \leq s \leq t$. Integrating under these conditions yields us half of the desired area. Through a symmetry argument, we can conclude that
 \begin{align}
      {\frac{1}{T^2} \int_0^T \int_0^T \rE{S_s S_t} \; ds \; dt}
      = {\frac{2}{T^2} \int_0^T \int_0^t \rE{S_s S_t} \; ds \; dt}
 \end{align}
-We can break down $S_s$ and $S_t$ into their components
+We now deal with the expression inside the expected value. We can expand $S_s$ and $S_t$ and separate out the Brownian motions
 \begin{align}
      S_{s} S_{t} 
      = S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)+\sigma(W_t+W_s)}
      = S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)} e^{\sigma W_t} e^{\sigma W_s}
 \end{align}
-Knowing that $S_t = S_s + (S_t + S_s)$, we can write $W_t = W_s + (W_t - W_s)$. Using this we can get write
+Observe that $W_t = W_s + (W_t - W_s)$. Using this, we write
 \begin{align}
      S_{s} S_{t} 
      = S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)} e^{\sigma W_t} e^{\sigma W_s}
-     = S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)} e^{\sigma W_s} e^{\sigma W_t - W_s} e^{\sigma W_s}
-     = S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)} e^{2 \sigma W_s} e^{\sigma W_t - W_s}
+     = S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)} e^{\sigma W_s} e^{\sigma (W_t - W_s)} e^{\sigma W_s}
+     = S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)} e^{2 \sigma W_s} e^{\sigma (W_t - W_s)}
 \end{align}
-This is of interest because by properties of Brownian motion $W_s$ and $W_t - W_s$ are independent.
-This allows us to take the expected values of $W_s$ and $W_t - W_s$ seperately without worrying about covariance.
-($W_s ~ N(0,s)$ and $W_t - W_s ~ N(0,t-s)$ )
+This is of interest because the Brownian motions $W_s$ and $W_t - W_s$ are independent (reference appendix).
+Observe that $W_s \sim N(0, s)$ and $W_t - W_s \sim N(0, t-s)$ (ref?). Due to independence, we can write out the expected value as follows
 \begin{align}
-     \rE{S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)}e^{2 \sigma W_s} e^{\sigma W_t - W_s}}
-     = S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)} \rE{e^{2 \sigma W_s}} \rE{e^{\sigma W_t - W_s}}
+     \rE{S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)}e^{2 \sigma W_s} e^{\sigma (W_t - W_s)}}
+     = S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)} \rE{e^{2 \sigma W_s}} \rE{e^{\sigma (W_t - W_s)}}
 \end{align}
-Using \eqref{moment 1} again we can simplify further (FIXME more intermediate steps)
+Using \eqref{moment 1} again, observe that
+\begin{align}
+     \rE{e^{2 \sigma W_s}} = e^{2 \sigma^2 s} \\
+     \rE{e^{\sigma (W_t - W_s)}} = e^{\frac{1}{2} \sigma^2 (t-s)} \;
+\end{align}
+Substituting, we find that
 \begin{align}
      \rE{S_{s} S_{t}} 
-     = S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)} \rE{e^{2 \sigma W_s}} \rE{e^{\sigma W_t - W_s}}
-     = S_0^2 e^{r(s+t)+\sigma^2s}
+     = S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)} \rE{e^{2 \sigma W_s}} \rE{e^{\sigma (W_t - W_s)}}
+     = S_0^2 e^{r(t+s)+\sigma^2s}
 \end{align}
-
+We now return to the main integral using this new result
+\begin{align} \label{double int A_T^2}
+     \frac{2}{T^2} \int_0^T \int_0^t S_0^2 e^{r(t+s)+\sigma^2s} \; ds \; dt = \frac{2}{T^2} \int_0^T S_0^2 e^{rt} \int_0^t e^{(r + \sigma^2)s} \; ds \; dt
+\end{align}
+We begin by evaluating the inside integral from \eqref{double int A_T^2}
 \begin{align}
-     \frac{2S_0^2}{T^2} \int_0^T e^{rt} \; dt \int_0^s e^{(r+\sigma^2)s} \; ds 
+     \frac{2}{T^2} \int_0^T S_0^2 e^{rt} \int_0^t e^{(r + \sigma^2)s} \; ds \; dt = \frac{2}{T^2} \int_0^T \frac{S_0^2 e^{rt}}{r + \sigma^2} (e^{(r+\sigma^2)t} - 1) \; dt = \frac{2 S_0^2}{T^2(r + \sigma^2)} \int_0^T  (e^{(2r+\sigma^2)t} - e^{rt}) \; dt
 \end{align}
-(FIXME more intermediate steps)
+Evaluating the next integral, we see that
+\begin{align}
+     \frac{2 S_0^2}{T^2(r + \sigma^2)} \int_0^T  (e^{(2r+\sigma^2)t} - e^{rt}) \; dt = \frac{2 S_0^2}{T^2(r + \sigma^2)} \left[ \frac{1}{2r+\sigma^2} \left( e^{(2r + \sigma^2)t} - 1 \right) - \frac{1}{r} \left( e^{rT} - 1 \right) \right]
+\end{align}
+Thus,
 \begin{align}
      \rE{A_T^2} =  
-     \frac{2S_0^2}{T^2(r+\sigma^2)}[\frac{1}{2r+\sigma^2}e^{2rT+\sigma^2T-1}-\frac{1}{r}(e^{rT}-1)]
+     \frac{2 S_0^2}{T^2(r + \sigma^2)} \left[ \frac{1}{2r+\sigma^2} \left( e^{(2r + \sigma^2)t} - 1 \right) - \frac{1}{r} \left( e^{rT} - 1 \right) \right]
 \end{align}
-Continuing onto the RHS of  \eqref{expect approx 2}
+Continuing on to the RHS of \eqref{expect approx 2}, we can apply the moment generating function again with the information that $W_t \sim N(0, t)$ to get
 \begin{align}
      \rE{Y_T^2}
-     = Y_0^2 e^{(2r-\Gamma^2)T} \rE{e^{2\Gamma W_t}}
+     = Y_0^2 e^{(2r-\Gamma^2)T} \rE{e^{2\Gamma W_T}}
      = Y_0^2 e^{(2r+\Gamma^2)T}
 \end{align}
-
-So
+Equating $\rE{A_T^2}$ and $\rE{Y_T^2}$ in \eqref{expect approx 2} and recalling the calibration \eqref{calibration 1 r neq 0} we found from \eqref{expect approx 1}, it follows that
 \begin{align}
      \Gamma^2
-     = \frac{1}{T}\ln{(\frac{2S_0^2}{Y_0^2 T^2 (r+\sigma^2)})}+\ln{(\frac{1}{2r+\sigma^2}e^{2rT+\sigma^2T-1}-\frac{1}{r}(e^{rT}-1))} -2rT
+     = \frac{1}{T} \left( \ln{\left( \frac{2S_0^2}{Y_0^2 T^2 (r+\sigma^2)} \right)}+\ln{\left( \frac{1}{2r+\sigma^2} \left( e^{2rT+\sigma^2T} - 1 \right) -\frac{1}{r}(e^{rT}-1) \right)} -2rT \right)
 \end{align}
 
-\subsection*{Acknowledgement} The authors would like to thank Prof. Hrusa for his patient guidance on this project.  
+\subsection*{Acknowledgements} The authors would like to thank Prof. Hrusa for his patient guidance on this project.  
 
 
 \appendix
