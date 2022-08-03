@@ -417,12 +417,15 @@ We resolve the former term by first substituting in \eqref{eq: phi-PDF}
 \begin{align}
      \dfrac{-\nu}{\sqrt{2\pi}} \;\int_{-\infty}^{d_{-}} ye^{-y^2} = \dfrac{\nu}{\sqrt{2\pi}} \;e^{\frac{-d_-^2}{2}}
 \end{align}
-Thus, our final simplified form is (FIXME: pull back call)
+Thus, we find that
 \begin{align}
-     V_0 = \tilde{\E}[C_\tau] + \dfrac{\nu}{\sqrt{2\pi}} \;e^{\frac{-d_-^2}{2}} +  (K- S_0 - \mu) \Phi(d_-) 
+     V_0 = \tilde{\E}[C_\tau] + \dfrac{\nu}{\sqrt{2\pi}} \;e^{\frac{-d_-^2}{2}} +  (K- S_0 - \mu) \Phi(d_-),
 \end{align}
-
-(FIXME: continue with this computation, write down an explicit formula for $V_0$, and also the price for the variant.) (FOLLOWUP still have to write up variant)
+which gives us the final form 
+\begin{align}
+     V_0 = C_0 + \dfrac{\nu}{\sqrt{2\pi}} \;e^{\frac{-d_-^2}{2}} +  (K- S_0 - \mu) \Phi(d_-),
+\end{align}
+after pulling back the call to time 0, as shown in the appendix. (FIXME: someone pls help ref appendix im not sure how)
 
 \section{Chooser Option Variants}
 
@@ -687,7 +690,6 @@ from which the \emph{put-call parity} can be derived.
 
 \section{Arbitrage-free pricing}
 
-(FIXME: Consider adding this to an appendix.)
 Before defining arbitrage-free pricing, we first must define arbitrage. An arbitrage strategy has three properties. 
 \begin{enumerate}
      \item the agent's initial capital is zero.
