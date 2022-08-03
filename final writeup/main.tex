@@ -54,7 +54,7 @@ Pittsburgh, PA 15213, USA
 \section{Introduction}
 In April 2020, the price of oil futures went negative.
 The often used Black-Scholes model, however, is unable to model assets with negative prices, due to its assumption that asset price follows a log-normal distribution.
-This reignited interest for the scarcely-used Bachelier model, a similar mathematical model where asset prices follow a normal distribution, with the advantage of being able to handle negative prices (which was considered a limitation at it's inception).
+This reignited interest for the scarcely-used Bachelier model, a similar mathematical model where asset prices follow a normal distribution, with the advantage of being able to handle negative prices (which was considered a limitation at its inception).
 
 \section{The Bachelier Model}
 In this paper we work within the context of the \emph{Bachelier model}, where the stock prices $\{S_t\}_{t \ge 0}$ evolves according to 
@@ -137,13 +137,18 @@ where
 \subsection{European Put when r = 0}
 To compute the price of a put, one can use put-call parity.
 (FIXME: derive put-call parity in appendix and reference it). 
+(FOLLOWUP: it has been derived, I do not know how to reference it, though...)
 
 \subsection{Arithmetic Asian Call}
 Next we consider an \emph{arithmetic Asian call} where the payoff at time $T$ is given by 
 \begin{align} \label{eq: asian}
 	 V_T = (A_T - K)^T, \; A_T = \frac{1}{T}\int_0^T S_t \; dt = S_0 + \frac{\kappa}{T} \int_0^T W_t \; dt. 
 \end{align}
-Using tools from stochastic calculus (FIXME: what tools), one can show that under the risk neutral measure $\tilde{\mathbb{P}}$, 
+Using tools from stochastic calculus (FIXME: what tools) (FOLLOWUP: not a proper reference, but 
+
+https://math.stackexchange.com/questions/1336471/variance-of-an-integral-of-brownian-motion 
+
+shows a proof with integration by parts and Fubini), one can show that under the risk neutral measure $\tilde{\mathbb{P}}$, 
 \begin{align}
 	 \int_0^T W_t \; dt \sim N(0, T^3/3).
 \end{align}
@@ -164,6 +169,7 @@ We note that since $\sqrt{3} > 1$, we see from \eqref{eq: asian op} that the pri
 
 \subsection{Arithmetic Asian Put}
 FIXME: derive Put-Call parity in appendix and reference it.
+FOLLOWUP: just need to reference
 
 \section{Chooser Pricing under the Bachelier Model}
 In this section we derive the arbitrage-free prices of some contracts in the simplest setting when $r = 0$.  
@@ -737,11 +743,64 @@ Thus,
 The calculation of $w_\tau$ is demonstrated in the above sections.
 
 \section{Max Transformation}
-FIXME
+
+We derive the following property of the max function:
+
+\begin{align}
+     \max(a, b) = a + \max(0, b-a).
+\end{align}
+
+The proof follows through simple casework. First consider when $a > b$, it follows that
+
+\begin{align}
+     \max(a, b) = a
+\end{align}
+\begin{align}
+     a + \max(0, b-a) = a + 0 = a.
+\end{align}
+
+The second case we consider is $b \geq a$, then
+
+\begin{align}
+     \max(a, b) = b
+\end{align}
+\begin{align}
+     a + \max(0, b-a) = a + (b - a) = b.
+\end{align}
+
+The proof is now complete.
+
 \section{Moment Generating Functions}
-FIXME
+
+We define $m_X(y)$ to be moment generating function on random variable $X$ such that 
+
+\begin{align}
+     m(y) = \rE{e^{yX}}
+\end{align}
+
+where $y \in \mathbb{R}$. When $X \sim N(\mu, \sigma^2)$, we have 
+
+\begin{align} \label{mgf func}
+     m(y) = \rE{e^{yX}} = \exp(\mu y + \frac{1}{2} \sigma^2 y^2)
+\end{align}
+
 \section{Various replicating strategies}
-FIXME
+
+\subsection{Replicating Puts and Calls}
+
+The put and call options are two often used contracts which give the buyer the right, but not obligation, to respectively sell or buy an underlying security. 
+
+
+To "price back" a put or call from time $t$ to time $0$, where $t \geq 0$, we simply buy a put or call respectively at time $0$. 
+It thus follows that 
+\begin{align}
+     \rE{C_t} = C_0
+\end{align}
+and the same can be done similarly for puts:
+\begin{align}
+     \rE{P_t} = P_0.
+\end{align}
+
 \subsection{Replicating European options}
 FIXME
 \subsection{Replicating Asian options}
