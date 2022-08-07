@@ -42,10 +42,6 @@ Pittsburgh, PA 15213, USA
 
 \begin{document}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%TODO LIST
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{abstract}
      In this set of notes we derive the time-zero prices of various \emph{chooser options} under the continuous Bachelier model.
      These are contracts with a fixed maturity date $T$ and a chooser date $\tau$ satisfying $0 \le \tau \le T$, for which an agent is allowed to choose at time $\tau$ the underlying security that determines the structure of the payoff at time $T$.  
@@ -79,7 +75,6 @@ We note to the reader that in the special case when $r = 0$, \eqref{eq: r not 0}
 \begin{align}\label{eq: r=0}
       S_t = S_0 + \kappa W_t. 
 \end{align}
-
 
 \subsection{European Call when r = 0}
 We first consider a European call where the payoff at time $T$ is given by 
@@ -148,9 +143,9 @@ where
 \end{align}
 
 \subsection{European Put when r = 0}
-To compute the price of a put, one can use put-call parity.
-(FIXME: derive put-call parity in appendix and reference it). 
-(FOLLOWUP: it has been derived, I do not know how to reference it, though...)
+To compute the price of a put, one can use put-call parity \eqref{Put-Call Parity}.
+
+FINISHME
 
 \subsection{Arithmetic Asian Call}
 Next we consider an \emph{arithmetic Asian call} where the payoff at time $T$ is given by 
@@ -181,8 +176,9 @@ We note that since $\sqrt{3} > 1$, we see from \eqref{eq: asian op} that the pri
 
 
 \subsection{Arithmetic Asian Put}
-FIXME: derive Put-Call parity in appendix and reference it.
-FOLLOWUP: just need to reference
+To compute the price of a put, one can use put-call parity \eqref{Put-Call Parity}.
+
+FINISHME
 
 \section{Chooser Pricing under the Bachelier Model}
 In this section we derive the arbitrage-free prices of some contracts in the simplest setting when $r = 0$.  
@@ -216,9 +212,10 @@ By \eqref{eq: pos part decomp}, we have
 
 Next, we identify the time-$\tau$ prices of contracts paying $P_T - C_T$ and $K - A_T$ at time $T$.
 
-To replicate a security with payoff $P_T - C_T$, we consider a portfolio that longs a put and shorts a call at time $0$, both with maturity $T$ and strike $K$ (FIXME: what's the maturity?). To replicate a security with payoff $K - A_T$,  we consider a portfolio investing $Ke^{-rT}$ into the money account at time 0 and shorting a contract (FIXME: what kind of contract?) (FOLLOWUP I'm tempted to say ZCB but I'm not sure) to receive $A_T$ at time $T$. 
+To replicate a security with payoff $P_T - C_T$, we consider a portfolio that longs a put and shorts a call at time $0$, both with maturity $T$ and strike $K$.
+To replicate a security with payoff $K - A_T$,  we consider a portfolio investing $Ke^{-rT}$ into the money account at time 0 and shorting a contract (FIXME: what kind of contract?) (FOLLOWUP I'm tempted to say ZCB but I'm not sure) to receive $A_T$ at time $T$. 
 
-Since both portfolios have the same payoff at time $T$ by \eqref{eq: P - C}, they have the same price for all times $t$ where $0 \leq t \leq T$ (FIXME: reference appendix some sorta arbitrage). 
+Since both portfolios have the same payoff at time $T$ by \eqref{eq: P - C}, they have the same price for all times $t$ where $0 \leq t \leq T$ \ref{arbitrage-free pricing sect} (FIXME: fix reference style). 
 
 For any $t$ satisfying $0 \le t \le T$, we define $P_t$ to be the time-$t$ value of a put with payoff $P_T$ at time $T$, $C_t$ to be the time-$t$ value of a call with payoff $C_T$ at time $t$, $w_t$ to be the time-$t$ value of an asian option paying $A_T$ at time $t$. (FIXME: Move logic to appendix and reference it)
 
@@ -698,7 +695,7 @@ from which the \emph{put-call parity} can be derived.
 For a normal random variable $X$ we use the notation $X \sim N(\mu,\sigma^2)$
 to denote that it has mean $\mu$ and variance $\sigma^2$.
 
-\section{Arbitrage-free pricing}
+\section{Arbitrage-free pricing} \label{arbitrage-free pricing sect}
 
 Before defining arbitrage-free pricing, we first must define arbitrage. An arbitrage strategy has three properties. 
 \begin{enumerate}
@@ -752,7 +749,7 @@ By \eqref{eq: pos part decomp},
 We replicate the LHS by going long the put and short the call at time $\tau$.
 The RHS can be replicated by investing $Ke^{r(\tau - T)}$ and shorting an option at $w_\tau$ which pays $A_T$ at time $T$, all at time time $\tau$.
 Thus, 
-\begin{align} 
+\begin{align} \label{Put-Call Parity}
      P^A_\tau - C^A_\tau = Ke^{r(\tau - T)} - w_\tau.
 \end{align}
 The calculation of $w_\tau$ is demonstrated in the above sections.
@@ -805,13 +802,6 @@ It thus follows that
 FIXME
 \subsection{Replicating Asian options}
 FIXME
-
-\subsection{Replicating Asian options}
-
-%$\tilde{\E}[A_ T] = \tilde{\E}[Y_ T]$ \\
-%$\tilde{\E}[A_ T^2] = \tilde{\E}[Y_ T^2]$ \\
-%$\tilde{\E}(e^{-rt}(A_T - K)^+ ) \approx \tilde{\E}(e^{-rt}(Y_T - K)^+ )$ \\
-%$\tilde{\E}(A_T^2) = 1/T^2 (e^{-rt}(Y_T - K)^+ )$ \\
 
 %\printbibliography
 
