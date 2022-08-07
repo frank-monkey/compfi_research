@@ -44,16 +44,20 @@ Pittsburgh, PA 15213, USA
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %TODO LIST
-% go through all the fixme's and edit them
-% add github link to appendix - explain the code a little bit
-% finish up 3.57 onward
-% Bachelier approximation where asian option is the same price and 1/sqrt(3) volatility as a euro proof
-% greeks 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{abstract}
      In this set of notes we derive the time-zero prices of various \emph{chooser options} under the continuous Bachelier model.
      These are contracts with a fixed maturity date $T$ and a chooser date $\tau$ satisfying $0 \le \tau \le T$, for which an agent is allowed to choose at time $\tau$ the underlying security that determines the structure of the payoff at time $T$.  
+
+     This paper is still in progress, the following are yet to be added:
+     \begin{itemize}
+          \item Go through all the fixme's and edit appropriately
+          \item Add github link to appendix - explain the code
+          \item Finish up 3.57 onward
+          \item Bachelier approximation where asian option is the same price and 1/sqrt(3) volatility as a european option proof
+          \item Greeks + calculations
+     \end{itemize}
 \end{abstract}
 
 
@@ -430,11 +434,10 @@ Thus, we find that
 \begin{align}
      V_0 = \tilde{\E}[C_\tau] + \dfrac{\nu}{\sqrt{2\pi}} \;e^{\frac{-d_-^2}{2}} +  (K- S_0 - \mu) \Phi(d_-),
 \end{align}
-which gives us the final form 
+which through \eqref{replicating puts/calls}, gives us the final equation.
 \begin{align}
      V_0 = C_0 + \dfrac{\nu}{\sqrt{2\pi}} \;e^{\frac{-d_-^2}{2}} +  (K- S_0 - \mu) \Phi(d_-),
 \end{align}
-after pulling back the call to time 0, as shown in the appendix. (FIXME: someone pls help ref appendix im not sure how)
 
 \section{Chooser Option Variants}
 
@@ -794,18 +797,16 @@ The put and call options are two often used contracts which give the buyer the r
 
 To "price back" a put or call from time $t$ to time $0$, where $t \geq 0$, we simply buy a put or call respectively at time $0$. 
 It thus follows that 
-\begin{align}
-     \rE{C_t} = C_0
+\begin{align} \label{replicating puts/calls}
+     \rE{C_t} = C_0 \\
+     \rE{P_t} = P_0
 \end{align}
-and the same can be done similarly for puts:
-\begin{align}
-     \rE{P_t} = P_0.
-\end{align}
-
 \subsection{Replicating European options}
 FIXME
 \subsection{Replicating Asian options}
 FIXME
+
+\subsection{Replicating Asian options}
 
 %$\tilde{\E}[A_ T] = \tilde{\E}[Y_ T]$ \\
 %$\tilde{\E}[A_ T^2] = \tilde{\E}[Y_ T^2]$ \\
