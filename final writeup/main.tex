@@ -207,7 +207,7 @@ The time-zero price of this contract is then
 \end{align}
 In the next subsection, we simplify the expression for $V_\tau$ via the method of replication. 
 \subsection{Replication}
-We first note that by properties of the max function (FIXME: add this to appendix and reference), we can write 
+We first note that by properties of the max function \eqref{Max appendix}, we can write 
 \begin{align}\label{eq: chooser formula PC}
      V_\tau = C_\tau + \max(0, P_\tau - C_\tau)
 \end{align}
@@ -219,20 +219,24 @@ By \eqref{eq: pos part decomp}, we have
 
 Next, we identify the time-$\tau$ prices of contracts paying $P_T - C_T$ and $K - A_T$ at time $T$.
 
-To replicate a security with payoff $P_T - C_T$, we consider a portfolio that longs a put and shorts a call at time $0$, both with maturity $T$ and strike $K$.
+To replicate a security with payoff $P_T - C_T$, we consider a portfolio that goes long an Asian Put and short an Asian Call at time $0$, both with maturity $T$ and strike $K$.
 To replicate a security with payoff $K - A_T$,  we consider a portfolio investing $Ke^{-rT}$ into the money account at time 0 and shorting a contract (FIXME: what kind of contract?) (FOLLOWUP I'm tempted to say ZCB but I'm not sure) to receive $A_T$ at time $T$. 
 
-Since both portfolios have the same payoff at time $T$ by \eqref{eq: P - C}, they have the same price for all times $t$ where $0 \leq t \leq T$ \ref{Arbitrage-Free Pricing Appendix} (FIXME: fix reference style). 
+Since both portfolios have the same payoff at time $T$ by \eqref{eq: P - C},
+they have the same price for all times $t$ where $0 \leq t \leq T$ under the assumption that the market is
+arbitrage-free according to \ref{Arbitrage-Free Pricing Appendix}.
 
-For any $t$ satisfying $0 \le t \le T$, we define $P_t$ to be the time-$t$ value of a put with payoff $P_T$ at time $T$, $C_t$ to be the time-$t$ value of a call with payoff $C_T$ at time $t$, $w_t$ to be the time-$t$ value of an asian option paying $A_T$ at time $t$. (FIXME: Move logic to appendix and reference it)
+%For any $t$ satisfying $0 \le t \le T$, we define $P_t$ to be the time-$t$ value of a Put with payoff $P_T$ at time $T$,
+%$C_t$ to be the time-$t$ value of a call with payoff $C_T$ at time $t$, $w_t$ to be the time-$t$ value of an Asian option paying $A_T$ at time $t$.
 
-Using this notation, at time $\tau$ the value of the first portfolio is $P_\tau - C_\tau$. Also, at time $\tau$ the second portfolio has $Ke^{-rT + r\tau}$ in the bank and is shorting a contract which pays $A_T$ at $T$, therefore the time-$\tau$ value of the second portfolio is $Ke^{r(\tau - T)} - A_\tau$. We denote the value of a contract at time $\tau$ which pays $A_T$ at time $T$ as $w_\tau$.
+Using this notation, at time $\tau$ the value of the first portfolio is $P_\tau - C_\tau$.
+ Also, at time $\tau$ the second portfolio has $Ke^{-rT + r\tau}$ in the bank and is shorting a contract which pays $A_T$ at $T$, therefore the time-$\tau$ value of the second portfolio is $Ke^{r(\tau - T)} - A_\tau$. We denote the value of a contract at time $\tau$ which pays $A_T$ at time $T$ as $w_\tau$.
 By replication, the time $\tau$ prices of the portfolios are equal, therefore we have 
 \begin{align}\label{eq: P-C Parity}
      P_\tau - C_\tau = Ke^{r(\tau - T)} - w_\tau.
 \end{align}
 Substituting this result back into \eqref{eq: V_tau}, the value of the original chooser contract at $\tau$ is
-\begin{align}
+\begin{align} \label{V_tau Asian Chooser}
      V_\tau = C_\tau + \max(0, Ke^{r(\tau - T)} - w_\tau).
 \end{align}
 Our next goal is to find an explicit formula for $w_\tau$. 
@@ -281,14 +285,17 @@ Returning to \eqref{eq: P-C Parity}, we can write out the equation as
 \begin{align}
      P_\tau - C_\tau = Ke^{r(\tau - T)} - \dfrac{\int_0^\tau S_t \; dt + \dfrac{S_\tau}{r}\left( 1 - e^{r(\tau - T)} \right)}{T}.
 \end{align}
-Substituting this into the chooser option from 1.7, the value of $V_\tau$ is
+Substituting this into \eqref{V_tau Asian Chooser}, the value of $V_\tau$ is
+%this into the chooser option from 1.7
 \begin{align}
      V_\tau = C_\tau + \max(0, Ke^{r(\tau - T)} - \dfrac{\int_0^\tau S_t \; dt + \dfrac{S_\tau}{r}\left( 1 - e^{r(\tau - T)} \right)}{T})
 \end{align}
 
 
-\subsection{Replicating Asian options when $r = 0$}
-We now consider the case when $r=0$. Observe we cannot plug $r=0$ into the formula we got for $r > 0$ since we divide by $r$. However, we can apply a similar replication argument as before. (FIXME: this is a little confusing since the interest rate was never specified. maybe specify that you are assuming $r > 0$ initially and now you're considering $r = 0$ as a special case. If you choose to do this I recommend breaking this section into different subsections). To fix this, we return to our replicating strategy for $w_\tau$ accounting for this special case.
+\subsection{Replicating Asian options when r = 0}
+We now consider the case when $r=0$. Observe we cannot plug $r=0$ into the formula we derived for $r>0$ since we divide by $r$.
+However, we can apply a similar replication argument as before. (FIXME: this is a little confusing since the interest rate was never specified. maybe specify that you are assuming $r > 0$ initially and now you're considering $r = 0$ as a special case. If you choose to do this I recommend breaking this section into different subsections).
+To fix this, we return to our replicating strategy for $w_\tau$ accounting for this special case.
 
 Define $U_\tau$ and $Y_T$ the same way as above. Again, split the integral $Y_T$ such that
 \begin{align}
@@ -344,7 +351,7 @@ We now calculate the mean and variance of random variable $X$. We define $X$ as 
      Y &= \frac{\kappa(T-\tau)}{T} W_\tau\\
      Z &= \frac{\kappa}{T} \int_0^\tau W_t \; dt.
 \end{align}
-Recall from the intro (add details on brownian motion in intro later) that the mean of the brownian motions in both $Y$ and $Z$ are $0$, thus the means of both $Y$ and $Z$ are 0. 
+Note from \eqref{BM Appendix} that the mean of the brownian motions in both $Y$ and $Z$ are $0$, thus the means of both $Y$ and $Z$ are 0. 
 We now calculate the variance of $X$ as the sum of two random variables
 \begin{align}
      Var(X) = Var(Y + Z)
@@ -353,12 +360,13 @@ It is known that
 \begin{align}
      Var(Y + Z) = Var(Y) + Var(Z) + 2Cov(YZ).
 \end{align}
-Recall from the intro (add later) the variances of brownian motion. It follows that 
+Note from \eqref{BM Appendix} the variances of brownian motion. It follows that 
 \begin{align}
      Var(Y) &= \tau \left(\frac{\kappa(T-\tau)}{T} \right)^2\\
      Var(Z) &= \frac{\tau^3}{3} \left(\frac{\kappa}{T}\right)^2
 \end{align}
-To calculate the covariance term, we expand it out in terms of expected value. Recall that the expected values of the brownian motions are 0.
+To calculate the covariance term, we expand it out in terms of expected value.
+Note that the expected values of the brownian motions are 0.
 \begin{align}
      Cov(YZ) = \E(YZ) - \E(Y)\E(Z) = \E(YZ)
 \end{align}
@@ -366,7 +374,8 @@ We can now rewrite the covariance as
 \begin{align}
      Cov(YZ) = \E(W_\tau \int_0^\tau W_t \; dt) \;\dfrac{\kappa^2 (T - \tau)}{T^2}
 \end{align}
-For simplicity, let $\alpha = \dfrac{\kappa^2 (T - \tau)}{T^2}$. By a property of integrals and expected value, we can move the integral outside the expected value as such (probably need to fix this).
+For simplicity, let $\alpha = \dfrac{\kappa^2 (T - \tau)}{T^2}$.
+By a property of integrals and expected value, we can move the integral outside the expected value as such (FIXME:  probably need to fix this).
 \begin{align}
      \alpha \E(W_\tau \int_0^\tau W_t \; dt) = \alpha \int_0^\tau \E(w_\tau w_t) dt
 \end{align}
@@ -820,8 +829,13 @@ The calculation of $w_\tau$ is demonstrated in the above sections.
 
 \section{Brownian Motion}\label{BM Appendix}
 FIXME/To be added
+-Note from BM Appendix that the mean of the brownian motions in both $Y$ and $Z$ are $0$, thus the means of both $Y$ and $Z$ are 0. 
+\begin{align}
+     Var(Y) &= \tau \left(\frac{\kappa(T-\tau)}{T} \right)^2\\
+     Var(Z) &= \frac{\tau^3}{3} \left(\frac{\kappa}{T}\right)^2
+\end{align}
 
-\section{Max Transformation}
+\section{Max Transformation} \label{Max appendix}
 We derive the following property of the max function:
 \begin{align}
      \max(a, b) = a + \max(0, b-a).
