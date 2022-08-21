@@ -222,7 +222,7 @@ Next, we identify the time-$\tau$ prices of contracts paying $P_T - C_T$ and $K 
 To replicate a security with payoff $P_T - C_T$, we consider a portfolio that longs a put and shorts a call at time $0$, both with maturity $T$ and strike $K$.
 To replicate a security with payoff $K - A_T$,  we consider a portfolio investing $Ke^{-rT}$ into the money account at time 0 and shorting a contract (FIXME: what kind of contract?) (FOLLOWUP I'm tempted to say ZCB but I'm not sure) to receive $A_T$ at time $T$. 
 
-Since both portfolios have the same payoff at time $T$ by \eqref{eq: P - C}, they have the same price for all times $t$ where $0 \leq t \leq T$ \ref{arbitrage-free pricing sect} (FIXME: fix reference style). 
+Since both portfolios have the same payoff at time $T$ by \eqref{eq: P - C}, they have the same price for all times $t$ where $0 \leq t \leq T$ \ref{Arbitrage-Free Pricing Appendix} (FIXME: fix reference style). 
 
 For any $t$ satisfying $0 \le t \le T$, we define $P_t$ to be the time-$t$ value of a put with payoff $P_T$ at time $T$, $C_t$ to be the time-$t$ value of a call with payoff $C_T$ at time $t$, $w_t$ to be the time-$t$ value of an asian option paying $A_T$ at time $t$. (FIXME: Move logic to appendix and reference it)
 
@@ -551,7 +551,12 @@ The final form for the time 0 price of the tail chooser is then
      V_0 = \tilde{\E}[C_\tau] - (k - S_0 - \mu) \Phi(d_-) -\dfrac{\nu}{\sqrt{2\pi}} e^{\frac{-d_-^2}{2}}
 \end{align}
 
-\section{Approximating Arithmetic Asian under Black-Scholes Model}
+\section{Approximating Asian Options}
+Typically, it may not be feasible to compute an Asian Option in a competitive time.
+Following are some approximations which sacrifice accuracy for ease of computation.
+(FIXME: Expand Description?)
+
+\subsection{Approximating Arithmetic Asian under Black-Scholes Model}
 (FIXME: find reference for why this is an acceptable approximation, flesh out reasoning)
 In the Black-Scholes Model, the asset price $S_t$ for $0\leq t \leq T$ evolves according to
 \begin{align} 
@@ -682,17 +687,16 @@ Continuing on to the RHS of \eqref{expect approx 2}, we can apply the moment gen
 \end{align}
 Equating $\rE{A_T^2}$ and $\rE{Y_T^2}$ in \eqref{expect approx 2} and recalling the calibration \eqref{calibration 1 r neq 0} we found from \eqref{expect approx 1}, it follows that
 \begin{align}
-     \Gamma^2
-     = \frac{1}{T} \left( \ln{\left( \frac{2S_0^2}{Y_0^2 T^2 (r+\sigma^2)} \right)}+\ln{\left( \frac{1}{2r+\sigma^2} \left( e^{2rT+\sigma^2T} - 1 \right) -\frac{1}{r}(e^{rT}-1) \right)} -2rT \right)
+     \Gamma^2 = \frac{1}{T} \left( \ln{\left( \frac{2S_0^2}{Y_0^2 T^2 (r+\sigma^2)} \right)}+\ln{\left( \frac{1}{2r+\sigma^2} \left( e^{2rT+\sigma^2T} - 1 \right) -\frac{1}{r}(e^{rT}-1) \right)} -2rT \right)
 \end{align}
 
-\section{Approximating Arithmetic Asian under the Bachelier Model}
+\subsection{Approximating Arithmetic Asian under the Bachelier Model}
 
 If we assume $r=0$, stock price evolves according to 
 \begin{align}
      S_t = S_0 + \kappa W_t
 \end{align}
-One can price an option sold at time $t=0$ according to
+One can price an option sold at time $t=0$ which expires at time $t=T$ according to
 \begin{align}
      V_0 = e^{-rT} \rE{V_T} = \rE{V_T}
 \end{align}
@@ -700,7 +704,7 @@ Therefore, we can price a European call as so
 \begin{align}
      V_0 = \rE{(S_T-K)^{+}}
 \end{align}
-Note that $S_t \sim N(S_0,\kappa^2T)$, as the variance of a Brownian motion is defined as $T$ (FIXME: Cite Brownian and variance math).
+Note that $S_t \sim N(S_0,\kappa^2T)$, as the variance of a Brownian motion is defined as $T$ shown in \eqref{BM Appendix} (FIXME: variance math).
 
 Now we can price an Asian call as follows
 \begin{align} \label{sect 6 asian}
@@ -714,24 +718,29 @@ Expanding $S_t$ yields
 \begin{align}
      \int_0^T S_t \; dt = \int_0^T S_0 \; dt + \int_0^T \kappa W_t \; dt = S_0T + \kappa \int_0^T W_t \; dt
 \end{align}
-Plugging this into \eqref{sect 6 asian} yields 
+Plugging this into \eqref{sect 6 asian} yields
 \begin{align} 
      A_T = S_0 + \frac{\kappa}{T} \int_0^T W_t \; dt
 \end{align}
-Plugging this into \eqref{sect 6 t0 price}
+Plugging this into \eqref{sect 6 t0 price} yields
 \begin{align}
      V_0 = \rE{(A_T-K)}^{+} = \rE{({(S_0 + \frac{k}{T} \int_0^T W_t \; dt) - K})^+} 
 \end{align}
-Note that this is the same form as the European Call, except the European Call has $S_T$ inplace of $A_T$
-The variance of $Z_T$ is $\frac{\kappa^2T}{\sqrt{3}}$, as the variance of a Brownian motion is defined as $T$ (FIXME: Cite Brownian and Variance math) and 
+Note that this is the same form as the European Call, except the European Call has $S_T$ inplace of $A_T$.
+The variance of $Z_T$ is $\frac{\kappa^2T}{\sqrt{3}}$, as the variance of a Brownian motion is defined as $T$ (FIXME: Cite Variance math) and 
 \begin{align}
      \frac{\kappa^2}{T^2} \frac{T^3}{3}= \frac{\kappa^2 T}{3}
 \end{align}
 The variance of $Z_T$ is exactly $\frac{1}{\sqrt{3}}$ the variance of $S_T$, while the mean remains the same as $S_T$.
-So, we can approximate the price of an Asian in the Bachelier Model by pricing it with the same parameters as a European Option (which can typically be done in O(1) time-complexity),
-but just changing the volatility to be $\frac{1}{\sqrt{3}}$ of the original.
+So, we can approximate the price of an Asian in the Bachelier Model by pricing it with the same parameters as a European Option 
+but just changing the volatility to be $\frac{1}{\sqrt{3}}$ of the original. 
+This result also applies to Asian Puts through Put-Call Parity\eqref{PC parity appendix}, 
+using a European Put with $\frac{1}{\sqrt{3}}$ of the original volatility.
 
-This result also applies to Asian Puts through Put-Call Parity (FIXME: Cite), using a European Put with  $\frac{1}{\sqrt{3}}$ of the original volatility.
+This approximation should be performed using Black-Scholes pricing (FIXME: Cite why)
+
+The advantage of this is that European Options are the most well-known option, so one could ballpark 
+the price of an Asian Option using already existing infrastructure.
 
 
 \subsection*{Acknowledgements} The authors would like to thank Prof. Hrusa for his patient guidance on this project.  
@@ -750,7 +759,7 @@ from which the \emph{put-call parity} can be derived.
 For a normal random variable $X$ we use the notation $X \sim N(\mu,\sigma^2)$
 to denote that it has mean $\mu$ and variance $\sigma^2$.
 
-\section{Arbitrage-free pricing} \label{arbitrage-free pricing sect}
+\section{Arbitrage-free pricing} \label{Arbitrage-Free Pricing Appendix}
 
 Before defining arbitrage-free pricing, we first must define arbitrage. An arbitrage strategy has three properties. 
 \begin{enumerate}
@@ -771,7 +780,7 @@ Thus, there exists an arbitrage strategy, which is a contradiction.
 
 It follows that under an arbitrage-free model, if two portfolios have equal value at time $T$, they must have equal value at all times from $0$ to $T$.
 
-\section{Put-Call Parity}
+\section{Put-Call Parity}\label{PC parity appendix}
 
 An important result used repeatedly throughout this paper is put-call parity. 
 
@@ -808,6 +817,9 @@ Thus,
      P^A_\tau - C^A_\tau = Ke^{r(\tau - T)} - w_\tau.
 \end{align}
 The calculation of $w_\tau$ is demonstrated in the above sections.
+
+\section{Brownian Motion}\label{BM Appendix}
+FIXME/To be added
 
 \section{Max Transformation}
 We derive the following property of the max function:
