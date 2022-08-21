@@ -686,6 +686,54 @@ Equating $\rE{A_T^2}$ and $\rE{Y_T^2}$ in \eqref{expect approx 2} and recalling 
      = \frac{1}{T} \left( \ln{\left( \frac{2S_0^2}{Y_0^2 T^2 (r+\sigma^2)} \right)}+\ln{\left( \frac{1}{2r+\sigma^2} \left( e^{2rT+\sigma^2T} - 1 \right) -\frac{1}{r}(e^{rT}-1) \right)} -2rT \right)
 \end{align}
 
+\section{Approximating Arithmetic Asian under the Bachelier Model}
+
+If we assume $r=0$, stock price evolves according to 
+\begin{align}
+     S_t = S_0 + \kappa W_t
+\end{align}
+One can price an option sold at time $t=0$ according to
+\begin{align}
+     V_0 = e^{-rT} \rE{V_T} = \rE{V_T}
+\end{align}
+Therefore, we can price a European call as so
+\begin{align}
+     V_0 = \rE{(S_T-K)^{+}}
+\end{align}
+Note that $S_t \sim N(S_0,\kappa^2T)$, as the variance of a Brownian motion is defined as $T$ (FIXME: Cite Brownian and variance math).
+
+Now we can price an Asian call as follows
+\begin{align} \label{sect 6 asian}
+     A_T = \frac{1}{T} \int_0^T S_t \; dt
+\end{align}
+The time 0 price is
+\begin{align} \label{sect 6 t0 price}
+     V_0 = \rE{(A_T-K)}^{+}
+\end{align}
+Expanding $S_t$ yields
+\begin{align}
+     \int_0^T S_t \; dt = \int_0^T S_0 \; dt + \int_0^T \kappa W_t \; dt = S_0T + \kappa \int_0^T W_t \; dt
+\end{align}
+Plugging this into \eqref{sect 6 asian} yields 
+\begin{align} 
+     A_T = S_0 + \frac{\kappa}{T} \int_0^T W_t \; dt
+\end{align}
+Plugging this into \eqref{sect 6 t0 price}
+\begin{align}
+     V_0 = \rE{(A_T-K)}^{+} = \rE{({(S_0 + \frac{k}{T} \int_0^T W_t \; dt) - K})^+} 
+\end{align}
+Note that this is the same form as the European Call, except the European Call has $S_T$ inplace of $A_T$
+The variance of $Z_T$ is $\frac{\kappa^2T}{\sqrt{3}}$, as the variance of a Brownian motion is defined as $T$ (FIXME: Cite Brownian and Variance math) and 
+\begin{align}
+     \frac{\kappa^2}{T^2} \frac{T^3}{3}= \frac{\kappa^2 T}{3}
+\end{align}
+The variance of $Z_T$ is exactly $\frac{1}{\sqrt{3}}$ the variance of $S_T$, while the mean remains the same as $S_T$.
+So, we can approximate the price of an Asian in the Bachelier Model by pricing it with the same parameters as a European Option (which can typically be done in O(1) time-complexity),
+but just changing the volatility to be $\frac{1}{\sqrt{3}}$ of the original.
+
+This result also applies to Asian Puts through Put-Call Parity (FIXME: Cite), using a European Put with  $\frac{1}{\sqrt{3}}$ of the original volatility.
+
+
 \subsection*{Acknowledgements} The authors would like to thank Prof. Hrusa for his patient guidance on this project.  
 
 
