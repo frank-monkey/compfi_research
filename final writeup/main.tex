@@ -50,8 +50,6 @@ Pittsburgh, PA 15213, USA
      \begin{itemize}
           \item Go through all the fixme's and edit appropriately
           \item Add github link to appendix - explain the code
-          \item Finish up 3.57 onward
-          \item Bachelier approximation where asian option is the same price and 1/sqrt(3) volatility as a european option proof
           \item Greeks + calculations
      \end{itemize}
 \end{abstract}
@@ -155,11 +153,7 @@ Next we consider an \emph{arithmetic Asian call} where the payoff at time $T$ is
 \begin{align} \label{eq: asian}
 	 C^A_T = (A_T - K)^T, \; A_T = \frac{1}{T}\int_0^T S_t \; dt = S_0 + \frac{\kappa}{T} \int_0^T W_t \; dt. 
 \end{align}
-Using tools from stochastic calculus (FIXME: what tools) (FOLLOWUP: not a proper reference, but 
-
-https://math.stackexchange.com/questions/1336471/variance-of-an-integral-of-brownian-motion 
-
-shows a proof with integration by parts and Fubini), one can show that under the risk neutral measure $\tilde{\mathbb{P}}$, 
+As shown in \eqref{BM Appendix}, under the risk neutral measure $\tilde{\mathbb{P}}$, 
 \begin{align}
 	 \int_0^T W_t \; dt \sim N(0, T^3/3).
 \end{align}
@@ -828,12 +822,22 @@ Thus,
 The calculation of $w_\tau$ is demonstrated in the above sections.
 
 \section{Brownian Motion}\label{BM Appendix}
-FIXME/To be added
--Note from BM Appendix that the mean of the brownian motions in both $Y$ and $Z$ are $0$, thus the means of both $Y$ and $Z$ are 0. 
-\begin{align}
-     Var(Y) &= \tau \left(\frac{\kappa(T-\tau)}{T} \right)^2\\
-     Var(Z) &= \frac{\tau^3}{3} \left(\frac{\kappa}{T}\right)^2
-\end{align}
+Brownian Motion is a stochastic process used to model evolution of asset prices in a continuous-time model.
+The following properties are of use in this paper:
+\begin{itemize}
+     \item $W_0=0$
+     \item The mapping of $t$ to $W_t$ is continuous
+     \item For each $t \geq 0$, $W_t \sim N(0, t)$
+     \item For all $s,t$ with $0 \leq s t$, we have $W_t-W_s \sim N(0, t-s)$
+     \item For all $s_1, t_1, s_2, t_2$ with $0 \leq s_1 < t_1 \leq s_2 < t_2$ the variables $W_{t_1}-W_{s_1}$ and $W_{t_2}-W_{s_1}$ are independent
+\end{itemize}
+Another important property is that $\int^T_0 W_t \;dt \sim N(0, \frac{T^3}{3})$, which can be derived through stochastic calculus.
+(FIXME: what tools) (FOLLOWUP: not a proper reference, but 
+
+https://math.stackexchange.com/questions/1336471/variance-of-an-integral-of-brownian-motion 
+
+shows a proof with integration by parts and Fubini),
+
 
 \section{Max Transformation} \label{Max appendix}
 We derive the following property of the max function:
@@ -864,7 +868,7 @@ We define $m_X(y)$ to be moment generating function on random variable $X$ such 
 \end{align}
 where $y \in \mathbb{R}$. When $X \sim N(\mu, \sigma^2)$, we have 
 \begin{align} \label{mgf func}
-     m(y) = \rE{e^{yX}} = \exp(\mu y + \frac{1}{2} \sigma^2 y^2)
+     m(y) = \rE{e^{yX}} = e^{(\mu y + \frac{1}{2} \sigma^2 y^2)}
 \end{align}
 \section{Various replicating strategies}
 
@@ -879,10 +883,8 @@ It thus follows that
      \rE{C_t} = C_0 \\
      \rE{P_t} = P_0
 \end{align}
-\subsection{Replicating European options}
-FIXME
-\subsection{Replicating Asian options}
-FIXME
+%\subsection{Replicating European options}
+%\subsection{Replicating Asian options}
 
 %\printbibliography
 
