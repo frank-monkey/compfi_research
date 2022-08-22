@@ -377,7 +377,8 @@ Observe that $t \leq \tau$. Thus, we can further simplify down to
 \begin{align}
      \alpha \int_0^\tau \E((w_\tau + w_t - w_t) w_t) dt = \alpha \int_0^\tau \E(w_t^2 + (w_\tau - w_t) w_t) dt
 \end{align}
-We can expand the expected value by linearity of expectations. Recall (another brownian motion thing for intro ig) that the expected value of $(w_\tau - w_t) w_t$ is 0 and that the expected value of $w_t^2$ is $t$. Thus, we have
+We can expand the expected value by linearity of expectations. 
+Recall from \eqref{BM Appendix} that the expected value of $(w_\tau - w_t) w_t$ is $0$ and that the expected value of $w_t^2$ is $t$. Thus, we have
 \begin{align}
      Cov(XY) = \alpha \int_0^\tau t \; dt = \alpha \dfrac{\tau^2}{2}
 \end{align}
@@ -390,7 +391,7 @@ It follows that the mean and variance of $X$ can be computed as (IMPORTANT FIXME
 \end{align}
 (FIXME: typically $\sigma$ denotes the standard deviation, so this isn't very consistent with standard notation)
 
-Using methods of stochastic calculus (FIXME: we need to find a reference to cite), $X$ is normally distributed with mean $\mu$ and variance $\sigma^2$. Therefore we can define the probability density function as
+Using methods of stochastic calculus detailed in \eqref{BM Appendix}, $X$ is normally distributed with mean $\mu$ and variance $\sigma^2$. Therefore we can define the probability density function as
 \begin{align}
      \label{eq: phi-PDF}
      \varphi(x) &=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\\
@@ -648,7 +649,7 @@ Observe that $W_t = W_s + (W_t - W_s)$. Using this, we write
      = S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)} e^{\sigma W_s} e^{\sigma (W_t - W_s)} e^{\sigma W_s}
      = S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)} e^{2 \sigma W_s} e^{\sigma (W_t - W_s)}
 \end{align}
-This is of interest because the Brownian motions $W_s$ and $W_t - W_s$ are independent (reference appendix).
+This is of interest because the Brownian motions $W_s$ and $W_t - W_s$ are independent as defined in \eqref{BM Appendix}.
 Observe that $W_s \sim N(0, s)$ and $W_t - W_s \sim N(0, t-s)$ (ref?). Due to independence, we can write out the expected value as follows
 \begin{align}
      \rE{S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)}e^{2 \sigma W_s} e^{\sigma (W_t - W_s)}}
@@ -693,9 +694,9 @@ Equating $\rE{A_T^2}$ and $\rE{Y_T^2}$ in \eqref{expect approx 2} and recalling 
      \Gamma^2 = \frac{1}{T} \left( \ln{\left( \frac{2S_0^2}{Y_0^2 T^2 (r+\sigma^2)} \right)}+\ln{\left( \frac{1}{2r+\sigma^2} \left( e^{2rT+\sigma^2T} - 1 \right) -\frac{1}{r}(e^{rT}-1) \right)} -2rT \right)
 \end{align}
 
-\subsection{Approximating Arithmetic Asian under the Bachelier Model}
+\subsection{Approximating Arithmetic Asian under the Black-Scholes Model using the Bachelier Model}
 
-If we assume $r=0$, stock price evolves according to 
+If we assume $r=0$, stock price evolves as follows in the Bachelier Model
 \begin{align}
      S_t = S_0 + \kappa W_t
 \end{align}
@@ -707,8 +708,7 @@ Therefore, we can price a European call as so
 \begin{align}
      V_0 = \rE{(S_T-K)^{+}}
 \end{align}
-Note that $S_t \sim N(S_0,\kappa^2T)$, as the variance of a Brownian motion is defined as $T$ shown in \eqref{BM Appendix} (FIXME: variance math).
-
+Note that $S_t \sim N(S_0,\kappa^2T)$, as the variance of a Brownian motion is defined as $T$ shown in \eqref{BM Appendix} and $\kappa$ is constant. 
 Now we can price an Asian call as follows
 \begin{align} \label{sect 6 asian}
      A_T = \frac{1}{T} \int_0^T S_t \; dt
@@ -730,19 +730,21 @@ Plugging this into \eqref{sect 6 t0 price} yields
      V_0 = \rE{(A_T-K)}^{+} = \rE{({(S_0 + \frac{k}{T} \int_0^T W_t \; dt) - K})^+} 
 \end{align}
 Note that this is the same form as the European Call, except the European Call has $S_T$ inplace of $A_T$.
-The variance of $Z_T$ is $\frac{\kappa^2T}{\sqrt{3}}$, as the variance of a Brownian motion is defined as $T$ (FIXME: Cite Variance math) and 
+The variance of $A_T$ is $\frac{\kappa^2T}{3}$, as $\frac{\kappa}{T}$ is constant and the variance of $\int_0^T W_t \; dt$ is $\frac{T^3}{3}$ as shown in \eqref{BM Appendix}. %maybe add variance to appendix? fixme? 
 \begin{align}
      \frac{\kappa^2}{T^2} \frac{T^3}{3}= \frac{\kappa^2 T}{3}
 \end{align}
-The variance of $Z_T$ is exactly $\frac{1}{\sqrt{3}}$ the variance of $S_T$, while the mean remains the same as $S_T$.
-So, we can approximate the price of an Asian in the Bachelier Model by pricing it with the same parameters as a European Option 
+The variance of $A_T$ is exactly $\frac{1}{3}$ the variance of $S_T$, while the mean remains the same as $S_T$.
+Variance is equal to volatility squared.
+So, we can approximate the price of an Asian in the Black-Scholes Model by pricing it with the same parameters as a European Option 
 but just changing the volatility to be $\frac{1}{\sqrt{3}}$ of the original. 
 This result also applies to Asian Puts through Put-Call Parity\eqref{PC parity appendix}, 
 using a European Put with $\frac{1}{\sqrt{3}}$ of the original volatility.
 
-This approximation should be performed using Black-Scholes pricing (FIXME: Cite why)
+This is an approximation because the Black-Scholes and Bachelier Model scale differently.
+(FIXME: Use data to show when this is an acceptable approximation)
 
-The advantage of this is that European Options are the most well-known option, so one could ballpark 
+The advantage of this approximation is that European Options are the most well-known option, so one could easily estimate
 the price of an Asian Option using already existing infrastructure.
 
 
