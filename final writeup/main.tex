@@ -38,13 +38,13 @@ Pittsburgh, PA 15213, USA
 \thanks{J. Chen, L. Jiang, F. Sacco, A. Zhang were supported by the MFSURP program at Carnegie Mellon University.}
 
 \keywords{Asian Option, Chooser Option, Bachelier Model, Exotic Option, Option Pricing, Quantitative Finance.}
-%In most research papers I read, they just sorta spam keywords from most to least specific? FIXME?
 
 \begin{document}
 
 \begin{abstract}
      In this set of notes we derive the time-zero prices of various \emph{chooser options} under the continuous Bachelier model.
      These are contracts with a fixed maturity date $T$ and a chooser date $\tau$ satisfying $0 \le \tau \le T$, for which an agent is allowed to choose at time $\tau$ the underlying security that determines the structure of the payoff at time $T$.  
+     Included is also 2 methods of approximating Asian Options.
 
      This paper is still in progress, the following are yet to be added:
      \begin{itemize}
@@ -133,7 +133,7 @@ and
 	 I = \nu \int_{-\infty}^{d_-} y \varphi(y) \; dy =  \frac{\nu}{\sqrt{2\pi}} \lim_{t \to -\infty} (e^{-t^2/2} - e^{-d_-^2/2}) = -\frac{\nu}{\sqrt{2\pi}} e^{-d_-^2/2}.
 \end{align}
 Therefore 
-\begin{align}
+\begin{align} \label{European Call r=0}
 	 C^E_0 =  -\frac{\nu}{\sqrt{2\pi}} e^{-d_-^2/2} + (K-\mu) \varphi(d_-).
 \end{align}
 where 
@@ -222,7 +222,7 @@ By \eqref{eq: pos part decomp}, we have
 Next, we identify the time-$\tau$ prices of contracts paying $P_T - C_T$ and $K - A_T$ at time $T$.
 
 To replicate a security with payoff $P_T - C_T$, we consider a portfolio that goes long an Asian Put and short an Asian Call at time $0$, both with maturity $T$ and strike $K$.
-To replicate a security with payoff $K - A_T$,  we consider a portfolio investing $Ke^{-rT}$ into the money account at time 0 and shorting a contract (FIXME: what kind of contract?) (FOLLOWUP I'm tempted to say ZCB but I'm not sure) to receive $A_T$ at time $T$. 
+To replicate a security with payoff $K - A_T$,  we consider a portfolio investing $Ke^{-rT}$ into the money account at time 0 and shorting a contract (which we will identify later), which pays $A_T$ at time $T$. 
 
 Since both portfolios have the same payoff at time $T$ by \eqref{eq: P - C},
 they have the same price for all times $t$ where $0 \leq t \leq T$ under the assumption that the market is
@@ -460,6 +460,10 @@ which through \eqref{replicating puts/calls}, gives us the final equation.
 \begin{align}
      V_0 = C_0 + \dfrac{\nu}{\sqrt{2\pi}} \;e^{\frac{-d_-^2}{2}} +  (K- S_0 - \mu) \Phi(d_-),
 \end{align}
+where
+\begin{align}
+      d_- =  \frac{K-S_0-\mu}{\nu}
+\end{align}
 
 \section{Chooser Option Variants}
 
@@ -510,7 +514,7 @@ Using \eqref{eq: chooser formula PC}, the price of the tail chooser option with 
 \begin{align}
      V_\tau = C_\tau + (K - S_\tau)^+.
 \end{align}
-Recall in the Bachelier model that the stock evolves according to $S_t = S_0 + \kappa W_t$ when $r = 0$, $S_0 > 0$, and $W_t$ is a brownian motion under the risk-neutral measure. Then,
+Recall in the Bachelier model that the stock evolves according to $S_t = S_0 + \kappa W_t$ when $r = 0$, $S_0 > 0$, and $W_t$ is a Brownian Motion under the risk-neutral measure. Then,
 \begin{align}
      V_\tau = C_\tau + (K - (S_0 + \kappa W_\tau))^+.
 \end{align}
@@ -564,10 +568,11 @@ The remaining integral term can be simplified through \eqref{eq: pdfphieq}.
 \begin{align} 
      \nu \int_{-\infty}^{d_-} y \varphi(y) \;dy = \nu \int_{-\infty}^{d_-} y \dfrac{1}{\sqrt{2\pi}} e^{\frac{-y^2}{2}} \;dy = -\dfrac{\nu}{\sqrt{2\pi}} e^{\frac{-d_-^2}{2}}
 \end{align}
-The final form for the time 0 price of the tail chooser is then 
+Substituting we get
 \begin{align} 
      V_0 = \tilde{\E}[C_\tau] - (k - S_0 - \mu) \Phi(d_-) -\dfrac{\nu}{\sqrt{2\pi}} e^{\frac{-d_-^2}{2}}
 \end{align}
+We can then substite $C_\tau$ from \eqref{European Call r=0} to get FIXME.
 
 \section{Approximating Asian Options}
 It may not be feasible to compute an Asian Option in a short time span.
@@ -584,7 +589,7 @@ Recall the notation
      A_T = \frac{1}{T}\int_0^T S_t \; dt.
 \end{align}
 Note that the integrand $S_t$ is a lognormal random variable.
-However, the integral of $S_t$ will not be lognormal (cite somewhere).
+However, the integral of $S_t$ will not be lognormal (FIXME: cite citation from above).
 Thus, we model $A_t$ with a log-normal $Y_t$ with the same mean and variance, which leaves us with equations
 \begin{align} \label{expect approx 1}
      \tilde{\E}[A_T] = \tilde{\E}[Y_T] \; \\
@@ -603,12 +608,12 @@ We can factor out the constant part of the expected value and are left to evalua
 \begin{align} \label{simplified expected A_T}
      \rE{A_T} = \frac{S_0}{T} \int_0^T e^{rt-\frac{1}{2}\sigma^2t} \rE{e^{\sigma W_t}}  \; dt
 \end{align}
-Using Moment Generating Function $e^{yX}$, we know if $X$ is a normally distributed random variable with mean $\mu$ and variance $\sigma^2$ than
+Using Moment Generating Function $e^{yX}$ via \eqref{mgf func}, we know if $X \sim N(\mu, \sigma^2)$ the following is true
 \begin{align} \label{moment 1}
      \rE{e^{yX}}
      = e^{\mu y + \frac{1}{2} \sigma^2 y^2}
 \end{align}
-Recalling that the Brownian motion $W_t$ is of mean $\mu$ and variance $\sigma^2$, 
+Recalling that the Brownian motion as defined in \eqref{BM Appendix}, $X \sim N(\mu, \sigma^2)$
 \begin{align} 
      \rE{e^{\sigma W_t}}
      = e^{\frac{1}{2}\sigma^2 t},
@@ -664,7 +669,8 @@ Observe that $W_t = W_s + (W_t - W_s)$. Using this, we write
      = S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)} e^{2 \sigma W_s} e^{\sigma (W_t - W_s)}
 \end{align}
 This is of interest because the Brownian motions $W_s$ and $W_t - W_s$ are independent as defined in \eqref{BM Appendix}.
-Observe that $W_s \sim N(0, s)$ and $W_t - W_s \sim N(0, t-s)$ (ref?). Due to independence, we can write out the expected value as follows
+Observe that $W_s \sim N(0, s)$ and $W_t - W_s \sim N(0, t-s)$ via \eqref{BM Appendix}. 
+Due to independence, we can write out the expected value as follows
 \begin{align}
      \rE{S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)}e^{2 \sigma W_s} e^{\sigma (W_t - W_s)}}
      = S_0^2 e^{(r-\frac{1}{2}\sigma^2)(t+s)} \rE{e^{2 \sigma W_s}} \rE{e^{\sigma (W_t - W_s)}}
