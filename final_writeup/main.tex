@@ -45,11 +45,9 @@ Pittsburgh, PA 15213, USA
      In this set of notes we derive the time-zero prices of various \emph{chooser options} under the continuous Bachelier model.
      These are contracts with a fixed maturity date $T$ and a chooser date $\tau$ satisfying $0 \le \tau \le T$, for which an agent is allowed to choose at time $\tau$ the underlying security that determines the structure of the payoff at time $T$.  
      Also included is the pricing of various European options under the Bachelier Model, and 2 methods of approximating Asian Options.
-
      This paper is still in progress, the following are yet to be added:
      \begin{itemize}
-          \item Go through all the fixme's and edit appropriately
-          \item Add github link to appendix - explain the code
+          \item Add Github link to the Appendix, annotate code using Jupyter Notebooks
           \item Greeks + calculations
      \end{itemize}
 \end{abstract}
@@ -60,27 +58,27 @@ Pittsburgh, PA 15213, USA
 
 \pagebreak
 \section{Introduction}
-The Bachelier model was pioneered by Louis Bachelier in his PhD Thesis in 1900.
+The Bachelier model was pioneered by Louis Bachelier in his Ph.D. Thesis in 1900.
 It was the first asset price model to use Brownian Motion to model the stochastic changes in stock price.
-However, upon it's inception, many mathematicians regarded it as inaccurate, in particular citing it's assumption that stock prices were normally distributed, which would introduce the factor that asset prices could go negative into pricing.
+However, upon its inception, many mathematicians regarded it as inaccurate, in particular citing its assumption that stock prices were normally distributed, which would introduce the factor that asset prices could go negative into pricing.
 This was something never recorded at the time, and quite unintuitive, how could an asset, which by definition should hold intrinsic or extrinsic value, ever have a negative price?
 
-Today, many market makers opt to use the Black-Scholes model, a model derivative of the Bachelier model, published in 1973, which in a similar fashion to the Bachelier model, uses Brownian motion to model the stochastic changes in stock price. 
+Today, many market makers opt to use the Black-Scholes model, a model derivative of the Bachelier model, published in 1973, which similarly to the Bachelier model, uses Brownian motion to model the stochastic changes in stock price. 
 However, a key difference between the Black-Scholes and Bachelier model is that the Black-Scholes model assumes prices were distributed in a Log-Normal fashion, making negative asset prices impossible, which is deemed to be more accurate of real-life conditions.
 
 In April 2020, however, the price of oil futures went negative.
 This was due to many factors, the most important of which was that there was little demand for oil due to the COVID-19 pandemic, yet still a large supply.
-Traders soon figured that it would cost more to store the oil traded within futures contracts than the oil was actually worth, causing the price of the futures to temporarily go as low as -37.63\$, as firms were selling the futures at a loss to avoid the expensive physical delivery and storage of the oil futures they were holding.
+Traders soon figured that it would cost more to store the oil traded within futures contracts than the oil was worth, causing the price of the futures to temporarily go as low as -37.63\$, as firms were selling the futures at a loss to avoid the expensive physical delivery and storage of the oil futures they were holding.
 
 The Black-Scholes model, however, was unable to model assets with negative prices, due to its assumption that asset price follows a log-normal distribution. 
-This lead to much confusion and panic as programs designed to price options were giving implausible or null results.
+This led to much confusion and panic as programs designed to price options were giving implausible or null results.
 Many groups market-making and trading these oil futures quickly switched to the Bachelier Model to enable negative asset pricing.
-This reignited interest within the until then seldomly used Bachelier Model, as this market inefficiency costed many traders, as they were unable to price derivatives.
-While negative asset prices are a rare occurance, traders and market makers alike want to be prepared for possibility.
+This reignited interest within the until then seldomly used Bachelier Model, as this market inefficiency cost many traders, as they were unable to price derivatives.
+While negative asset prices are a rare occurrence, traders and market makers alike want to be prepared for the possibility.
 
 In this paper, we aim to fill the gap in research on the Bachelier Model.
 We begin by pricing European Options under the Bachelier Model in continuous time, and using that we build up to pricing Arithmetic and Geometric Asian Options, and Asian Choosers.
-We do this through usage of Stochastic Calculus and Brownian Motion.
+We do this through the usage of Stochastic Calculus and Brownian Motion.
 We then use two different techniques to approximate Asian options.
 
 \section{The Bachelier Model}
